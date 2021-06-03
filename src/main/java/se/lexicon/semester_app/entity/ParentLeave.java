@@ -9,11 +9,11 @@ import java.time.LocalDate;
 
 @Entity
 @Data
-public class VacationDays {
+public class ParentLeave {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private LocalDate vacationDate;
+    private LocalDate parentDate;
     private  boolean approved;
 }

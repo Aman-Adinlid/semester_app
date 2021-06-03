@@ -17,16 +17,23 @@ public class Employee {
             name = "UUID",
             strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
+    @Column(nullable = false)
     private String firstName;
+    @Column(nullable = false)
     private String lastName;
+    @Column(nullable = false,unique = true)
     private String email;
+    @Column(nullable = false,unique = true)
     private String mobile;
     @OneToMany
     private List<VacationDays> vacationDays;
+    @OneToMany
+    private List<ParentLeave> parentLeave;
     private int savedVacation;
     private int yearlyVacationDays;
     private LocalDate dateOfEmployment;
     private int userType;
+    @Column(nullable = false)
     private String password;
 
 
