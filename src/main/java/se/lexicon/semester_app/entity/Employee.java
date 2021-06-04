@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @Entity
 @Data
-public class Employee {
+public class Employee extends Person {
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -17,24 +17,20 @@ public class Employee {
             name = "UUID",
             strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
-    @Column(nullable = false)
-    private String firstName;
-    @Column(nullable = false)
-    private String lastName;
     @Column(nullable = false,unique = true)
     private String email;
     @Column(nullable = false,unique = true)
     private String mobile;
-    @OneToMany
-    private List<VacationDays> vacationDays;
-    @OneToMany
-    private List<ParentLeave> parentLeave;
+    @OneToMany(cascade = {CascadeType.MERGE,CascadeType.DETACH, CascadeType.PERSIST,CascadeType.REFRESH})
+    private List<VacationDay> vacationDay;
     private int savedVacation;
-    private int yearlyVacationDays;
+    private int yearlyVacationDay;
     private LocalDate dateOfEmployment;
-    private int userType;
-    @Column(nullable = false)
-    private String password;
+    @ManyToOne
+    private Company company;
+//    private int userType;
+//    @Column(nullable = false)
+//    private String password;
 
 
 }
