@@ -24,6 +24,6 @@ public class Employee {
     private int savedVacation;
     private int yearlyVacationDay;
     private LocalDate dateOfEmployment;
-    //@ManyToOne
-    //private Company company;
+    @ManyToOne
+    private Company company;
 }
