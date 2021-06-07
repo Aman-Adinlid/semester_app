@@ -3,11 +3,9 @@ package se.lexicon.semester_app.entity;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -21,8 +19,8 @@ public class Employee {
     private String email;
     @Column(nullable = false, unique = true)
     private String mobile;
-    //@OneToMany(cascade = {CascadeType.MERGE,CascadeType.DETACH, CascadeType.PERSIST,CascadeType.REFRESH})
-    //private List<VacationDay> vacationDay;
+    @OneToMany(cascade = {CascadeType.MERGE,CascadeType.DETACH, CascadeType.PERSIST,CascadeType.REFRESH})
+    private List<VacationDay> vacationDay;
     private int savedVacation;
     private int yearlyVacationDay;
     private LocalDate dateOfEmployment;
