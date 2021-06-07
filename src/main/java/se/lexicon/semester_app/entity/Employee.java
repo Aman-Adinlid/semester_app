@@ -10,7 +10,7 @@ import java.util.UUID;
 
 @Data
 @Entity
-public class Employee extends Person{
+public class Employee{
 
     @Id
     @GeneratedValue(generator = "UUID") @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
