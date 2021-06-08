@@ -45,6 +45,7 @@ public class PersonServiceImpl implements PersonService {
         return null;
     }
 
+    @Transactional
     @Override
     public PersonDto create(PersonDto personDto) {
         return null;

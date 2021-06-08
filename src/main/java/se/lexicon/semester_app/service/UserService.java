@@ -8,11 +8,11 @@ import java.util.List;
 public interface UserService {
     UserDto findById(int id) throws RecordNotFoundException;
 
-    UserDto findByEmail(String email);
+    UserDto findByEmail(String email) throws RecordNotFoundException;
 
     List<UserDto> findAll();
 
-    UserDto create(UserDto userDto);
+    UserDto create(UserDto userDto) throws RecordNotFoundException;
 
     UserDto update(UserDto userDto) throws RecordNotFoundException;
 

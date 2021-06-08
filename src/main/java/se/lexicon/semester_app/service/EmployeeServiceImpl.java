@@ -66,6 +66,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         return convertedEntityToDto;
     }
 
+    @Transactional
     @Override
     public EmployeeDto create(EmployeeDto employeeDto) {
         return modelMapper.map(employeeRepository.save(modelMapper.map(employeeDto, Employee.class)), EmployeeDto.class);
@@ -82,13 +83,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Transactional
     @Override
     public EmployeeDto update(EmployeeDto employeeDto) throws RecordNotFoundException {
-        if (employeeDto == null) throw new ArgumentException("EmployeeDto is null");
-        if (employeeDto.getId() == null) throw new IllegalArgumentException("Id should not be null");
-        Employee employee = modelMapper.map(employeeDto, Employee.class);
-        employeeRepository.findById(employee.getId()).orElseThrow(() -> new RecordNotFoundException("Employee id is not valid"));
-        Employee updatedEmployee = employeeRepository.save(employee);
-        EmployeeDto convertedToEmployeeDto = modelMapper.map(updatedEmployee, EmployeeDto.class);
-        return convertedToEmployeeDto;
+        if (employeeDto == null) throw new ArgumentException("EmployeeDto object should not be null");
+        Optional<Employee> optionalEmployee = employeeRepository.findById(employeeDto.getId());
+        if (optionalEmployee.isPresent()) {
+            return modelMapper.map(employeeRepository.save(modelMapper.map(employeeDto, Employee.class)), EmployeeDto.class);
+        } else {
+            throw new RecordNotFoundException("EmployeeDto not found");
+        }
     }
 
     @Override
