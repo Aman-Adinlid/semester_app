@@ -23,8 +23,24 @@ public class PersonTest {
     public void test1_create_Person() {
         Assertions.assertEquals("Test", person.getFirstName());
         Assertions.assertEquals("Test1", person.getLastName());
+    }
 
+    @Test
+    @DisplayName("Test2")
+    public void test2_equal() {
+        Person person = new Person();
+        person.setFirstName("Test");
+        person.setLastName("Test1");
+        Assertions.assertTrue(person.equals(person));
+    }
 
+    @Test
+    @DisplayName("Test3")
+    public void test3_hashCode() {
+        Person person = new Person();
+        person.setFirstName("Test");
+        person.setLastName("Test1");
+        Assertions.assertEquals(person.hashCode(), person.hashCode());
     }
 }
 
