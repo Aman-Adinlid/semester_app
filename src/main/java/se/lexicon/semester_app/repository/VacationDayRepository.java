@@ -7,5 +7,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface VacationDayRepository extends CrudRepository<VacationDay, Integer> {
-    List<VacationDay> findByLocalDate(LocalDate vacationDate);
+    List<VacationDay> findByVacationDate(LocalDate vacationDate);
+
+    List<VacationDay> findByApproved(boolean approved);
+
 }

@@ -9,7 +9,7 @@ import java.util.List;
 public interface VacationDayService {
     VacationDayDto findById(int id) throws RecordNotFoundException;
 
-    VacationDayDto findByLocalDate(LocalDate vacationDate);
+    VacationDayDto findByVacationDate(LocalDate vacationDate);
 
     List<VacationDayDto> findAll();
 
@@ -17,9 +17,11 @@ public interface VacationDayService {
 
     VacationDayDto update(VacationDayDto vacationDayDto) throws RecordNotFoundException;
 
-    List<VacationDayDto> getApproved(boolean approved); // ask M
+    // List<VacationDayDto> getApproved(boolean approved); // ask M
 
-    boolean isApproved (VacationDayDto vacationDayDto);
+    List<VacationDayDto> findByApproved(boolean approved);
+
+    boolean isApproved(VacationDayDto vacationDayDto);
 
     void delete(int id) throws RecordNotFoundException;
 }

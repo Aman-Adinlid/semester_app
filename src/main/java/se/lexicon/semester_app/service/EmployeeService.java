@@ -1,6 +1,7 @@
 package se.lexicon.semester_app.service;
 
 import se.lexicon.semester_app.dto.EmployeeDto;
+import se.lexicon.semester_app.dto.VacationDayDto;
 import se.lexicon.semester_app.entity.VacationDay;
 import se.lexicon.semester_app.exception.RecordNotFoundException;
 
@@ -20,7 +21,10 @@ public interface EmployeeService {
 
     List<EmployeeDto> findAll();
 
-    List<VacationDay> getVacationDays(UUID id);
+    // List<VacationDay> getVacationDays(UUID id);
+
+    List<VacationDayDto> findByVacationDay(UUID id);
+
 
     List<VacationDay> saveVacationDays(UUID id, List<VacationDay> vacationDays);
 

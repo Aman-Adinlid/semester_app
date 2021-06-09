@@ -38,8 +38,8 @@ public class VacationServiceImpl implements VacationDayService {
     }
 
     @Override
-    public VacationDayDto findByLocalDate(LocalDate vacationDate) {
-        return modelMapper.map(vacationDayRepository.findByLocalDate(vacationDate), VacationDayDto.class);
+    public VacationDayDto findByVacationDate(LocalDate vacationDate) {
+        return modelMapper.map(vacationDayRepository.findByVacationDate(vacationDate), VacationDayDto.class);
     }
 
     @Override
@@ -72,9 +72,16 @@ public class VacationServiceImpl implements VacationDayService {
     }
 
     @Override
-    public List<VacationDayDto> getApproved(boolean approved) {
-        return null;
+    public List<VacationDayDto> findByApproved(boolean approved) {
+        List<VacationDay> vacationDays = vacationDayRepository.findByApproved(approved);
+        List<VacationDayDto> vacationDayDtoList = vacationDays.stream().map(vacationDay -> modelMapper.map(vacationDay, VacationDayDto.class)).collect(Collectors.toList());
+        return vacationDayDtoList;
     }
+
+    // @Override
+    // public List<VacationDayDto> getApproved(boolean approved) {
+    //   return null;
+
 
     @Override
     public boolean isApproved(VacationDayDto vacationDayDto) {

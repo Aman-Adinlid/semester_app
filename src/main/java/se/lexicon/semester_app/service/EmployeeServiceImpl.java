@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import se.lexicon.semester_app.dto.EmployeeDto;
+import se.lexicon.semester_app.dto.VacationDayDto;
 import se.lexicon.semester_app.entity.Employee;
 import se.lexicon.semester_app.entity.VacationDay;
 import se.lexicon.semester_app.exception.ArgumentException;
@@ -80,6 +81,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeDtoList;
     }
 
+
     @Transactional
     @Override
     public EmployeeDto update(EmployeeDto employeeDto) throws RecordNotFoundException {
@@ -97,9 +99,15 @@ public class EmployeeServiceImpl implements EmployeeService {
         return null;
     }
 
+    // @Override
+    //public List<VacationDay> getVacationDays (UUID id){
+    // return null;//** need to fix
+
     @Override
-    public List<VacationDay> getVacationDays(UUID id) {
-        return employeeRepository.getVacationDays();//** need to fix
+    public List<VacationDayDto> findByVacationDay(UUID id) {
+        List<VacationDay> vacationDays = employeeRepository.findByVacationDay(id);
+        List<VacationDayDto> vacationDayDtoList = vacationDays.stream().map(vacationDay -> modelMapper.map(vacationDay, VacationDayDto.class)).collect(Collectors.toList());
+        return vacationDayDtoList;
     }
 
     @Override

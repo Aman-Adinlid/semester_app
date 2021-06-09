@@ -82,7 +82,7 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public void delete(int id) throws RecordNotFoundException {
-        if (id ==0) throw new ArgumentException("Id is not valid");
+        if (id == 0) throw new ArgumentException("Id is not valid");
         personRepository.delete(modelMapper.map(personRepository.findById(id)
                 .orElseThrow(() -> new RecordNotFoundException("Id ")), Person.class));
     }
