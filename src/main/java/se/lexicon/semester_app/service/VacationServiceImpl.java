@@ -39,7 +39,7 @@ public class VacationServiceImpl implements VacationDayService {
 
     @Override
     public VacationDayDto findByLocalDate(LocalDate vacationDate) {
-        return null;
+        return modelMapper.map(vacationDayRepository.findByLocalDate(vacationDate), VacationDayDto.class);
     }
 
     @Override
@@ -83,7 +83,7 @@ public class VacationServiceImpl implements VacationDayService {
 
     @Override
     public void delete(int id) throws RecordNotFoundException {
-        if (id < 1) throw new ArgumentException("Is is not valid");
+        if (id < 1) throw new ArgumentException("Id is not valid");
         vacationDayRepository.delete(modelMapper.map(vacationDayRepository.findById(id)
                 .orElseThrow(() -> new RecordNotFoundException("Id ")), VacationDay.class));
     }

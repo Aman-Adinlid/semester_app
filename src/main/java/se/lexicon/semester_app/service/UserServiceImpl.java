@@ -77,7 +77,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void delete(int id) throws RecordNotFoundException {
-        if (id < 1) throw new ArgumentException("Is is not valid");
+        if (id < 1) throw new ArgumentException("Id is not valid");
         userRepository.delete(modelMapper.map(userRepository.findById(id)
                 .orElseThrow(() -> new RecordNotFoundException("Id ")), User.class));
     }

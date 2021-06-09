@@ -5,11 +5,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import se.lexicon.semester_app.dto.CompanyDto;
 import se.lexicon.semester_app.dto.EmployeeDto;
+import se.lexicon.semester_app.entity.Company;
+import se.lexicon.semester_app.exception.ArgumentException;
 import se.lexicon.semester_app.exception.RecordNotFoundException;
 import se.lexicon.semester_app.repository.CompanyRepository;
 import se.lexicon.semester_app.repository.EmployeeRepository;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class CompanyServiceImpl implements CompanyService {
     CompanyRepository companyRepository;
@@ -33,17 +38,23 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public CompanyDto findById(int id) throws RecordNotFoundException {
-        return null;
+        return modelMapper.map(companyRepository.findById(id).orElseThrow(() ->
+                new RecordNotFoundException("CompanyDto not found")), CompanyDto.class);
     }
 
     @Override
     public CompanyDto findByName(String name) {
-        return null;
+        return modelMapper.map(companyRepository.findByNameIgnoreCase(name), CompanyDto.class);
+
     }
 
     @Override
     public List<CompanyDto> findAll() {
-        return null;
+        List<Company> companyList = new ArrayList<>();
+        companyRepository.findAll().iterator().forEachRemaining(companyList::add);
+        List<CompanyDto> companyDtoList = companyList.stream().map(company ->
+                modelMapper.map(company, CompanyDto.class)).collect(Collectors.toList());
+        return companyDtoList;
     }
 
     @Override
@@ -59,17 +70,27 @@ public class CompanyServiceImpl implements CompanyService {
     @Transactional
     @Override
     public CompanyDto create(CompanyDto companyDto) {
-        return null;
+        return modelMapper.map(companyRepository.save(modelMapper.map(companyDto, Company.class)), CompanyDto.class);
+
     }
 
     @Transactional
     @Override
     public CompanyDto update(CompanyDto companyDto) throws RecordNotFoundException {
-        return null;
+        if (companyDto == null) throw new ArgumentException("CompanyDto object should not be null");
+        if (companyDto.getId() < 1) throw new IllegalArgumentException("CompanyId should not be null");
+        Optional<Company> companyOptional = companyRepository.findById(companyDto.getId());
+        if (companyOptional.isPresent()) {
+            return modelMapper.map(companyRepository.save(modelMapper.map(companyDto, Company.class)), CompanyDto.class);
+        } else {
+            throw new RecordNotFoundException("CompanyDto not found");
+        }
     }
 
     @Override
     public void delete(int id) throws RecordNotFoundException {
-
+        if (id < 1) throw new ArgumentException("Id is not valid");
+        companyRepository.delete(modelMapper.map(companyRepository.findById(id)
+                .orElseThrow(() -> new RecordNotFoundException("Id ")), Company.class));
     }
 }
