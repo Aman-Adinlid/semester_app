@@ -90,7 +90,7 @@ public class VacationServiceImpl implements VacationDayService {
 
     @Override
     public void delete(int id) throws RecordNotFoundException {
-        if (id < 1) throw new ArgumentException("Id is not valid");
+        if (id ==0) throw new ArgumentException("Id is not valid");
         vacationDayRepository.delete(modelMapper.map(vacationDayRepository.findById(id)
                 .orElseThrow(() -> new RecordNotFoundException("Id ")), VacationDay.class));
     }
