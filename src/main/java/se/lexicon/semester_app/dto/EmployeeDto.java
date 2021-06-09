@@ -19,4 +19,5 @@ public class EmployeeDto {
     private LocalDate dateOfEmployment;
     private int userType;
     private String password;
+    private UserDto userDto;
 }

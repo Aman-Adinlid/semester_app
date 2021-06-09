@@ -10,20 +10,23 @@ import java.util.UUID;
 
 @Data
 @Entity
-public class Employee{
+public class Employee {
 
     @Id
-    @GeneratedValue(generator = "UUID") @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
     @Column(nullable = false, unique = true)
     private String email;
     @Column(nullable = false, unique = true)
     private String mobile;
-    @OneToMany(cascade = {CascadeType.MERGE,CascadeType.DETACH, CascadeType.PERSIST,CascadeType.REFRESH})
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<VacationDay> vacationDay;
     private int savedVacation;
     private int yearlyVacationDay;
     private LocalDate dateOfEmployment;
     @ManyToOne
     private Company company;
+    @OneToOne
+    private User user;
 }

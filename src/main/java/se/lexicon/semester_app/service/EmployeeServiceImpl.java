@@ -99,7 +99,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<VacationDay> getVacationDays(UUID id) {
-        return null;
+        return employeeRepository.getVacationDays();//** need to fix
     }
 
     @Override
