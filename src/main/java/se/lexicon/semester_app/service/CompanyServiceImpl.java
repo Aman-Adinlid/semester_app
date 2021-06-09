@@ -89,7 +89,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public void delete(int id) throws RecordNotFoundException {
-        if (id < 1) throw new ArgumentException("Id is not valid");
+        if (id == 0) throw new ArgumentException("Id is not valid");
         companyRepository.delete(modelMapper.map(companyRepository.findById(id)
                 .orElseThrow(() -> new RecordNotFoundException("Id ")), Company.class));
     }
