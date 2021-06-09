@@ -10,5 +10,5 @@ import java.util.List;
 public interface VacationDayRepo extends CrudRepository<VacationDay, Integer> {
     VacationDay findByVacationDate(LocalDate vacationDate);
 
-    List<VacationDayDto> findByApproved(boolean approved);
+    List<VacationDay> findByApproved(boolean approved);
 }

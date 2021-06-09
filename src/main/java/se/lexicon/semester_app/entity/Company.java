@@ -14,4 +14,9 @@ public class Company {
     private String name;
     @OneToMany
     List<Employee> employees;
+
+
+    //ADDED
+    @OneToOne
+    private Employee employee;
 }

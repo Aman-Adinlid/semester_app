@@ -8,4 +8,8 @@ public class CompanyDto {
     private int id;
     private String name;
     List<EmployeeDto> employeeDtos;
+
+
+    //ADDED
+    private EmployeeDto employeeDto;
 }
