@@ -10,5 +10,4 @@ public interface VacationDayRepository extends CrudRepository<VacationDay, Integ
     List<VacationDay> findByVacationDate(LocalDate vacationDate);
 
     List<VacationDay> findByApproved(boolean approved);
-
 }
