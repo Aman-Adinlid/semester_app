@@ -37,14 +37,18 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public PersonDto findByFirstName(String firstName) {
-        return modelMapper.map(personRepository.findByFirstNameIgnoreCase(firstName), PersonDto.class);
+    public List<PersonDto> findByFirstName(String firstName) {
+        List<Person> personList = personRepository.findByFirstNameIgnoreCase(firstName);
+        List<PersonDto> personDtoList = personList.stream().map(person -> modelMapper.map(person, PersonDto.class)).collect(Collectors.toList());
+        return personDtoList;
 
     }
 
     @Override
-    public PersonDto findByLastName(String lastName) {
-        return modelMapper.map(personRepository.findByLastNameIgnoreCase(lastName), PersonDto.class);
+    public List<PersonDto> findByLastName(String lastName) {
+        List<Person> personList = personRepository.findByLastNameIgnoreCase(lastName);
+        List<PersonDto> personDtoList = personList.stream().map(person -> modelMapper.map(person, PersonDto.class)).collect(Collectors.toList());
+        return personDtoList;
 
     }
 
@@ -78,7 +82,7 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public void delete(int id) throws RecordNotFoundException {
-        if (id < 1) throw new ArgumentException("Id is not valid");
+        if (id ==0) throw new ArgumentException("Id is not valid");
         personRepository.delete(modelMapper.map(personRepository.findById(id)
                 .orElseThrow(() -> new RecordNotFoundException("Id ")), Person.class));
     }

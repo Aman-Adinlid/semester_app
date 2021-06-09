@@ -7,10 +7,9 @@ import java.util.List;
 
 public interface PersonService {
     PersonDto findById(int id) throws RecordNotFoundException;
+    List<PersonDto> findByFirstName(String firstName);
 
-    PersonDto findByFirstName(String firstName);
-
-    PersonDto findByLastName(String lastName);
+    List<PersonDto> findByLastName(String lastName);
 
     // maybe a method for firstName and lastName
 

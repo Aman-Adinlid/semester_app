@@ -74,9 +74,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<EmployeeDto> findAll() {
-        List<Employee> list = new ArrayList<>();
-        employeeRepository.findAll().iterator().forEachRemaining(list::add);
-        return list.stream().map(employee -> modelMapper.map(employee, EmployeeDto.class)).collect(Collectors.toList());
+        List<Employee> employeeList = new ArrayList<>();
+        employeeRepository.findAll().iterator().forEachRemaining(employeeList::add);
+        List<EmployeeDto> employeeDtoList = employeeList.stream().map(employee -> modelMapper.map(employee, EmployeeDto.class)).collect(Collectors.toList());
+        return employeeDtoList;
     }
 
     @Transactional
@@ -108,6 +109,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void delete(UUID id) {
-        employeeRepository.deleteById(id);
+        if (id == null) throw new ArgumentException("Id is not valid");
+        Optional<Employee> optional = employeeRepository.findById(id);
+        if (optional.isPresent()) {
+            employeeRepository.deleteById(id);
+        }
+
     }
 }

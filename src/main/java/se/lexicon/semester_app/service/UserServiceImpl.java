@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto update(UserDto userDto) throws RecordNotFoundException {
         if (userDto == null) throw new ArgumentException("UserDto object should not be null");
-        if (userDto.getId() < 1) throw new IllegalArgumentException("UserId should not be null");
+        if (userDto.getId() ==0) throw new IllegalArgumentException("UserId should not be null");
         Optional<User> userOptional = userRepository.findById(userDto.getId());
         if (userOptional.isPresent()) {
             return modelMapper.map(userRepository.save(modelMapper.map(userDto, User.class)), UserDto.class);
@@ -77,7 +77,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void delete(int id) throws RecordNotFoundException {
-        if (id < 1) throw new ArgumentException("Id is not valid");
+        if (id ==0) throw new ArgumentException("Id is not valid");
         userRepository.delete(modelMapper.map(userRepository.findById(id)
                 .orElseThrow(() -> new RecordNotFoundException("Id ")), User.class));
     }
