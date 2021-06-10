@@ -16,8 +16,6 @@ public interface UserService {
 
     UserDto update(UserDto userDto) throws RecordNotFoundException;
 
-    int login(String user, String password);
-
     void delete(int id) throws RecordNotFoundException;
 
 }

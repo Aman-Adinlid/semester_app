@@ -17,8 +17,6 @@ public interface VacationDayService {
 
     VacationDayDto update(VacationDayDto vacationDayDto) throws RecordNotFoundException;
 
-    // List<VacationDayDto> getApproved(boolean approved); // ask M
-
     List<VacationDayDto> findByApproved(boolean approved);
 
     boolean isApproved(VacationDayDto vacationDayDto);

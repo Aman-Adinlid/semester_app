@@ -44,7 +44,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public CompanyDto findByName(String name) {
-        return modelMapper.map(companyRepository.findByNameIgnoreCase(name), CompanyDto.class);
+        return null;
 
     }
 

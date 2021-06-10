@@ -2,7 +2,6 @@ package se.lexicon.semester_app.service;
 
 import se.lexicon.semester_app.dto.EmployeeDto;
 import se.lexicon.semester_app.dto.VacationDayDto;
-import se.lexicon.semester_app.entity.VacationDay;
 import se.lexicon.semester_app.exception.RecordNotFoundException;
 
 import java.util.List;
@@ -25,8 +24,7 @@ public interface EmployeeService {
 
     List<VacationDayDto> findByVacationDay(UUID id);
 
-
-    List<VacationDay> saveVacationDays(UUID id, List<VacationDay> vacationDays);
+    // List<VacationDay> saveVacationDays(UUID id, List<VacationDay> vacationDays);
 
     void delete(UUID id);
 
