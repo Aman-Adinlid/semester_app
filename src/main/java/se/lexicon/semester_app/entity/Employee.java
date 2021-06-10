@@ -2,25 +2,26 @@ package se.lexicon.semester_app.entity;
 
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
-@Data
 @Entity
-public class Employee {
+@Data
+public class Employee{
 
     @Id
     @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false,unique = true)
     private String email;
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false,unique = true)
     private String mobile;
-    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToMany(cascade = {CascadeType.MERGE,CascadeType.DETACH, CascadeType.PERSIST,CascadeType.REFRESH})
     private List<VacationDay> vacationDay;
     private int savedVacation;
     private int yearlyVacationDay;
@@ -29,4 +30,7 @@ public class Employee {
     private Company company;
     @OneToOne
     private User user;
+
+
+
 }

@@ -9,4 +9,6 @@ public class VacationDayDto {
     private int id;
     private LocalDate vacationDate;
     private boolean approved;
+
 }
+
