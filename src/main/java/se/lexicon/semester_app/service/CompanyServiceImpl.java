@@ -2,6 +2,7 @@ package se.lexicon.semester_app.service;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import se.lexicon.semester_app.dto.CompanyDto;
 import se.lexicon.semester_app.dto.EmployeeDto;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
+@Service
 public class CompanyServiceImpl implements CompanyService {
 
     CompanyRepository companyRepository;
