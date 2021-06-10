@@ -27,6 +27,7 @@ public class PersonRepositoryTest {
         person = new Person();
         person.setFirstName("Test");
         person.setLastName("Test");
+        personRepository.save(person);
 
     }
 
