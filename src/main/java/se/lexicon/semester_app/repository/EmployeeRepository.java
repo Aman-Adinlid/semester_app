@@ -9,7 +9,7 @@ import java.util.UUID;
 
 public interface EmployeeRepository extends CrudRepository<Employee, UUID> {
 
-    List<VacationDay> findByVacationDay(UUID id);
+    List<VacationDay> findByVacationDay(UUID id); //got warning cuz it should be a employee here!!!!!!!!!
 
     // List<VacationDay>();
 
