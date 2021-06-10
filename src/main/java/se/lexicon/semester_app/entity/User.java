@@ -8,9 +8,10 @@ import javax.persistence.Id;
 
 @Data
 @Entity
-public class User {
+public class User{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  int id;
+    private int id;
     private String email;
+    private UserType type;
 }

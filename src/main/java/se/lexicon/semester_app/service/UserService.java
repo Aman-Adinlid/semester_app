@@ -1,8 +1,22 @@
 package se.lexicon.semester_app.service;
 
-public interface UserService {
-    // todo:
+import se.lexicon.semester_app.dto.UserDto;
+import se.lexicon.semester_app.exception.RecordNotFoundException;
 
-    // int login (String user , String password)
+import java.util.List;
+
+public interface UserService {
+
+    UserDto findById(int id) throws RecordNotFoundException;
+
+    UserDto findByEmail(String email) throws RecordNotFoundException;
+
+    List<UserDto> findAll();
+
+    UserDto create(UserDto userDto) throws RecordNotFoundException;
+
+    UserDto update(UserDto userDto) throws RecordNotFoundException;
+
+    void delete(int id) throws RecordNotFoundException;
 
 }

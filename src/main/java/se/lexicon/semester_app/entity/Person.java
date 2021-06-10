@@ -1,8 +1,8 @@
 package se.lexicon.semester_app.entity;
 
 import lombok.Data;
-import javax.persistence.*;
 
+import javax.persistence.*;
 
 @Entity
 @Data
@@ -14,5 +14,4 @@ public class Person {
     private String firstName;
     @Column(nullable = false)
     private String lastName;
-
 }
