@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface VacationDayService {
+
     VacationDayDto findById(int id) throws RecordNotFoundException;
 
     VacationDayDto findByVacationDate(LocalDate vacationDate);

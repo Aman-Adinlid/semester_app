@@ -6,6 +6,7 @@ import se.lexicon.semester_app.exception.RecordNotFoundException;
 import java.util.List;
 
 public interface UserService {
+
     UserDto findById(int id) throws RecordNotFoundException;
 
     UserDto findByEmail(String email) throws RecordNotFoundException;

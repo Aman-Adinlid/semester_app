@@ -8,8 +8,9 @@ import java.util.List;
 import java.util.UUID;
 
 public interface EmployeeRepository extends CrudRepository<Employee, UUID> {
-    // List<VacationDay>();
 
     List<VacationDay> findByVacationDay(UUID id);
+
+    // List<VacationDay>();
 
 }

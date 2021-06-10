@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
+
     EmployeeRepository employeeRepository;
     ModelMapper modelMapper;
     VacationDayRepository vacationDayRepository;
@@ -99,20 +100,12 @@ public class EmployeeServiceImpl implements EmployeeService {
         return null;
     }
 
-    // @Override
-    //public List<VacationDay> getVacationDays (UUID id){
-    // return null;//** need to fix
-
     @Override
     public List<VacationDayDto> findByVacationDay(UUID id) {
         List<VacationDay> vacationDays = employeeRepository.findByVacationDay(id);
         List<VacationDayDto> vacationDayDtoList = vacationDays.stream().map(vacationDay -> modelMapper.map(vacationDay, VacationDayDto.class)).collect(Collectors.toList());
         return vacationDayDtoList;
     }
-
-   // @Override
-  //  public List<VacationDay> saveVacationDays(UUID id, List<VacationDay> vacationDays) {
-        //return null;
 
 
     @Override

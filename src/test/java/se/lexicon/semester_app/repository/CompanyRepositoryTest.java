@@ -37,8 +37,9 @@ public class CompanyRepositoryTest {
     @Test
     @DisplayName("Test1")
     public void test1_findByName() {
-       // Company actual = companyRepository.findByNameIncludesIgnoreCase("Test");
-       // assertEquals("Test", actual.getName());
+        List<Company> companyList = new ArrayList<>();
+        companyRepository.findCompanyByNameContainsIgnoreCase("Test").iterator().forEachRemaining(companyList::add);
+        assertEquals(1, companyList.size());
     }
 
     @Test

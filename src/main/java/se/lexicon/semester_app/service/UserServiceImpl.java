@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
+
     UserRepository userRepository;
     ModelMapper modelMapper;
 
@@ -69,7 +70,6 @@ public class UserServiceImpl implements UserService {
             throw new RecordNotFoundException("UserDto not found");
         }
     }
-
 
     @Override
     public void delete(int id) throws RecordNotFoundException {

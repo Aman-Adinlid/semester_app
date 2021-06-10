@@ -10,7 +10,6 @@ import java.util.List;
 
 @SpringBootTest
 public class CompanyTest {
-
     Company company;
     List<Employee> employeeList;
 

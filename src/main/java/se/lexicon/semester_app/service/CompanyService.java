@@ -7,9 +7,10 @@ import se.lexicon.semester_app.exception.RecordNotFoundException;
 import java.util.List;
 
 public interface CompanyService {
+
     CompanyDto findById(int id) throws RecordNotFoundException;
 
-    CompanyDto findByName(String name);
+    List<CompanyDto> findCompanyByName(String name);
 
     List<CompanyDto> findAll();
 

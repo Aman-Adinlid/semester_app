@@ -17,6 +17,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class CompanyServiceImpl implements CompanyService {
+
     CompanyRepository companyRepository;
     ModelMapper modelMapper;
     EmployeeRepository employeeRepository;
@@ -43,10 +44,14 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public CompanyDto findByName(String name) {
-        return null;
-
+    public List<CompanyDto> findCompanyByName(String name) {
+        List<Company> companyList = new ArrayList<>();
+        companyRepository.findCompanyByNameContainsIgnoreCase(name).iterator().forEachRemaining(companyList::add);
+        List<CompanyDto> companyDtoList = companyList.stream().map(company ->
+                modelMapper.map(company, CompanyDto.class)).collect(Collectors.toList());
+        return companyDtoList;
     }
+
 
     @Override
     public List<CompanyDto> findAll() {

@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class VacationServiceImpl implements VacationDayService {
+
     VacationDayRepository vacationDayRepository;
     ModelMapper modelMapper;
 
@@ -78,19 +79,14 @@ public class VacationServiceImpl implements VacationDayService {
         return vacationDayDtoList;
     }
 
-    // @Override
-    // public List<VacationDayDto> getApproved(boolean approved) {
-    //   return null;
-
-
     @Override
     public boolean isApproved(VacationDayDto vacationDayDto) {
-        return false;//fix it****
+        return false;//tried to fix it but it didn't work, fix it if u can!!!!
     }
 
     @Override
     public void delete(int id) throws RecordNotFoundException {
-        if (id ==0) throw new ArgumentException("Id is not valid");
+        if (id == 0) throw new ArgumentException("Id is not valid");
         vacationDayRepository.delete(modelMapper.map(vacationDayRepository.findById(id)
                 .orElseThrow(() -> new RecordNotFoundException("Id ")), VacationDay.class));
     }

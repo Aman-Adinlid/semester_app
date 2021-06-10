@@ -6,6 +6,7 @@ import se.lexicon.semester_app.exception.RecordNotFoundException;
 import java.util.List;
 
 public interface PersonService {
+
     PersonDto findById(int id) throws RecordNotFoundException;
 
     List<PersonDto> findByFirstName(String firstName);
