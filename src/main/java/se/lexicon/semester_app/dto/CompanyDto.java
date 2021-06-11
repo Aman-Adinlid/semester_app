@@ -3,7 +3,6 @@ package se.lexicon.semester_app.dto;
 import lombok.Data;
 import se.lexicon.semester_app.entity.Employee;
 
-import javax.persistence.OneToMany;
 import java.util.List;
 import java.util.UUID;
 

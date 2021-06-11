@@ -13,13 +13,15 @@ import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService {
-UserRepository userRepository;
-ModelMapper modelMapper;
-@Autowired
+    UserRepository userRepository;
+    ModelMapper modelMapper;
+
+    @Autowired
     public void setUserRepository(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-@Autowired
+
+    @Autowired
     public void setModelMapper(ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
     }

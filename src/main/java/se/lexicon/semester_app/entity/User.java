@@ -15,15 +15,15 @@ public class User {
             name = "UUID",
             strategy = "org.hibernate.id.UUIDGenerator")
     private UUID uuid;
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String FirstName;
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String LastName;
-    @Column(nullable=false,unique = true)
+    @Column(nullable = false, unique = true)
     private String email;
-    @Column(nullable = false,unique = true)
+    @Column(nullable = false, unique = true)
     private String mobile;
-    @Column(nullable = false,unique = true)
+    @Column(nullable = false, unique = true)
     private String password;
     private UserType type;
 }

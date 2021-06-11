@@ -11,14 +11,16 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class VacationDayServiceImpl implements VacationDayService{
-        VacationDayRepository vacationDayRepository;
-        ModelMapper modelMapper;
-@Autowired
+public class VacationDayServiceImpl implements VacationDayService {
+    VacationDayRepository vacationDayRepository;
+    ModelMapper modelMapper;
+
+    @Autowired
     public void setVacationDayRepository(VacationDayRepository vacationDayRepository) {
         this.vacationDayRepository = vacationDayRepository;
     }
-@Autowired
+
+    @Autowired
     public void setModelMapper(ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
     }

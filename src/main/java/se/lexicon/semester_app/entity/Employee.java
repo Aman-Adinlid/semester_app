@@ -13,11 +13,11 @@ import java.util.UUID;
 public class Employee {
     @Id
     @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name="UUID",strategy = "org.hibernate.id.UUIDGenerator")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID uuid;
     @OneToOne
     private User user;
-    @OneToMany(cascade = {CascadeType.MERGE,CascadeType.DETACH, CascadeType.PERSIST,CascadeType.REFRESH})
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<VacationDay> vacationDays;
     private int yearlyVacationDays;
     private LocalDate dateOfEmployment;
