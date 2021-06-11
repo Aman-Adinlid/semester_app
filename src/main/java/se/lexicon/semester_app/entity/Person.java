@@ -4,11 +4,11 @@ import lombok.Data;
 
 import javax.persistence.*;
 
-@Data
 @Entity
+@Data
 public class Person {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(nullable = false)
     private String firstName;
