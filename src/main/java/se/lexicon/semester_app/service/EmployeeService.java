@@ -16,6 +16,7 @@ public interface EmployeeService {
     EmployeeDto updateEmployee(EmployeeDto employeeDto) throws RecordNotFoundException;
     void deleteEmployee(UUID uuid) throws RecordNotFoundException;
 
+    List<VacationDayDto> updateVaccationDay(VacationDayDto vaccationDayDto) throws RecordNotFoundException;
     List<VacationDayDto> updateVaccationDays(List<VacationDayDto> vaccationDaysDto) throws RecordNotFoundException;
     List<VacationDayDto> addVacationDay(VacationDayDto vacationDayDto) throws RecordNotFoundException;
     List<VacationDayDto> addVacationDays(List<VacationDayDto> vacationDaysDto) throws RecordNotFoundException;;

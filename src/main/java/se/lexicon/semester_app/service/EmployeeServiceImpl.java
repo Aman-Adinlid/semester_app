@@ -43,6 +43,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    public List<VacationDayDto> updateVaccationDay(VacationDayDto vaccationDayDto) throws RecordNotFoundException {
+        return null;
+    }
+
+    @Override
     public EmployeeDto updateEmployee(EmployeeDto employeeDto) throws RecordNotFoundException {
         return null;
     }
