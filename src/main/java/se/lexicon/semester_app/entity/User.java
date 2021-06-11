@@ -23,5 +23,7 @@ public class User {
     private String email;
     @Column(nullable = false,unique = true)
     private String mobile;
+    @Column(nullable = false,unique = true)
+    private String password;
     private UserType type;
 }

@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Data
-public class EmplyeeDto {
+public class EmployeeDto {
     private UUID uuid;
     private UserDto user;
     private List<VacationDayDto> vacationDays;
