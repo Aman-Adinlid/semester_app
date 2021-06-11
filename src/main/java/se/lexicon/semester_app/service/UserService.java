@@ -9,7 +9,7 @@ public interface UserService {
 
     UserDto findById(int id) throws RecordNotFoundException;
 
-    UserDto findByEmail(String email) throws RecordNotFoundException;
+    UserDto findByEmail(String email);
 
     List<UserDto> findAll();
 

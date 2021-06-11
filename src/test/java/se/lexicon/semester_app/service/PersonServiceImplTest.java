@@ -31,7 +31,7 @@ public class PersonServiceImplTest {
     }
 
     @Test
-    @DisplayName("Test1 ")
+    @DisplayName("Test1")
     public void test1_findById() throws RecordNotFoundException {
         PersonDto createdPersonDto = personService.create(personDto);
         personService.findById(createdPersonDto.getId());
@@ -40,20 +40,20 @@ public class PersonServiceImplTest {
 
 
     @Test
-    @DisplayName("Test2 ")
+    @DisplayName("Test2")
     public void test2_findByFirstName() {
         assertEquals("Test", personService.findByFirstName("Test").get(0).getFirstName());
     }
 
 
     @Test
-    @DisplayName("Test3 ")
+    @DisplayName("Test3")
     public void test3_findByLastName() {
         assertEquals("Test", personService.findByLastName("Test").get(0).getLastName());
     }
 
     @Test
-    @DisplayName("Test4 ")
+    @DisplayName("Test4")
     public void test4_findAll() {
         List<PersonDto> personDtoList = personService.findAll();
         System.out.println(personDtoList);
@@ -61,19 +61,19 @@ public class PersonServiceImplTest {
     }
 
     @Test
-    @DisplayName("Test5 ")
+    @DisplayName("Test5")
     public void test5_create() {
         assertEquals("Test", personService.create(personDto).getFirstName());
     }
 
     @Test
-    @DisplayName("Test6 ")
+    @DisplayName("Test6")
     public void test6_update() throws RecordNotFoundException {
         //  assertEquals(1, personService.update(personDto).getId());
     }
 
     @Test
-    @DisplayName("Test7 ")
+    @DisplayName("Test7")
     public void test7_delete() throws RecordNotFoundException {
         PersonDto createdPersonDto = personService.create(personDto);
         personService.delete(createdPersonDto.getId());
