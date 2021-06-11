@@ -53,7 +53,6 @@ public class CompanyServiceImpl implements CompanyService {
         return companyDtoList;
     }
 
-
     @Override
     public List<CompanyDto> findAll() {
         List<Company> companyList = new ArrayList<>();
