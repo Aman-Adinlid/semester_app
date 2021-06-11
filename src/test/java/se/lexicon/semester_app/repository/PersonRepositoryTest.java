@@ -9,6 +9,7 @@ import se.lexicon.semester_app.entity.Person;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -47,20 +48,27 @@ public class PersonRepositoryTest {
         assertEquals(0, personRepository.findByFirstNameIgnoreCase("Test").size());
     }
 
-    //test findById**
-
-
     @Test
     @DisplayName("Test3")
-    public void test3_findAll_save() {
+    public void test3_findById() {
         List<Person> personList = new ArrayList<>();
         personRepository.findAll().iterator().forEachRemaining(personList::add);
-        assertEquals(0, personList.size());
+        Integer expected = personList.get(0).getId();
+        Optional<Person> actual = personRepository.findById(expected);
+        assertEquals("Test", actual.get().getFirstName());
     }
 
     @Test
     @DisplayName("Test4")
-    public void test4_delete() {
+    public void test4_findAll_save() {
+        List<Person> personList = new ArrayList<>();
+        personRepository.findAll().iterator().forEachRemaining(personList::add);
+        assertEquals(1, personList.size());
+    }
+
+    @Test
+    @DisplayName("Test5")
+    public void test5_delete() {
         List<Person> personList = new ArrayList<>();
         personRepository.delete(person);
         List<Person> list = new ArrayList<>();
