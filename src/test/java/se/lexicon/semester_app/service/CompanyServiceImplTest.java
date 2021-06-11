@@ -70,6 +70,8 @@ public class CompanyServiceImplTest {
     public void test2_findAll() {
         List<CompanyDto> companyDtoList = companyService.findAll();
         System.out.println(companyDtoList);
+        assertEquals(1, companyService.findAll().get(0).getId());
+
     }
 
     @Test
@@ -80,14 +82,16 @@ public class CompanyServiceImplTest {
 
     @Test
     @DisplayName("Test4 ")
-    public void test4_create() {
+    public void test4_create() throws RecordNotFoundException {
+        CompanyDto createdCompanyDto = companyService.create(companyDto);
+        companyService.findById(createdCompanyDto.getId());
         assertEquals("Test", companyService.create(companyDto).getName());
     }
 
     @Test
     @DisplayName("Test5 ")
     public void test5_update() throws RecordNotFoundException {
-      //  assertEquals(1, companyService.update(companyDto).getId());
+      // assertEquals(1, companyService.update(companyDto).getId());
     }
 
     @Test
