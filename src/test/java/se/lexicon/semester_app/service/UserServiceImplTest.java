@@ -64,7 +64,7 @@ public class UserServiceImplTest {
 
     @Test
     @DisplayName("Test6")
-    public void test7_delete() throws RecordNotFoundException {
+    public void test6_delete() throws RecordNotFoundException {
         UserDto createdUserDto = userService.create(userDto);
         userService.delete(createdUserDto.getId());
         assertEquals(1, userService.findAll().size());

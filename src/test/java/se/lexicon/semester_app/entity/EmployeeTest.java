@@ -14,22 +14,19 @@ public class EmployeeTest {
     Employee employee;
     List<VacationDay> vacationDayList;
     List<Employee> employeeList;
-    Company company;
     User user;
 
     @BeforeEach
     public void setUp() {
         employee = new Employee();
+        employee.setFirstName("Test");
+        employee.setLastName("Test");
         employee.setEmail("Test");
         employee.setMobile("Test1");
         employee.setVacationDay(vacationDayList);
         employee.setSavedVacation(12);
         employee.setYearlyVacationDay(2021);
         employee.setDateOfEmployment(LocalDate.of(2021, 01, 12));
-
-        company = new Company();
-        company.setName("Test");
-        company.setEmployees(employeeList);
 
         user = new User();
         user.setEmail("Test");
@@ -39,6 +36,8 @@ public class EmployeeTest {
     @Test
     @DisplayName("Test1")
     public void test1_create_Employee() {
+        Assertions.assertEquals("Test", employee.getFirstName());
+        Assertions.assertEquals("Test", employee.getLastName());
         Assertions.assertEquals("Test", employee.getEmail());
         Assertions.assertEquals("Test1", employee.getMobile());
         Assertions.assertEquals(vacationDayList, employee.getVacationDay());
@@ -51,13 +50,14 @@ public class EmployeeTest {
     @DisplayName("Test2")
     public void test2_equal() {
         employee = new Employee();
+        employee.setFirstName("Test");
+        employee.setLastName("Test");
         employee.setEmail("Test");
         employee.setMobile("Test1");
         employee.setVacationDay(vacationDayList);
         employee.setSavedVacation(12);
         employee.setYearlyVacationDay(2021);
         employee.setDateOfEmployment(LocalDate.of(2021, 01, 12));
-        employee.setCompany(company);
         employee.setUser(user);
         Assertions.assertTrue(employee.equals(employee));
     }
@@ -66,13 +66,14 @@ public class EmployeeTest {
     @DisplayName("Test3")
     public void test3_hashCode() {
         employee = new Employee();
+        employee.setFirstName("Test");
+        employee.setLastName("Test");
         employee.setEmail("Test");
         employee.setMobile("Test1");
         employee.setVacationDay(vacationDayList);
         employee.setSavedVacation(12);
         employee.setYearlyVacationDay(2021);
         employee.setDateOfEmployment(LocalDate.of(2021, 01, 12));
-        employee.setCompany(company);
         employee.setUser(user);
         Assertions.assertEquals(employee.hashCode(), employee.hashCode());
 

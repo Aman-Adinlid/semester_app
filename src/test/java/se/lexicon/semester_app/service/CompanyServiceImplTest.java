@@ -10,7 +10,6 @@ import se.lexicon.semester_app.dto.EmployeeDto;
 import se.lexicon.semester_app.dto.VacationDayDto;
 import se.lexicon.semester_app.exception.RecordNotFoundException;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -19,9 +18,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class CompanyServiceImplTest {
     CompanyService companyService;
     CompanyDto companyDto;
+    EmployeeDto employeeDto;
     List<EmployeeDto> employeeDtoList;
     EmployeeService employeeService;
-    EmployeeDto employeeDto;
+    VacationDayDto vacationDayDto;
     List<VacationDayDto> vacationDayDtoList;
 
     @Autowired
@@ -32,8 +32,6 @@ public class CompanyServiceImplTest {
     @Autowired
     public void setCompanyService(CompanyService companyService) {
         this.companyService = companyService;
-
-
     }
 
     @BeforeEach
@@ -43,16 +41,15 @@ public class CompanyServiceImplTest {
         companyDto.setEmployeeDto(employeeDtoList);
         companyService.create(companyDto);
 
-        employeeDto = new EmployeeDto();
+        EmployeeDto employeeDto = new EmployeeDto();
         employeeDto.setFirstName("Test");
         employeeDto.setLastName("Test");
-        employeeDto.setEmail("Test");
+        employeeDto.setEmail("Test546");
         employeeDto.setMobile("Test");
         employeeDto.setVacationDayDto(vacationDayDtoList);
         employeeDto.setSavedVacation(12);
         employeeDto.setYearlyVacationDays(2021);
-        employeeDto.setDateOfEmployment(LocalDate.of(2021, 01, 12));
-        employeeDto.setPassword("Test12");
+
         employeeService.create(employeeDto);
     }
 

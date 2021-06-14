@@ -17,6 +17,5 @@ public class EmployeeDto {
     private int savedVacation;
     private int yearlyVacationDays;
     private LocalDate dateOfEmployment;
-    private String password;
     private UserDto userDto;
 }
