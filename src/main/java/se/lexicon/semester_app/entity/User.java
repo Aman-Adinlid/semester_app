@@ -13,5 +13,5 @@ public class User{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String email;
-    private UserType type;
+    private UserType userType;
 }

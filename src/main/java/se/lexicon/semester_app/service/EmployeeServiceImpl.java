@@ -17,7 +17,6 @@ import se.lexicon.semester_app.repository.VacationDayRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -50,17 +49,20 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
     @Override
-    public EmployeeDto findById(UUID id) throws RecordNotFoundException {
-        if (id == null) throw new IllegalArgumentException("id should not be null");
-        Optional<Employee> employee = employeeRepository.findById(id);
-        if (!employee.isPresent())
-            throw new RecordNotFoundException("Employee Id is not valid - data not fond");
-        return modelMapper.map(employee.get(), EmployeeDto.class);
+    public EmployeeDto findById(String id) throws RecordNotFoundException {
+        if (id == null) throw new ArgumentException("Id should not be null");
+        Optional<Employee> optionalEmployee = employeeRepository.findById(id);
+        if (optionalEmployee.isPresent()) {
+            EmployeeDto convertedData = modelMapper.map(optionalEmployee.get(), EmployeeDto.class);
+            return convertedData;
+        } else {
+            throw new RecordNotFoundException("EmployeeDto not found");
+        }
     }
 
     @Override
     public EmployeeDto save(EmployeeDto employeeDto) {
-        if (employeeDto == null) throw new IllegalArgumentException("EmployeeDto object should not be null");
+        if (employeeDto == null) throw new ArgumentException("EmployeeDto object should not be null");
         if (employeeDto.getId() != null) throw new IllegalArgumentException("Id should be null");
         Employee employeeEntity = modelMapper.map(employeeDto, Employee.class);
         Employee savedEmployeeEntity = employeeRepository.save(employeeEntity);
@@ -101,15 +103,15 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<VacationDayDto> findByVacationDay(UUID id) {
-        List<VacationDay> vacationDays = employeeRepository.findByVacationDay(id);
+    public List<VacationDayDto> findAllByVacationDay(String id) {
+        List<VacationDay> vacationDays = employeeRepository.findAllByVacationDay(id);
         List<VacationDayDto> vacationDayDtoList = vacationDays.stream().map(vacationDay -> modelMapper.map(vacationDay, VacationDayDto.class)).collect(Collectors.toList());
         return vacationDayDtoList;
     }
 
 
     @Override
-    public void delete(UUID id) {
+    public void delete(String id) {
         if (id == null) throw new ArgumentException("Id is not valid");
         Optional<Employee> optional = employeeRepository.findById(id);
         if (optional.isPresent()) {

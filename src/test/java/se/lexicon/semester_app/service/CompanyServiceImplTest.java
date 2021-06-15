@@ -38,7 +38,7 @@ public class CompanyServiceImplTest {
     public void setUp() throws RecordNotFoundException {
         companyDto = new CompanyDto();
         companyDto.setName("Test");
-        companyDto.setEmployeeDto(employeeDtoList);
+        companyDto.setEmployee(employeeDtoList);
         companyService.create(companyDto);
 
         EmployeeDto employeeDto = new EmployeeDto();

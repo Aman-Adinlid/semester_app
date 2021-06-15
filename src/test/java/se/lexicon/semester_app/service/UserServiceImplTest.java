@@ -26,7 +26,7 @@ public class UserServiceImplTest {
     public void setUp() throws RecordNotFoundException {
         userDto = new UserDto();
         userDto.setEmail("Test");
-        userDto.setType(UserType.ADMIN);
+        userDto.setUserType(UserType.ADMIN);
         userService.create(userDto);
     }
 

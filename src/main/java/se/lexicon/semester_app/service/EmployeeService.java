@@ -5,11 +5,10 @@ import se.lexicon.semester_app.dto.VacationDayDto;
 import se.lexicon.semester_app.exception.RecordNotFoundException;
 
 import java.util.List;
-import java.util.UUID;
 
 public interface EmployeeService {
 
-    EmployeeDto findById(UUID id) throws RecordNotFoundException;
+    EmployeeDto findById(String id) throws RecordNotFoundException;
 
     EmployeeDto save(EmployeeDto employeeDto);
 
@@ -21,12 +20,9 @@ public interface EmployeeService {
 
     List<EmployeeDto> findAll();
 
-    // List<VacationDay> getVacationDays(UUID id);
+    // have to fix a query for it in repo, need to make sure if it is correct to have this method in here??
+    List<VacationDayDto> findAllByVacationDay(String id);
 
-    List<VacationDayDto> findByVacationDay(UUID id);
+    void delete(String id);
 
-    // List<VacationDay> saveVacationDays(UUID id, List<VacationDay> vacationDays);
-
-    void delete(UUID id);
-  
 }

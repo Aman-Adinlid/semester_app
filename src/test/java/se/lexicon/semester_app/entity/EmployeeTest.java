@@ -30,7 +30,7 @@ public class EmployeeTest {
 
         user = new User();
         user.setEmail("Test");
-        user.setType(UserType.USER);
+        user.setUserType(UserType.USER);
     }
 
     @Test

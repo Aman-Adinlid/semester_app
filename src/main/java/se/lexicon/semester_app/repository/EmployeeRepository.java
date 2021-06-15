@@ -5,12 +5,10 @@ import se.lexicon.semester_app.entity.Employee;
 import se.lexicon.semester_app.entity.VacationDay;
 
 import java.util.List;
-import java.util.UUID;
 
-public interface EmployeeRepository extends CrudRepository<Employee, UUID> {
+public interface EmployeeRepository extends CrudRepository<Employee, String> {
+    // @Query
+    List<VacationDay> findAllByVacationDay(String id); //got warning cuz it should be a employee here!!!!!!!!!
 
-    List<VacationDay> findByVacationDay(UUID id); //got warning cuz it should be a employee here!!!!!!!!!
-
-    // List<VacationDay>();
 
 }

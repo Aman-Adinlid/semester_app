@@ -30,7 +30,7 @@ public class EmployeeDtoTest {
 
         userDto = new UserDto();
         userDto.setEmail("Test");
-        userDto.setType(UserType.USER);
+        userDto.setUserType(UserType.USER);
     }
 
     @Test

@@ -15,14 +15,14 @@ public class UserDtoTest {
     public void setUp() {
         userDto = new UserDto();
         userDto.setEmail("Test");
-        userDto.setType(UserType.ADMIN);
+        userDto.setUserType(UserType.ADMIN);
     }
 
     @Test
     @DisplayName("Test1")
     public void test1_create_UserDto() {
         Assertions.assertEquals("Test", userDto.getEmail());
-        Assertions.assertEquals(UserType.ADMIN, userDto.getType());
+        Assertions.assertEquals(UserType.ADMIN, userDto.getUserType());
     }
 
     @Test
@@ -30,7 +30,7 @@ public class UserDtoTest {
     public void test2_equal() {
         UserDto userDto = new UserDto();
         userDto.setEmail("Test");
-        userDto.setType(UserType.ADMIN);
+        userDto.setUserType(UserType.ADMIN);
         Assertions.assertTrue(userDto.equals(userDto));
     }
 
@@ -39,7 +39,7 @@ public class UserDtoTest {
     public void test3_hashCode() {
         UserDto userDto = new UserDto();
         userDto.setEmail("Test");
-        userDto.setType(UserType.ADMIN);
+        userDto.setUserType(UserType.ADMIN);
         Assertions.assertEquals(userDto.hashCode(), userDto.hashCode());
     }
 }

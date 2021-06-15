@@ -52,7 +52,7 @@ public class EmployeeRepositoryTest {
 
         User user = new User();
         user.setEmail("Test");
-        user.setType(UserType.USER);
+        user.setUserType(UserType.USER);
         userRepository.save(user);
     }
 }

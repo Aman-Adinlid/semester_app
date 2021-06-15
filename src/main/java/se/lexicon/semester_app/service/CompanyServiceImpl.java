@@ -7,21 +7,25 @@ import org.springframework.transaction.annotation.Transactional;
 import se.lexicon.semester_app.dto.CompanyDto;
 import se.lexicon.semester_app.dto.EmployeeDto;
 import se.lexicon.semester_app.entity.Company;
+import se.lexicon.semester_app.entity.Employee;
 import se.lexicon.semester_app.exception.ArgumentException;
 import se.lexicon.semester_app.exception.RecordNotFoundException;
 import se.lexicon.semester_app.repository.CompanyRepository;
 import se.lexicon.semester_app.repository.EmployeeRepository;
 
+import java.awt.image.RasterFormatException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
 @Service
 public class CompanyServiceImpl implements CompanyService {
 
     CompanyRepository companyRepository;
     ModelMapper modelMapper;
     EmployeeRepository employeeRepository;
+    EmployeeDto employeeDto;
 
     @Autowired
     public void setCompanyRepository(CompanyRepository companyRepository) {
@@ -75,6 +79,19 @@ public class CompanyServiceImpl implements CompanyService {
     @Transactional
     @Override
     public CompanyDto create(CompanyDto companyDto) {
+        // check company dto
+        // chek companyDto.getEmployee()
+        // save Employee to database
+        // save company
+        // return
+        if (companyDto == null) throw new ArgumentException("CompanyDto not found");
+        if (companyDto.getId() != 0) throw new ArgumentException("Id should be empty");
+        if (companyDto.getEmployee() == null) throw new ArgumentException(("It is not found"));
+        Employee employee = modelMapper.map(employeeDto, Employee.class);
+        employeeRepository.findById(employeeDto.getId()).orElseThrow(() ->
+                new RasterFormatException(" should not be duplicate"));
+        Employee savedEmployee = employeeRepository.save(employee);
+        EmployeeDto employeeDto = modelMapper.map(savedEmployee, EmployeeDto.class);
         return modelMapper.map(companyRepository.save(modelMapper.map(companyDto, Company.class)), CompanyDto.class);
 
     }

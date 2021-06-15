@@ -13,18 +13,20 @@ public class CompanyDtoTest {
     CompanyDto companyDto;
     List<EmployeeDto> employeeDtoList;
 
+
     @BeforeEach
     public void setUp() {
         companyDto = new CompanyDto();
         companyDto.setName("Test");
-        companyDto.setEmployeeDto(employeeDtoList);
+        companyDto.setEmployee(employeeDtoList);
+
     }
 
     @Test
     @DisplayName("Test1")
     public void test1_create_CompanyDto() {
         Assertions.assertEquals("Test", companyDto.getName());
-        Assertions.assertEquals(employeeDtoList, companyDto.getEmployeeDto());
+        Assertions.assertEquals(employeeDtoList, companyDto.getEmployee());
     }
 
 
@@ -33,7 +35,7 @@ public class CompanyDtoTest {
     public void test2_equal() {
         CompanyDto companyDto = new CompanyDto();
         companyDto.setName("Test");
-        companyDto.setEmployeeDto(employeeDtoList);
+        companyDto.setEmployee(employeeDtoList);
         Assertions.assertTrue(companyDto.equals(companyDto));
     }
 
@@ -42,7 +44,7 @@ public class CompanyDtoTest {
     public void test3_hashCode() {
         CompanyDto companyDto = new CompanyDto();
         companyDto.setName("Test");
-        companyDto.setEmployeeDto(employeeDtoList);
+        companyDto.setEmployee(employeeDtoList);
         Assertions.assertEquals(companyDto.hashCode(), companyDto.hashCode());
     }
 }
