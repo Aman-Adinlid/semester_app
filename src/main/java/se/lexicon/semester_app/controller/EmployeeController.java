@@ -26,7 +26,6 @@ public class EmployeeController {
         return ResponseEntity.status(HttpStatus.OK).body(employeeService.findAll());
     }
 
-    // couldn't get the id when i tried to find it
     @GetMapping("/{id}")
     public ResponseEntity<EmployeeDto> findById(@PathVariable("id") String id) throws RecordNotFoundException {
         if (id == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
