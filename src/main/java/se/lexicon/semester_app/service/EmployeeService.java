@@ -1,5 +1,6 @@
 package se.lexicon.semester_app.service;
 
+import se.lexicon.semester_app.dto.CompanyDto;
 import se.lexicon.semester_app.dto.EmployeeDto;
 import se.lexicon.semester_app.exception.RecordNotFoundException;
 
@@ -19,7 +20,7 @@ public interface EmployeeService {
 
     List<EmployeeDto> findAll();
 
-    //List<EmployeeDto> findByCompany(CompanyDto companyDto);
+    List<EmployeeDto> findByCompany(CompanyDto companyDto);
 
     void delete(String id);
 

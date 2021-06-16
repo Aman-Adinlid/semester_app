@@ -4,7 +4,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import se.lexicon.semester_app.dto.CompanyDto;
 import se.lexicon.semester_app.dto.EmployeeDto;
+import se.lexicon.semester_app.entity.Company;
 import se.lexicon.semester_app.entity.Employee;
 import se.lexicon.semester_app.exception.ArgumentException;
 import se.lexicon.semester_app.exception.RecordNotFoundException;
@@ -101,15 +103,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
 
-    //It is not correct, think about it
-   /* @Override
+    @Override
     public List<EmployeeDto> findByCompany(CompanyDto companyDto) {
         if (companyDto.getId() == 0) throw new ArgumentException("Id should not be null");
         List<Employee> employees = employeeRepository.findByCompany(modelMapper.map(companyDto, Company.class));
         List<EmployeeDto> employeeDtoList = employees.stream().map(employee -> modelMapper.map(employee, EmployeeDto.class)).collect(Collectors.toList());
         return employeeDtoList;
-   **/
-
+    }
 
     @Override
     public void delete(String id) {

@@ -18,6 +18,4 @@ public class VacationDay {
     @ManyToOne
     @JoinColumn(name = "employee_id")
     private Employee employee;
-
-
 }

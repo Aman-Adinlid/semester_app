@@ -76,11 +76,6 @@ public class CompanyServiceImpl implements CompanyService {
     @Transactional
     @Override
     public CompanyDto create(CompanyDto companyDto) {
-        // check company dto
-        // chek companyDto.getEmployee()
-        // save Employee to database
-        // save company
-        // return
         return modelMapper.map(companyRepository.save(modelMapper.map(companyDto, Company.class)), CompanyDto.class);
 
     }
