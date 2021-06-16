@@ -7,13 +7,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @SpringBootTest
 public class EmployeeTest {
     Employee employee;
-    List<VacationDay> vacationDayList;
-    List<Employee> employeeList;
     User user;
 
     @BeforeEach
@@ -23,7 +20,6 @@ public class EmployeeTest {
         employee.setLastName("Test");
         employee.setEmail("Test");
         employee.setMobile("Test1");
-        employee.setVacationDay(vacationDayList);
         employee.setSavedVacation(12);
         employee.setYearlyVacationDay(2021);
         employee.setDateOfEmployment(LocalDate.of(2021, 01, 12));
@@ -40,7 +36,6 @@ public class EmployeeTest {
         Assertions.assertEquals("Test", employee.getLastName());
         Assertions.assertEquals("Test", employee.getEmail());
         Assertions.assertEquals("Test1", employee.getMobile());
-        Assertions.assertEquals(vacationDayList, employee.getVacationDay());
         Assertions.assertEquals(12, employee.getSavedVacation());
         Assertions.assertEquals(2021, employee.getYearlyVacationDay());
         Assertions.assertEquals(LocalDate.of(2021, 01, 12), employee.getDateOfEmployment());
@@ -54,7 +49,6 @@ public class EmployeeTest {
         employee.setLastName("Test");
         employee.setEmail("Test");
         employee.setMobile("Test1");
-        employee.setVacationDay(vacationDayList);
         employee.setSavedVacation(12);
         employee.setYearlyVacationDay(2021);
         employee.setDateOfEmployment(LocalDate.of(2021, 01, 12));
@@ -70,7 +64,6 @@ public class EmployeeTest {
         employee.setLastName("Test");
         employee.setEmail("Test");
         employee.setMobile("Test1");
-        employee.setVacationDay(vacationDayList);
         employee.setSavedVacation(12);
         employee.setYearlyVacationDay(2021);
         employee.setDateOfEmployment(LocalDate.of(2021, 01, 12));

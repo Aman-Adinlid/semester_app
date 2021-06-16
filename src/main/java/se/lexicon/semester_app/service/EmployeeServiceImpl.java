@@ -5,9 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import se.lexicon.semester_app.dto.EmployeeDto;
-import se.lexicon.semester_app.dto.VacationDayDto;
 import se.lexicon.semester_app.entity.Employee;
-import se.lexicon.semester_app.entity.VacationDay;
 import se.lexicon.semester_app.exception.ArgumentException;
 import se.lexicon.semester_app.exception.RecordNotFoundException;
 import se.lexicon.semester_app.repository.EmployeeRepository;
@@ -102,12 +100,15 @@ public class EmployeeServiceImpl implements EmployeeService {
         return null;
     }
 
-    @Override
-    public List<VacationDayDto> findAllByVacationDay(String id) {
-        List<VacationDay> vacationDays = employeeRepository.findAllByVacationDay(id);
-        List<VacationDayDto> vacationDayDtoList = vacationDays.stream().map(vacationDay -> modelMapper.map(vacationDay, VacationDayDto.class)).collect(Collectors.toList());
-        return vacationDayDtoList;
-    }
+
+    //It is not correct, think about it
+   /* @Override
+    public List<EmployeeDto> findByCompany(CompanyDto companyDto) {
+        if (companyDto.getId() == 0) throw new ArgumentException("Id should not be null");
+        List<Employee> employees = employeeRepository.findByCompany(modelMapper.map(companyDto, Company.class));
+        List<EmployeeDto> employeeDtoList = employees.stream().map(employee -> modelMapper.map(employee, EmployeeDto.class)).collect(Collectors.toList());
+        return employeeDtoList;
+   **/
 
 
     @Override

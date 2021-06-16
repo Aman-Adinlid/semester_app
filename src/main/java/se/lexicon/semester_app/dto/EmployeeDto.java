@@ -3,7 +3,6 @@ package se.lexicon.semester_app.dto;
 import lombok.Data;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Data
 public class EmployeeDto {
@@ -12,7 +11,7 @@ public class EmployeeDto {
     private String lastName;
     private String email;
     private String mobile;
-    private List<VacationDayDto> vacationDayDto;
+    //private CompanyDto companyDto;
     private int savedVacation;
     private int yearlyVacationDays;
     private LocalDate dateOfEmployment;

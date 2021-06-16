@@ -1,7 +1,6 @@
 package se.lexicon.semester_app.service;
 
 import se.lexicon.semester_app.dto.EmployeeDto;
-import se.lexicon.semester_app.dto.VacationDayDto;
 import se.lexicon.semester_app.exception.RecordNotFoundException;
 
 import java.util.List;
@@ -20,8 +19,7 @@ public interface EmployeeService {
 
     List<EmployeeDto> findAll();
 
-    // have to fix a query for it in repo, need to make sure if it is correct to have this method in here??
-    List<VacationDayDto> findAllByVacationDay(String id);
+    //List<EmployeeDto> findByCompany(CompanyDto companyDto);
 
     void delete(String id);
 

@@ -6,19 +6,15 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.List;
-
 @SpringBootTest
 public class CompanyDtoTest {
     CompanyDto companyDto;
-    List<EmployeeDto> employeeDtoList;
-
 
     @BeforeEach
     public void setUp() {
         companyDto = new CompanyDto();
         companyDto.setName("Test");
-        companyDto.setEmployee(employeeDtoList);
+
 
     }
 
@@ -26,7 +22,7 @@ public class CompanyDtoTest {
     @DisplayName("Test1")
     public void test1_create_CompanyDto() {
         Assertions.assertEquals("Test", companyDto.getName());
-        Assertions.assertEquals(employeeDtoList, companyDto.getEmployee());
+
     }
 
 
@@ -35,7 +31,6 @@ public class CompanyDtoTest {
     public void test2_equal() {
         CompanyDto companyDto = new CompanyDto();
         companyDto.setName("Test");
-        companyDto.setEmployee(employeeDtoList);
         Assertions.assertTrue(companyDto.equals(companyDto));
     }
 
@@ -44,7 +39,6 @@ public class CompanyDtoTest {
     public void test3_hashCode() {
         CompanyDto companyDto = new CompanyDto();
         companyDto.setName("Test");
-        companyDto.setEmployee(employeeDtoList);
         Assertions.assertEquals(companyDto.hashCode(), companyDto.hashCode());
     }
 }

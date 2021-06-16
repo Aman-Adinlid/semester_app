@@ -19,10 +19,9 @@ public class CompanyServiceImplTest {
     CompanyService companyService;
     CompanyDto companyDto;
     EmployeeDto employeeDto;
-    List<EmployeeDto> employeeDtoList;
     EmployeeService employeeService;
     VacationDayDto vacationDayDto;
-    List<VacationDayDto> vacationDayDtoList;
+
 
     @Autowired
     public void setEmployeeService(EmployeeService employeeService) {
@@ -38,7 +37,6 @@ public class CompanyServiceImplTest {
     public void setUp() throws RecordNotFoundException {
         companyDto = new CompanyDto();
         companyDto.setName("Test");
-        companyDto.setEmployee(employeeDtoList);
         companyService.create(companyDto);
 
         EmployeeDto employeeDto = new EmployeeDto();
@@ -46,7 +44,6 @@ public class CompanyServiceImplTest {
         employeeDto.setLastName("Test");
         employeeDto.setEmail("Test546");
         employeeDto.setMobile("Test");
-        employeeDto.setVacationDayDto(vacationDayDtoList);
         employeeDto.setSavedVacation(12);
         employeeDto.setYearlyVacationDays(2021);
 

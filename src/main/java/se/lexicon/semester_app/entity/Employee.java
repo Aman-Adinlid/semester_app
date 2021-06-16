@@ -5,7 +5,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @Data
@@ -23,8 +22,8 @@ public class Employee {
     private String email;
     @Column(nullable = false, unique = true)
     private String mobile;
-    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-    private List<VacationDay> vacationDay;
+   //@ManyToOne
+   // private Company company; // got error cuz of it, fix it
     private int savedVacation;
     private int yearlyVacationDay;
     private LocalDate dateOfEmployment;

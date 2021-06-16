@@ -8,12 +8,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import se.lexicon.semester_app.entity.UserType;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @SpringBootTest
 public class EmployeeDtoTest {
     EmployeeDto employeeDto;
-    List<VacationDayDto> vacationDayDtoList;
     UserDto userDto;
 
     @BeforeEach
@@ -23,7 +21,6 @@ public class EmployeeDtoTest {
         employeeDto.setLastName("Test");
         employeeDto.setEmail("Test");
         employeeDto.setMobile("Test");
-        employeeDto.setVacationDayDto(vacationDayDtoList);
         employeeDto.setSavedVacation(12);
         employeeDto.setYearlyVacationDays(2021);
         employeeDto.setDateOfEmployment(LocalDate.of(2021, 01, 12));
@@ -40,7 +37,6 @@ public class EmployeeDtoTest {
         Assertions.assertEquals("Test", employeeDto.getLastName());
         Assertions.assertEquals("Test", employeeDto.getEmail());
         Assertions.assertEquals("Test", employeeDto.getMobile());
-        Assertions.assertEquals(vacationDayDtoList, employeeDto.getVacationDayDto());
         Assertions.assertEquals(12, employeeDto.getSavedVacation());
         Assertions.assertEquals(2021, employeeDto.getYearlyVacationDays());
         Assertions.assertEquals(LocalDate.of(2021, 01, 12), employeeDto.getDateOfEmployment());
@@ -54,7 +50,6 @@ public class EmployeeDtoTest {
         employeeDto.setLastName("Test");
         employeeDto.setEmail("Test");
         employeeDto.setMobile("Test");
-        employeeDto.setVacationDayDto(vacationDayDtoList);
         employeeDto.setSavedVacation(12);
         employeeDto.setYearlyVacationDays(2021);
         employeeDto.setDateOfEmployment(LocalDate.of(2021, 01, 12));
@@ -72,7 +67,6 @@ public class EmployeeDtoTest {
         employeeDto.setLastName("Test");
         employeeDto.setEmail("Test");
         employeeDto.setMobile("Test");
-        employeeDto.setVacationDayDto(vacationDayDtoList);
         employeeDto.setSavedVacation(12);
         employeeDto.setYearlyVacationDays(2021);
         employeeDto.setDateOfEmployment(LocalDate.of(2021, 01, 12));
