@@ -22,8 +22,9 @@ public class Employee {
     private String email;
     @Column(nullable = false, unique = true)
     private String mobile;
-   //@ManyToOne
-   // private Company company; // got error cuz of it, fix it
+    @ManyToOne
+    @JoinColumn(name = "company_id")
+    private Company company;
     private int savedVacation;
     private int yearlyVacationDay;
     private LocalDate dateOfEmployment;

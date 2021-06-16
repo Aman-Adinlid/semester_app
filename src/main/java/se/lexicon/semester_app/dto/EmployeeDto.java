@@ -11,7 +11,7 @@ public class EmployeeDto {
     private String lastName;
     private String email;
     private String mobile;
-    //private CompanyDto companyDto;
+    private CompanyDto companyDto;
     private int savedVacation;
     private int yearlyVacationDays;
     private LocalDate dateOfEmployment;

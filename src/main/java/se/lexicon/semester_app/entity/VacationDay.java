@@ -15,8 +15,9 @@ public class VacationDay {
     private LocalDate vacationDate;
     private boolean approved;
     private VacationType vacationType;
-    //@ManyToOne
-   // private Employee employee; // got error, fix it
+    @ManyToOne
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
 
 
 }
