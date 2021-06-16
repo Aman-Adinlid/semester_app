@@ -33,7 +33,6 @@ public class CompanyController {
     }
 
     @PostMapping
-    //got null for employee, need to fix this method
     public ResponseEntity<CompanyDto> create(@RequestBody CompanyDto companyDto) throws RecordNotFoundException {
         if (companyDto == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
