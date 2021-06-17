@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
 @Service
 public class CompanyServiceImpl implements CompanyService {
 
@@ -53,7 +54,6 @@ public class CompanyServiceImpl implements CompanyService {
         return companyDtoList;
     }
 
-
     @Override
     public List<CompanyDto> findAll() {
         List<Company> companyList = new ArrayList<>();
@@ -76,6 +76,7 @@ public class CompanyServiceImpl implements CompanyService {
     @Transactional
     @Override
     public CompanyDto create(CompanyDto companyDto) {
+
         return modelMapper.map(companyRepository.save(modelMapper.map(companyDto, Company.class)), CompanyDto.class);
 
     }

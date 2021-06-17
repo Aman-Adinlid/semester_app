@@ -26,7 +26,7 @@ public class CompanyServiceTest {
         this.companyService = companyService;
     }
     @BeforeEach
-    public void setup(){
+    public void setup() throws RecordNotFoundException {
         VacationDayDto vacationDayDto = new VacationDayDto();
         vacationDayDto.setVacationDate(LocalDate.now());
         vacationDayDto.setApproved(vacationDayDto.isApproved());
@@ -39,18 +39,15 @@ public class CompanyServiceTest {
         employeeDto.setLastName("Test");
         employeeDto.setEmail("Test");
         employeeDto.setMobile("Test");
-        employeeDto.setVacationDayDto(vacationDayDtoList);
         employeeDto.setSavedVacation(12);
         employeeDto.setYearlyVacationDays(2021);
         employeeDto.setDateOfEmployment(LocalDate.of(2021, 01, 12));
-        employeeDto.setPassword("Test12");
 
         List<EmployeeDto> employeeDtoList = new ArrayList<>();
         employeeDtoList.add(employeeDto);
 
         companyDto = new CompanyDto();
         companyDto.setName("companyName");
-        companyDto.setEmployeeDto(employeeDtoList);
         System.out.println(companyDto);
 
         companyService.create(companyDto);

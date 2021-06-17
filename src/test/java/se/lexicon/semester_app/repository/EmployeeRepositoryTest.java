@@ -39,20 +39,18 @@ public class EmployeeRepositoryTest {
         employee = new Employee();
         employee.setEmail("Test");
         employee.setMobile("Test1");
-        employee.setVacationDay(vacationDayList);
         employee.setSavedVacation(12);
-        employee.setYearlyVacationDay(2021);
+        employee.setYearlyVacationDays(2021);
         employee.setDateOfEmployment(LocalDate.of(2021, 01, 12));
         employeeRepository.save(employee);
 
         company = new Company();
         company.setName("Test");
-        company.setEmployees(employeeList);
         companyRepository.save(company);
 
         User user = new User();
         user.setEmail("Test");
-        user.setType(UserType.USER);
+        user.setUserType(UserType.USER);
         userRepository.save(user);
     }
 }

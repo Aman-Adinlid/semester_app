@@ -23,15 +23,13 @@ public class EmployeeDtoTest {
         employeeDto.setLastName("Test");
         employeeDto.setEmail("Test");
         employeeDto.setMobile("Test");
-        employeeDto.setVacationDayDto(vacationDayDtoList);
         employeeDto.setSavedVacation(12);
         employeeDto.setYearlyVacationDays(2021);
         employeeDto.setDateOfEmployment(LocalDate.of(2021, 01, 12));
-        employeeDto.setPassword("Test12");
 
         userDto = new UserDto();
         userDto.setEmail("Test");
-        userDto.setType(UserType.USER);
+        userDto.setUserType(UserType.USER);
     }
 
     @Test
@@ -41,11 +39,10 @@ public class EmployeeDtoTest {
         Assertions.assertEquals("Test", employeeDto.getLastName());
         Assertions.assertEquals("Test", employeeDto.getEmail());
         Assertions.assertEquals("Test", employeeDto.getMobile());
-        Assertions.assertEquals(vacationDayDtoList, employeeDto.getVacationDayDto());
         Assertions.assertEquals(12, employeeDto.getSavedVacation());
         Assertions.assertEquals(2021, employeeDto.getYearlyVacationDays());
         Assertions.assertEquals(LocalDate.of(2021, 01, 12), employeeDto.getDateOfEmployment());
-        Assertions.assertEquals("Test12", employeeDto.getPassword());
+
     }
 
     @Test
@@ -56,12 +53,10 @@ public class EmployeeDtoTest {
         employeeDto.setLastName("Test");
         employeeDto.setEmail("Test");
         employeeDto.setMobile("Test");
-        employeeDto.setVacationDayDto(vacationDayDtoList);
         employeeDto.setSavedVacation(12);
         employeeDto.setYearlyVacationDays(2021);
         employeeDto.setDateOfEmployment(LocalDate.of(2021, 01, 12));
-        employeeDto.setPassword("Test12");
-        employeeDto.setUserDto(userDto);
+        employeeDto.setUser(userDto);
         Assertions.assertTrue(employeeDto.equals(employeeDto));
 
     }
@@ -75,12 +70,10 @@ public class EmployeeDtoTest {
         employeeDto.setLastName("Test");
         employeeDto.setEmail("Test");
         employeeDto.setMobile("Test");
-        employeeDto.setVacationDayDto(vacationDayDtoList);
         employeeDto.setSavedVacation(12);
         employeeDto.setYearlyVacationDays(2021);
         employeeDto.setDateOfEmployment(LocalDate.of(2021, 01, 12));
-        employeeDto.setPassword("Test12");
-        employeeDto.setUserDto(userDto);
+        employeeDto.setUser(userDto);
         Assertions.assertEquals(employeeDto.hashCode(), employeeDto.hashCode());
     }
 }

@@ -7,5 +7,5 @@ import se.lexicon.semester_app.entity.UserType;
 public class UserDto {
     private int id;
     private String email;
-    private UserType type;
+    private UserType userType;
 }

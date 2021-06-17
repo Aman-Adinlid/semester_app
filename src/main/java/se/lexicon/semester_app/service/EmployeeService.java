@@ -1,17 +1,14 @@
 package se.lexicon.semester_app.service;
 
+import se.lexicon.semester_app.dto.CompanyDto;
 import se.lexicon.semester_app.dto.EmployeeDto;
-import se.lexicon.semester_app.dto.VacationDayDto;
 import se.lexicon.semester_app.exception.RecordNotFoundException;
 
 import java.util.List;
-import java.util.UUID;
 
 public interface EmployeeService {
 
-    EmployeeDto findById(UUID id) throws RecordNotFoundException;
-
-    EmployeeDto save(EmployeeDto employeeDto);
+    EmployeeDto findById(String id) throws RecordNotFoundException;
 
     EmployeeDto create(EmployeeDto employeeDto) throws RecordNotFoundException;
 
@@ -21,12 +18,8 @@ public interface EmployeeService {
 
     List<EmployeeDto> findAll();
 
-    // List<VacationDay> getVacationDays(UUID id);
+    List<EmployeeDto> findByCompany(CompanyDto companyDto);
 
-    List<VacationDayDto> findByVacationDay(UUID id);
+    void delete(String id);
 
-    // List<VacationDay> saveVacationDays(UUID id, List<VacationDay> vacationDays);
-
-    void delete(UUID id);
-  
 }

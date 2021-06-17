@@ -6,31 +6,30 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
-
 @Entity
 @Data
-public class Employee{
+public class Employee {
 
     @Id
     @GeneratedValue(generator = "UUID")
-    @GenericGenerator(
-            name = "UUID",
-            strategy = "org.hibernate.id.UUIDGenerator")
-    private UUID id;
-    @Column(nullable = false,unique = true)
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    private String id;
+    @Column(nullable = false, unique = true)
+    private String firstName;
+    @Column(nullable = false, unique = true)
+    private String lastName;
+    @Column(nullable = false, unique = true)
     private String email;
-    @Column(nullable = false,unique = true)
+    @Column(nullable = false, unique = true)
     private String mobile;
-    @OneToMany(cascade = {CascadeType.MERGE,CascadeType.DETACH, CascadeType.PERSIST,CascadeType.REFRESH})
-    private List<VacationDay> vacationDay;
-    private int savedVacation;
-    private int yearlyVacationDay;
-    private LocalDate dateOfEmployment;
     @ManyToOne
+    @JoinColumn(name = "company_id")
     private Company company;
+    private int savedVacation;
+    private int yearlyVacationDays;
+    private LocalDate dateOfEmployment;
     @OneToOne
     private User user;
-
 
 
 }
