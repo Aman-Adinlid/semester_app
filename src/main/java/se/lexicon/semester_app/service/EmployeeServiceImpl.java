@@ -58,10 +58,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
     }
 
-
     @Override
     public EmployeeDto create(EmployeeDto employeeDto) {
-        employeeDto.getCompanyDto().setId(1);
         return modelMapper.map(employeeRepository.save(modelMapper.map(employeeDto, Employee.class)), EmployeeDto.class);
     }
 
