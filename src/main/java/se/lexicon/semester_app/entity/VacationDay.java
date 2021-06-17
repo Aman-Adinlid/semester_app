@@ -16,5 +16,6 @@ public class VacationDay {
     private boolean approved;
     private VacationType vacationType;
     @ManyToOne
+    @JoinColumn(name = "employee_id")
     private Employee employee;
 }

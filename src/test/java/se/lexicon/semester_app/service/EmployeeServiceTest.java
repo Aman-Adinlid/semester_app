@@ -40,7 +40,7 @@ public class EmployeeServiceTest {
         companyDto = new CompanyDto();
         companyDto.setName("Test");
 
-        employeeDto.setCompanyDto(companyDto);
+        employeeDto.setCompany(companyDto);
         employeeService.create(employeeDto);
 
     }
@@ -48,8 +48,8 @@ public class EmployeeServiceTest {
     @Test
     @DisplayName("Test1 ")
     public void test1_findById() throws RecordNotFoundException {
-       // EmployeeDto createdEmployeeDto = employeeService.create(employeeDto);
-       // employeeService.findById(createdEmployeeDto.getId());
+        // EmployeeDto createdEmployeeDto = employeeService.create(employeeDto);
+        // employeeService.findById(createdEmployeeDto.getId());
         //assertEquals("1", employeeService.findById("1").getId());
     }
 }

@@ -23,6 +23,7 @@ public class Employee {
     @Column(nullable = false, unique = true)
     private String mobile;
     @ManyToOne
+    @JoinColumn(name = "company_id")
     private Company company;
     private int savedVacation;
     private int yearlyVacationDay;

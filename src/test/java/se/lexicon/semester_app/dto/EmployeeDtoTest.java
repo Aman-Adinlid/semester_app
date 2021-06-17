@@ -53,7 +53,7 @@ public class EmployeeDtoTest {
         employeeDto.setSavedVacation(12);
         employeeDto.setYearlyVacationDays(2021);
         employeeDto.setDateOfEmployment(LocalDate.of(2021, 01, 12));
-        employeeDto.setUserDto(userDto);
+        employeeDto.setUser(userDto);
         Assertions.assertTrue(employeeDto.equals(employeeDto));
 
     }
@@ -70,7 +70,7 @@ public class EmployeeDtoTest {
         employeeDto.setSavedVacation(12);
         employeeDto.setYearlyVacationDays(2021);
         employeeDto.setDateOfEmployment(LocalDate.of(2021, 01, 12));
-        employeeDto.setUserDto(userDto);
+        employeeDto.setUser(userDto);
         Assertions.assertEquals(employeeDto.hashCode(), employeeDto.hashCode());
     }
 }
