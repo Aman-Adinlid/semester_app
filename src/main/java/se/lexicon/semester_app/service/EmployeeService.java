@@ -10,8 +10,6 @@ public interface EmployeeService {
 
     EmployeeDto findById(String id) throws RecordNotFoundException;
 
-    EmployeeDto save(EmployeeDto employeeDto);
-
     EmployeeDto create(EmployeeDto employeeDto) throws RecordNotFoundException;
 
     EmployeeDto update(EmployeeDto employeeDto) throws RecordNotFoundException;
@@ -20,7 +18,7 @@ public interface EmployeeService {
 
     List<EmployeeDto> findAll();
 
-    List<EmployeeDto> findByCompany(CompanyDto companyDto);
+    List<EmployeeDto> findByCompany(CompanyDto companyDto) throws RecordNotFoundException;
 
     void delete(String id);
 
