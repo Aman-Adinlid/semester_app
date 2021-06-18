@@ -11,6 +11,13 @@ public class User{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private int id;
+    @Column(nullable = false)
+    private String firstName;
+    @Column(nullable = false)
+    private String lastName;
+    @Column(nullable = false, unique = true)
+    private String mobile;
+    @Column(nullable = false, unique = true)
     private String email;
     private UserType userType;
 }

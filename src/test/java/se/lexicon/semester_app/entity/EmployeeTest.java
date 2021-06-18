@@ -20,8 +20,7 @@ public class EmployeeTest {
     @BeforeEach
     public void setUp() {
         employee = new Employee();
-        employee.setEmail("Test");
-        employee.setMobile("Test1");
+
         employee.setSavedVacation(12);
         employee.setYearlyVacationDays(2021);
         employee.setDateOfEmployment(LocalDate.of(2021, 01, 12));
@@ -37,8 +36,6 @@ public class EmployeeTest {
     @Test
     @DisplayName("Test1")
     public void test1_create_Employee() {
-        Assertions.assertEquals("Test", employee.getEmail());
-        Assertions.assertEquals("Test1", employee.getMobile());
         Assertions.assertEquals(12, employee.getSavedVacation());
         Assertions.assertEquals(2021, employee.getYearlyVacationDays());
         Assertions.assertEquals(LocalDate.of(2021, 01, 12), employee.getDateOfEmployment());
@@ -48,8 +45,7 @@ public class EmployeeTest {
     @DisplayName("Test2")
     public void test2_equal() {
         employee = new Employee();
-        employee.setEmail("Test");
-        employee.setMobile("Test1");
+
         employee.setSavedVacation(12);
         employee.setYearlyVacationDays(2021);
         employee.setDateOfEmployment(LocalDate.of(2021, 01, 12));
@@ -62,8 +58,7 @@ public class EmployeeTest {
     @DisplayName("Test3")
     public void test3_hashCode() {
         employee = new Employee();
-        employee.setEmail("Test");
-        employee.setMobile("Test1");
+
         employee.setSavedVacation(12);
         employee.setYearlyVacationDays(2021);
         employee.setDateOfEmployment(LocalDate.of(2021, 01, 12));

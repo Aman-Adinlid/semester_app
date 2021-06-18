@@ -14,14 +14,6 @@ public class Employee {
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
-    @Column(nullable = false, unique = true)
-    private String firstName;
-    @Column(nullable = false, unique = true)
-    private String lastName;
-    @Column(nullable = false, unique = true)
-    private String email;
-    @Column(nullable = false, unique = true)
-    private String mobile;
     @ManyToOne
     @JoinColumn(name = "company_id")
     private Company company;

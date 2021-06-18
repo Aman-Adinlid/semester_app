@@ -19,10 +19,6 @@ public class EmployeeDtoTest {
     @BeforeEach
     public void setUp() {
         employeeDto = new EmployeeDto();
-        employeeDto.setFirstName("Test");
-        employeeDto.setLastName("Test");
-        employeeDto.setEmail("Test");
-        employeeDto.setMobile("Test");
         employeeDto.setSavedVacation(12);
         employeeDto.setYearlyVacationDays(2021);
         employeeDto.setDateOfEmployment(LocalDate.of(2021, 01, 12));
@@ -35,10 +31,6 @@ public class EmployeeDtoTest {
     @Test
     @DisplayName("Test1")
     public void test1_create_EmployeeDto() {
-        Assertions.assertEquals("Test", employeeDto.getFirstName());
-        Assertions.assertEquals("Test", employeeDto.getLastName());
-        Assertions.assertEquals("Test", employeeDto.getEmail());
-        Assertions.assertEquals("Test", employeeDto.getMobile());
         Assertions.assertEquals(12, employeeDto.getSavedVacation());
         Assertions.assertEquals(2021, employeeDto.getYearlyVacationDays());
         Assertions.assertEquals(LocalDate.of(2021, 01, 12), employeeDto.getDateOfEmployment());
@@ -49,10 +41,6 @@ public class EmployeeDtoTest {
     @DisplayName("Test2")
     public void test2_equal() {
         employeeDto = new EmployeeDto();
-        employeeDto.setFirstName("Test");
-        employeeDto.setLastName("Test");
-        employeeDto.setEmail("Test");
-        employeeDto.setMobile("Test");
         employeeDto.setSavedVacation(12);
         employeeDto.setYearlyVacationDays(2021);
         employeeDto.setDateOfEmployment(LocalDate.of(2021, 01, 12));
@@ -66,10 +54,6 @@ public class EmployeeDtoTest {
     @DisplayName("Test3")
     public void test3_hashCode() {
         employeeDto = new EmployeeDto();
-        employeeDto.setFirstName("Test");
-        employeeDto.setLastName("Test");
-        employeeDto.setEmail("Test");
-        employeeDto.setMobile("Test");
         employeeDto.setSavedVacation(12);
         employeeDto.setYearlyVacationDays(2021);
         employeeDto.setDateOfEmployment(LocalDate.of(2021, 01, 12));

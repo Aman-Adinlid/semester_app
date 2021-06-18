@@ -37,8 +37,6 @@ public class EmployeeRepositoryTest {
     @BeforeEach
     public void setUp() {
         employee = new Employee();
-        employee.setEmail("Test");
-        employee.setMobile("Test1");
         employee.setSavedVacation(12);
         employee.setYearlyVacationDays(2021);
         employee.setDateOfEmployment(LocalDate.of(2021, 01, 12));

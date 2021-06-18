@@ -35,10 +35,6 @@ public class CompanyServiceTest {
         vacationDayDtoList.add(vacationDayDto);
 
         EmployeeDto employeeDto = new EmployeeDto();
-        employeeDto.setFirstName("Test");
-        employeeDto.setLastName("Test");
-        employeeDto.setEmail("Test");
-        employeeDto.setMobile("Test");
         employeeDto.setSavedVacation(12);
         employeeDto.setYearlyVacationDays(2021);
         employeeDto.setDateOfEmployment(LocalDate.of(2021, 01, 12));
@@ -48,8 +44,6 @@ public class CompanyServiceTest {
 
         companyDto = new CompanyDto();
         companyDto.setName("companyName");
-        System.out.println(companyDto);
-
         companyService.create(companyDto);
 
 
