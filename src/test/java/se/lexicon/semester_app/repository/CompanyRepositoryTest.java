@@ -30,7 +30,6 @@ public class CompanyRepositoryTest {
     public void setUp() {
         company = new Company();
         company.setName("Test");
-        company.setEmployees(employeeList);
         companyRepository.save(company);
     }
 

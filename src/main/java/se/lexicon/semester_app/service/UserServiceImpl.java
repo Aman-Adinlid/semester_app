@@ -77,5 +77,5 @@ public class UserServiceImpl implements UserService {
         userRepository.delete(modelMapper.map(userRepository.findById(id)
                 .orElseThrow(() -> new RecordNotFoundException("Id ")), User.class));
     }
-
 }
+

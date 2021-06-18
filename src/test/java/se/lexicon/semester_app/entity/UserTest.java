@@ -14,14 +14,16 @@ public class UserTest {
     public void setUp() {
         user = new User();
         user.setEmail("Test");
-        user.setType(UserType.USER);
+        user.setEmail("Test");
+        user.setMobile("Test1");
+        user.setUserType(UserType.USER);
     }
 
     @Test
     @DisplayName("Test1")
     public void test1_create_User() {
         Assertions.assertEquals("Test", user.getEmail());
-        Assertions.assertEquals(UserType.USER, user.getType());
+        Assertions.assertEquals(UserType.USER, user.getUserType());
     }
 
     @Test
@@ -29,7 +31,9 @@ public class UserTest {
     public void test2_equal() {
         User user = new User();
         user.setEmail("Test");
-        user.setType(UserType.USER);
+        user.setUserType(UserType.USER);
+        user.setEmail("Test");
+        user.setMobile("Test1");
         Assertions.assertTrue(user.equals(user));
     }
 
@@ -38,7 +42,8 @@ public class UserTest {
     public void test3_hashCode() {
         User user = new User();
         user.setEmail("Test");
-        user.setType(UserType.USER);
+        user.setMobile("Test1");
+        user.setUserType(UserType.USER);
         Assertions.assertEquals(user.hashCode(), user.hashCode());
 
     }

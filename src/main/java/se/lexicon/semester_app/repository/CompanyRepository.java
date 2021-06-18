@@ -9,5 +9,4 @@ public interface CompanyRepository extends CrudRepository<Company, Integer> {
 
     List<Company> findCompanyByNameContainsIgnoreCase(String name);
 
-    // List<Employee> findByEmployees();
 }

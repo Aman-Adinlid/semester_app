@@ -4,12 +4,14 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import se.lexicon.semester_app.dto.CompanyDto;
 import se.lexicon.semester_app.dto.EmployeeDto;
-import se.lexicon.semester_app.dto.VacationDayDto;
+import se.lexicon.semester_app.dto.UserDto;
+import se.lexicon.semester_app.entity.Company;
 import se.lexicon.semester_app.entity.Employee;
-import se.lexicon.semester_app.entity.VacationDay;
 import se.lexicon.semester_app.exception.ArgumentException;
 import se.lexicon.semester_app.exception.RecordNotFoundException;
+import se.lexicon.semester_app.repository.CompanyRepository;
 import se.lexicon.semester_app.repository.EmployeeRepository;
 import se.lexicon.semester_app.repository.UserRepository;
 import se.lexicon.semester_app.repository.VacationDayRepository;
@@ -17,7 +19,6 @@ import se.lexicon.semester_app.repository.VacationDayRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,8 +26,18 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     EmployeeRepository employeeRepository;
     ModelMapper modelMapper;
-    VacationDayRepository vacationDayRepository;
-    UserRepository userRepository;
+    CompanyService companyService;
+    UserService userService;
+
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+    @Autowired
+    public void setCompanyService(CompanyService companyService) {
+        this.companyService = companyService;
+    }
 
     @Autowired
     public void setEmployeeRepository(EmployeeRepository employeeRepository) {
@@ -38,41 +49,36 @@ public class EmployeeServiceImpl implements EmployeeService {
         this.modelMapper = modelMapper;
     }
 
-    @Autowired
-    public void setVacationDayRepository(VacationDayRepository vacationDayRepository) {
-        this.vacationDayRepository = vacationDayRepository;
-    }
-
-    @Autowired
-    public void setUserRepository(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-
 
     @Override
-    public EmployeeDto findById(UUID id) throws RecordNotFoundException {
-        if (id == null) throw new IllegalArgumentException("id should not be null");
-        Optional<Employee> employee = employeeRepository.findById(id);
-        if (!employee.isPresent())
-            throw new RecordNotFoundException("Employee Id is not valid - data not fond");
-        return modelMapper.map(employee.get(), EmployeeDto.class);
+    public EmployeeDto findById(String id) throws RecordNotFoundException {
+        if (id == null) throw new ArgumentException("Id should not be null");
+        Optional<Employee> optionalEmployee = employeeRepository.findById(id);
+        if (optionalEmployee.isPresent()) {
+            EmployeeDto convertedData = modelMapper.map(optionalEmployee.get(), EmployeeDto.class);
+            return convertedData;
+        } else {
+            throw new RecordNotFoundException("EmployeeDto not found");
+        }
     }
-
+    @Transactional
     @Override
-    public EmployeeDto save(EmployeeDto employeeDto) {
-        if (employeeDto == null) throw new IllegalArgumentException("EmployeeDto object should not be null");
+    public EmployeeDto create(EmployeeDto employeeDto) throws RecordNotFoundException {
+        if (employeeDto == null) throw new ArgumentException("EmployeeDto object should not be null");
         if (employeeDto.getId() != null) throw new IllegalArgumentException("Id should be null");
+
         Employee employeeEntity = modelMapper.map(employeeDto, Employee.class);
         Employee savedEmployeeEntity = employeeRepository.save(employeeEntity);
         EmployeeDto convertedEntityToDto = modelMapper.map(savedEmployeeEntity, EmployeeDto.class);
+
+        UserDto userDto = userService.findById(convertedEntityToDto.getUser().getId());
+        CompanyDto companyDto = companyService.findById(convertedEntityToDto.getCompany().getId());
+        convertedEntityToDto.setUser(userDto);
+        convertedEntityToDto.setCompany(companyDto);
         return convertedEntityToDto;
     }
 
-    @Transactional
-    @Override
-    public EmployeeDto create(EmployeeDto employeeDto) {
-        return modelMapper.map(employeeRepository.save(modelMapper.map(employeeDto, Employee.class)), EmployeeDto.class);
-    }
+
 
     @Override
     public List<EmployeeDto> findAll() {
@@ -100,16 +106,17 @@ public class EmployeeServiceImpl implements EmployeeService {
         return null;
     }
 
+
     @Override
-    public List<VacationDayDto> findByVacationDay(UUID id) {
-        List<VacationDay> vacationDays = employeeRepository.findByVacationDay(id);
-        List<VacationDayDto> vacationDayDtoList = vacationDays.stream().map(vacationDay -> modelMapper.map(vacationDay, VacationDayDto.class)).collect(Collectors.toList());
-        return vacationDayDtoList;
+    public List<EmployeeDto> findByCompany(CompanyDto companyDto) {
+        if (companyDto.getId() == 0) throw new ArgumentException("Id should not be null");
+        List<Employee> employees = employeeRepository.findByCompany(modelMapper.map(companyDto, Company.class));
+        List<EmployeeDto> employeeDtoList = employees.stream().map(employee -> modelMapper.map(employee, EmployeeDto.class)).collect(Collectors.toList());
+        return employeeDtoList;
     }
 
-
     @Override
-    public void delete(UUID id) {
+    public void delete(String id) {
         if (id == null) throw new ArgumentException("Id is not valid");
         Optional<Employee> optional = employeeRepository.findById(id);
         if (optional.isPresent()) {
@@ -117,6 +124,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
 
     }
+}
 
-    }
+
 
