@@ -11,8 +11,6 @@ import se.lexicon.semester_app.exception.RecordNotFoundException;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 @SpringBootTest
 public class EmployeeServiceTest {
 
@@ -29,10 +27,6 @@ public class EmployeeServiceTest {
 
     public void setUp() throws RecordNotFoundException {
         employeeDto = new EmployeeDto();
-        employeeDto.setFirstName("Test");
-        employeeDto.setLastName("Test");
-        employeeDto.setEmail("Test");
-        employeeDto.setMobile("Test");
         employeeDto.setSavedVacation(12);
         employeeDto.setYearlyVacationDays(2021);
         employeeDto.setDateOfEmployment(LocalDate.of(2021, 01, 12));

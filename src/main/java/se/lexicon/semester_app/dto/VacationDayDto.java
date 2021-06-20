@@ -12,7 +12,5 @@ public class VacationDayDto {
     private boolean approved;
     private VacationType vacationType;
     private EmployeeDto employee;
-
-
 }
 

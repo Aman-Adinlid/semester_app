@@ -13,6 +13,10 @@ public class UserTest {
     @BeforeEach
     public void setUp() {
         user = new User();
+        user.setFirstName("Test");
+        user.setLastName("Test");
+        user.setEmail("Test546");
+        user.setMobile("Test");
         user.setEmail("Test");
         user.setUserType(UserType.USER);
     }

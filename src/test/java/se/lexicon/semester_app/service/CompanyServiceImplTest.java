@@ -40,10 +40,6 @@ public class CompanyServiceImplTest {
         companyService.create(companyDto);
 
         EmployeeDto employeeDto = new EmployeeDto();
-        employeeDto.setFirstName("Test");
-        employeeDto.setLastName("Test");
-        employeeDto.setEmail("Test546");
-        employeeDto.setMobile("Test");
         employeeDto.setSavedVacation(12);
         employeeDto.setYearlyVacationDays(2021);
 

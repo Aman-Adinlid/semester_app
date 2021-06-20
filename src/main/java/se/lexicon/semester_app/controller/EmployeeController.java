@@ -26,7 +26,7 @@ public class EmployeeController {
         return ResponseEntity.status(HttpStatus.OK).body(employeeService.findAll());
     }
 
-     @GetMapping("/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<EmployeeDto> findById(@PathVariable("id") String id) throws RecordNotFoundException {
         if (id == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         try {

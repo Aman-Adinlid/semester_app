@@ -8,6 +8,7 @@ import se.lexicon.semester_app.dto.UserDto;
 import se.lexicon.semester_app.exception.RecordNotFoundException;
 import se.lexicon.semester_app.service.UserService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -35,7 +36,7 @@ public class UserController {
 
 
     @PostMapping
-    public ResponseEntity<UserDto> create(@RequestBody UserDto userDto) throws RecordNotFoundException {
+    public ResponseEntity<UserDto> create(@RequestBody @Valid UserDto userDto) throws RecordNotFoundException {
         if (userDto == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
@@ -44,7 +45,7 @@ public class UserController {
 
 
     @PutMapping
-    public ResponseEntity<UserDto> update(@RequestBody UserDto userDto) throws RecordNotFoundException {
+    public ResponseEntity<UserDto> update(@RequestBody @Valid UserDto userDto) throws RecordNotFoundException {
         if (userDto == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
