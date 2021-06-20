@@ -47,3 +47,4 @@ public class VacationDayTest {
         Assertions.assertEquals(vacationDay.hashCode(), vacationDay.hashCode());
     }
 }
+

@@ -11,6 +11,7 @@ import se.lexicon.semester_app.service.UserService;
 import javax.validation.Valid;
 import java.util.List;
 
+
 @RestController
 @RequestMapping("api/v1/user")
 public class UserController {
@@ -66,3 +67,4 @@ public class UserController {
     }
 
 }
+

@@ -5,6 +5,7 @@ import se.lexicon.semester_app.entity.VacationType;
 
 import java.time.LocalDate;
 
+
 @Data
 public class VacationDayDto {
     private int id;
@@ -13,4 +14,3 @@ public class VacationDayDto {
     private VacationType vacationType;
     private EmployeeDto employee;
 }
-

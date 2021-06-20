@@ -6,6 +6,7 @@ import se.lexicon.semester_app.exception.RecordNotFoundException;
 
 import java.util.List;
 
+
 public interface EmployeeService {
 
     EmployeeDto findById(String id) throws RecordNotFoundException;
@@ -21,5 +22,4 @@ public interface EmployeeService {
     List<EmployeeDto> findByCompany(CompanyDto companyDto) throws RecordNotFoundException;
 
     void delete(String id);
-
 }

@@ -22,4 +22,5 @@ public class Employee {
     private LocalDate dateOfEmployment;
     @OneToOne
     private User user;
+  
 }
