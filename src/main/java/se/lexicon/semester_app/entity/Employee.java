@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @Entity
 @Data
-public class Employee extends Person {
+public class Employee {
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -28,9 +28,6 @@ public class Employee extends Person {
     private LocalDate dateOfEmployment;
     @ManyToOne
     private Company company;
-//    private int userType;
-//    @Column(nullable = false)
-//    private String password;
 
 
 }

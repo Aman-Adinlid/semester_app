@@ -9,11 +9,15 @@ import java.time.LocalDate;
 @Data
 public class VacationDay {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private LocalDate vacationDate;
-    private  boolean approved;
-    private  VacationType vacationType;
-
+    private boolean approved;
+    private VacationType vacationType;
+    @ManyToOne
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
 }
+

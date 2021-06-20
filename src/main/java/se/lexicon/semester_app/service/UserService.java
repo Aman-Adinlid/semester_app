@@ -14,7 +14,7 @@ public interface UserService {
 
     UserDto update(UserDto userDto) throws RecordNotFoundException;
 
-    void deleteById(int id);
+    void deleteById(int id) throws RecordNotFoundException;
 
     UserDto findByEmail(String email);
 

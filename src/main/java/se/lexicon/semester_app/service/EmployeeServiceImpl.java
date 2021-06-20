@@ -3,80 +3,101 @@ package se.lexicon.semester_app.service;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import se.lexicon.semester_app.dto.CompanyDto;
 import se.lexicon.semester_app.dto.EmployeeDto;
+import se.lexicon.semester_app.dto.UserDto;
 import se.lexicon.semester_app.entity.Employee;
+import se.lexicon.semester_app.exception.ArgumentException;
 import se.lexicon.semester_app.exception.RecordNotFoundException;
 import se.lexicon.semester_app.repo.EmployeeRepo;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
-public class EmployeeServiceImpl implements EmployeeService{
-    EmployeeRepo employeeRepo;
+public class EmployeeServiceImpl implements EmployeeService {
+    EmployeeRepo employeeRepository;
     ModelMapper modelMapper;
-
+    CompanyService companyService;
+    UserService userService;
 
     @Autowired
-    public void setEmployeeRepo(EmployeeRepo employeeRepo) {
-        this.employeeRepo = employeeRepo;
+    public void setUserService(UserService userService) {
+        this.userService = userService;
     }
+
+    @Autowired
+    public void setCompanyService(CompanyService companyService) {
+        this.companyService = companyService;
+    }
+
+    @Autowired
+    public void setEmployeeRepository(EmployeeRepo employeeRepository) {
+        this.employeeRepository = employeeRepository;
+    }
+
     @Autowired
     public void setModelMapper(ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
     }
 
     @Override
-    public EmployeeDto findById(UUID id) throws RecordNotFoundException {
-        if (id==null)throw new IllegalArgumentException("id should not be null");
-        Optional<Employee> optionalEmployee=employeeRepo.findById(id);
+    public EmployeeDto findById(String id) throws RecordNotFoundException {
+        if (id == null) throw new ArgumentException("Id should not be null");
+        Optional<Employee> optionalEmployee = employeeRepository.findById(id);
         if (optionalEmployee.isPresent()) {
             EmployeeDto convertedData = modelMapper.map(optionalEmployee.get(), EmployeeDto.class);
             return convertedData;
-        }else {
-            throw new RecordNotFoundException("EmployDto not found");
-        }
-    }
-
-    @Override
-    public EmployeeDto save(EmployeeDto dto) {
-        if (dto==null)throw new IllegalArgumentException("EmployeeDto object should not be null");
-        if (dto.getId() !=null)throw new IllegalArgumentException("Id should be null");
-        Employee employeeEntity=modelMapper.map(dto,Employee.class);
-        Employee savedEmployeeEntity=employeeRepo.save(employeeEntity);
-        EmployeeDto convertEntityToDto=modelMapper.map(savedEmployeeEntity,EmployeeDto.class);
-        return convertEntityToDto;
-    }
-
-
-    @Override
-    public EmployeeDto update(EmployeeDto dto) throws RecordNotFoundException {
-        if (dto==null)throw new IllegalArgumentException("EmployeeDto object should not be null");
-        if (dto.getId()==null)throw new IllegalArgumentException("Id should not be null");
-        Optional<Employee>optionalEmployee=employeeRepo.findById(dto.getId());
-        if (optionalEmployee.isPresent()) {
-            return modelMapper.map(employeeRepo.save(modelMapper.map(dto, Employee.class)), EmployeeDto.class);
-        }else {
+        } else {
             throw new RecordNotFoundException("EmployeeDto not found");
-
-
         }
-
-
     }
 
+
+
+    @Override
+    public EmployeeDto create(EmployeeDto employeeDto) throws RecordNotFoundException {
+        if (employeeDto == null) throw new ArgumentException("EmployeeDto object should not be null");
+        if (employeeDto.getId() != null) throw new IllegalArgumentException("Id should be null");
+
+        Employee employeeEntity = modelMapper.map(employeeDto, Employee.class);
+        Employee savedEmployeeEntity = employeeRepository.save(employeeEntity);
+        EmployeeDto convertedEntityToDto = modelMapper.map(savedEmployeeEntity, EmployeeDto.class);
+
+        UserDto userDto = userService.findById(convertedEntityToDto.getUser().getId());
+        CompanyDto companyDto = companyService.findById(convertedEntityToDto.getCompany().getId());
+        convertedEntityToDto.setUser(userDto);
+        convertedEntityToDto.setCompany(companyDto);
+        return convertedEntityToDto;
+    }
+
+
+
+    @Override
+    public EmployeeDto update(EmployeeDto employeeDto) throws RecordNotFoundException {
+        return null;
+    }
+
+    @Override
+    public List<EmployeeDto> findByUserType(int userType) {
+        return null;
+    }
 
     @Override
     public List<EmployeeDto> findAll() {
-        List<Employee>employeeList=new ArrayList<>();
-        employeeRepo.findAll().iterator().forEachRemaining(employeeList::add);
-        List<EmployeeDto>employeeDtoList=employeeList.stream()
-                .map(employee -> modelMapper.map(employee,EmployeeDto.class))
-                .collect(Collectors.toList());
-        return employeeDtoList;
+        return null;
     }
+
+    @Override
+    public List<EmployeeDto> findByCompany(CompanyDto companyDto) {
+        return null;
     }
+
+    @Override
+    public void delete(String id) {
+
+    }
+}
 

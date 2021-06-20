@@ -7,5 +7,5 @@ import java.util.List;
 public class CompanyDto {
     private int id;
     private String name;
-    List<EmployeeDto> employeeDtos;
+
 }

@@ -8,15 +8,11 @@ import java.util.UUID;
 
 @Data
 public class EmployeeDto {
-    private UUID id;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String mobile;
-    private List<VacationDayDto> vacationDayDto;
+    private String id;
+    private CompanyDto company;
     private int savedVacation;
     private int yearlyVacationDays;
     private LocalDate dateOfEmployment;
-    private int userType;
-    private String password;
+    private UserDto user;
 }
+
