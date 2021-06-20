@@ -8,10 +8,11 @@ import se.lexicon.semester_app.dto.CompanyDto;
 import se.lexicon.semester_app.exception.RecordNotFoundException;
 import se.lexicon.semester_app.service.CompanyService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/company")
+@RequestMapping("api/v1/company")
 public class CompanyController {
 
     CompanyService companyService;
@@ -33,7 +34,7 @@ public class CompanyController {
     }
 
     @PostMapping
-    public ResponseEntity<CompanyDto> create(@RequestBody CompanyDto companyDto) throws RecordNotFoundException {
+    public ResponseEntity<CompanyDto> create(@RequestBody @Valid CompanyDto companyDto) throws RecordNotFoundException {
         if (companyDto == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
@@ -42,7 +43,7 @@ public class CompanyController {
     }
 
     @PutMapping
-    public ResponseEntity<CompanyDto> update(@RequestBody CompanyDto companyDto) throws RecordNotFoundException {
+    public ResponseEntity<CompanyDto> update(@RequestBody @Valid CompanyDto companyDto) throws RecordNotFoundException {
         if (companyDto == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }

@@ -11,7 +11,7 @@ import se.lexicon.semester_app.service.EmployeeService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/employee")
+@RequestMapping("api/v1/employee")
 public class EmployeeController {
 
     EmployeeService employeeService;

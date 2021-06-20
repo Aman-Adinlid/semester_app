@@ -3,17 +3,17 @@ package se.lexicon.semester_app.repository;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import se.lexicon.semester_app.entity.*;
+import se.lexicon.semester_app.entity.Company;
+import se.lexicon.semester_app.entity.Employee;
+import se.lexicon.semester_app.entity.User;
+import se.lexicon.semester_app.entity.UserType;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @SpringBootTest
 public class EmployeeRepositoryTest {
     EmployeeRepository employeeRepository;
     Employee employee;
-    List<VacationDay> vacationDayList;
-    List<Employee> employeeList;
     Company company;
     CompanyRepository companyRepository;
     User user;
@@ -38,7 +38,6 @@ public class EmployeeRepositoryTest {
     public void setUp() {
         employee = new Employee();
         employee.setSavedVacation(12);
-        employee.setYearlyVacationDays(2021);
         employee.setDateOfEmployment(LocalDate.of(2021, 01, 12));
         employeeRepository.save(employee);
 
