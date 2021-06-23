@@ -13,7 +13,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/supervisor/api/v1")
 @AllArgsConstructor
-public class OwnerController {
+public class SuperVisorController {
     UserRepository appUserRepository;
 
     @PutMapping

@@ -37,7 +37,7 @@ public class RegistrationService {
                     request.getLastName(),
                     request.getMobile(),
                     request.getEmail(),
-                    UserType.SUPERVISOR,
+                    UserType.USER,
                     request.getPassword()));
             return token;
           }
