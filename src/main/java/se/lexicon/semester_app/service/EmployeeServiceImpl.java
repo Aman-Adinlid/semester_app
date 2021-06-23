@@ -11,10 +11,8 @@ import se.lexicon.semester_app.entity.Company;
 import se.lexicon.semester_app.entity.Employee;
 import se.lexicon.semester_app.exception.ArgumentException;
 import se.lexicon.semester_app.exception.RecordNotFoundException;
-import se.lexicon.semester_app.repository.CompanyRepository;
 import se.lexicon.semester_app.repository.EmployeeRepository;
-import se.lexicon.semester_app.repository.UserRepository;
-import se.lexicon.semester_app.repository.VacationDayRepository;
+
 
 import java.util.ArrayList;
 import java.util.List;

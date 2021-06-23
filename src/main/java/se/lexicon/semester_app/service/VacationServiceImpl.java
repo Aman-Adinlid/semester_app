@@ -9,7 +9,6 @@ import se.lexicon.semester_app.entity.VacationDay;
 import se.lexicon.semester_app.exception.ArgumentException;
 import se.lexicon.semester_app.exception.RecordNotFoundException;
 import se.lexicon.semester_app.repository.VacationDayRepository;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
