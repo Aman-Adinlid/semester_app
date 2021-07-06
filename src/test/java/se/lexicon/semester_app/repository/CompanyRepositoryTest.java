@@ -56,7 +56,7 @@ public class CompanyRepositoryTest {
     public void test3_findAll_save() {
         List<Company> companyList = new ArrayList<>();
         companyRepository.findAll().iterator().forEachRemaining(companyList::add);
-        assertEquals(1, companyList.size());
+        assertEquals(2, companyList.size());
     }
 
     @Test

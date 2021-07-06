@@ -12,7 +12,7 @@ import static se.lexicon.semester_app.entity.Permission.*;
 public enum UserType {
     USER(Sets.newHashSet())
     ,ADMIN(Sets.newHashSet(USER_READ,USER_WRITE))
-    ,SUPERVISOR(Sets.newHashSet(ADMIN_READ, ADMIN_WRITE));
+    ,SUPERVISOR(Sets.newHashSet(ADMIN_READ, ADMIN_WRITE,USER_READ,USER_WRITE));
 
 
     private final Set<Permission> permissions;
