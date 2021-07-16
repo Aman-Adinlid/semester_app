@@ -15,7 +15,7 @@ public class UserTest {
         user = new User();
         user.setEmail("Test");
         user.setEmail("Test");
-        user.setMobile("Test1");
+//        user.setMobile("Test1");
         user.setUserType(UserType.USER);
     }
 
@@ -33,7 +33,7 @@ public class UserTest {
         user.setEmail("Test");
         user.setUserType(UserType.USER);
         user.setEmail("Test");
-        user.setMobile("Test1");
+//        user.setMobile("Test1");
         Assertions.assertTrue(user.equals(user));
     }
 
@@ -42,7 +42,7 @@ public class UserTest {
     public void test3_hashCode() {
         User user = new User();
         user.setEmail("Test");
-        user.setMobile("Test1");
+//        user.setMobile("Test1");
         user.setUserType(UserType.USER);
         Assertions.assertEquals(user.hashCode(), user.hashCode());
 

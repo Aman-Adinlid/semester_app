@@ -12,17 +12,10 @@ import se.lexicon.semester_app.dto.UserDto;
 import se.lexicon.semester_app.entity.User;
 import se.lexicon.semester_app.exception.ArgumentException;
 import se.lexicon.semester_app.exception.RecordNotFoundException;
-import se.lexicon.semester_app.registration.token.ConfirmationToken;
-import se.lexicon.semester_app.registration.token.ConfirmationTokenRepository;
-import se.lexicon.semester_app.registration.token.ConfirmationTokenService;
 import se.lexicon.semester_app.repository.UserRepository;
-import se.lexicon.semester_app.security.PassWordEncoder;
-
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,9 +24,7 @@ public class UserServiceImpl implements UserService {
 
     UserRepository userRepository;
     ModelMapper modelMapper;
-    ConfirmationTokenRepository confirmationTokenRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    private ConfirmationTokenService confirmationTokenService;
 
 
     @Autowired
@@ -44,11 +35,6 @@ public class UserServiceImpl implements UserService {
     @Autowired
     public void setModelMapper(ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
-    }
-
-    @Autowired
-    public void setConfirmationTokenRepository(ConfirmationTokenRepository confirmationTokenRepository) {
-        this.confirmationTokenRepository = confirmationTokenRepository;
     }
 
 
@@ -110,20 +96,15 @@ public class UserServiceImpl implements UserService {
         }
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepository.save(user);
-        String token =  UUID.randomUUID().toString();
-        ConfirmationToken confirmationToken = new ConfirmationToken(
-                token,
-                LocalDateTime.now(),
-                LocalDateTime.now().plusMinutes(15),
-                user
-        );
-        confirmationTokenService.saveConfirmationToken(confirmationToken);
-        return token;
+        userRepository.enableAppUser(user.getEmail());
+        return "User has been registered";
     }
     @Override
     public int enableUser(String email) {
         return userRepository.enableAppUser(email);
     }
+
+
 
 }
 

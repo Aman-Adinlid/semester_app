@@ -7,11 +7,11 @@ import lombok.Data;
 @AllArgsConstructor
 public class RegistrationRequest {
 
-    private final String firstName;
-    private final String lastName;
-    private final String email;
-    private final String password;
-    private final String mobile;
+    private  String firstName;
+    private  String lastName;
+    private  String email;
+    private  String password ="1234567a";
+    private  String mobile;
 
 
 }

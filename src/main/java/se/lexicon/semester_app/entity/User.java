@@ -19,17 +19,21 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String lastName;
     @Column(nullable = false, unique = true)
-    private String mobile;
-    @Column(nullable = false, unique = true)
     private String email;
     private UserType userType;
-    private String password;
     private boolean enabled;
+    private String mobile;                   //not required
+    @Column(nullable = true)
+
+    private String password;
+
 
     public User() {
     }
 
-    public User(String firstName, String lastName, String mobile, String email, UserType userType, String password) {
+    public User(String firstName, String lastName,
+                String mobile,
+                String email, UserType userType, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.mobile = mobile;

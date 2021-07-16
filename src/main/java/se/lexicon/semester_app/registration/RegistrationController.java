@@ -19,10 +19,7 @@ public class RegistrationController {
 
     @PostMapping("/register")
     public String register (@Valid @RequestBody RegistrationRequest request) {
+        request.setPassword("1234567a");
         return registrationService.register(request);
-    }
-    @GetMapping(path = "/confirm")
-    public String confirm(@RequestParam("token") String token) {
-        return registrationService.confirmToken(token);
     }
 }

@@ -10,9 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import se.lexicon.semester_app.entity.UserType;
 import se.lexicon.semester_app.service.UserService;
-
 import static se.lexicon.semester_app.entity.UserType.*;
 
 
@@ -37,12 +35,14 @@ public class MyApplicationConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/","/api/v1/confirm","/api/v1/register/","index","/api/v1/register").permitAll()
-                .antMatchers("/admin/api/**").hasAnyRole(ADMIN.name(),SUPERVISOR.name())
-                .antMatchers("/owner/api/**").hasRole(SUPERVISOR.name())
-                .anyRequest().authenticated()
+//                .antMatchers("/","/api/v1/register/","index","/api/v1/register").permitAll()
+                .antMatchers("/admin/api/**","/api/v1/user").hasAnyRole(ADMIN.name(),SUPERVISOR.name())
+                .antMatchers("/supervisor/api/**").hasRole(SUPERVISOR.name())
+                .anyRequest().permitAll()
                 .and()
                 .formLogin()
+                .and()
+                .rememberMe().tokenValiditySeconds(31104000)
                 .and().logout().logoutUrl("/logout")
                 .clearAuthentication(true)
                 .invalidateHttpSession(true)

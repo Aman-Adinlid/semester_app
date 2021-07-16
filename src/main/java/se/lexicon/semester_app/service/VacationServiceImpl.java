@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import se.lexicon.semester_app.dto.UserDto;
 import se.lexicon.semester_app.dto.VacationDayDto;
 import se.lexicon.semester_app.entity.VacationDay;
 import se.lexicon.semester_app.exception.ArgumentException;
@@ -20,6 +21,7 @@ public class VacationServiceImpl implements VacationDayService {
 
     VacationDayRepository vacationDayRepository;
     ModelMapper modelMapper;
+    UserService userService;
 
     @Autowired
     public void setVacationDayRepository(VacationDayRepository vacationDayRepository) {
@@ -31,11 +33,18 @@ public class VacationServiceImpl implements VacationDayService {
         this.modelMapper = modelMapper;
     }
 
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+
     @Override
     public VacationDayDto findById(int id) throws RecordNotFoundException {
         return modelMapper.map(vacationDayRepository.findById(id).orElseThrow(() ->
                 new RecordNotFoundException("VacationDayDto not found")), VacationDayDto.class);
     }
+
 
     @Override
     public VacationDayDto findByVacationDate(LocalDate vacationDate) {
@@ -44,12 +53,14 @@ public class VacationServiceImpl implements VacationDayService {
 
     @Override
     public List<VacationDayDto> findAll() {
-        List<VacationDay> vacationDayList = new ArrayList<>();
-        vacationDayRepository.findAll().iterator().forEachRemaining(vacationDayList::add);
-        List<VacationDayDto> vacationDayDtoList = vacationDayList.stream().map(vacationDay ->
-                modelMapper.map(vacationDay, VacationDayDto.class)).collect(Collectors.toList());
-        return vacationDayDtoList;
-    }
+
+            List<VacationDay> vacationDayList = new ArrayList<>();
+            vacationDayRepository.findAll().iterator().forEachRemaining(vacationDayList::add);
+            List<VacationDayDto> vacationDayDtoList = vacationDayList.stream().map(vacationDay ->
+                    modelMapper.map(vacationDay, VacationDayDto.class)).collect(Collectors.toList());
+            return vacationDayDtoList;
+        }
+
 
     @Transactional
     @Override
@@ -89,4 +100,5 @@ public class VacationServiceImpl implements VacationDayService {
         vacationDayRepository.delete(modelMapper.map(vacationDayRepository.findById(id)
                 .orElseThrow(() -> new RecordNotFoundException("Id ")), VacationDay.class));
     }
+
 }

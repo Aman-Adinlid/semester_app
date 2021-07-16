@@ -12,7 +12,7 @@ public interface VacationDayService {
 
     VacationDayDto findByVacationDate(LocalDate vacationDate);
 
-    List<VacationDayDto> findAll();
+    List<VacationDayDto> findAll() ;
 
     VacationDayDto create(VacationDayDto vacationDayDto);
 

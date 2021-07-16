@@ -10,5 +10,6 @@ public class UserDto {
     private String lastName;
     private String mobile;
     private String email;
+    private String password;
     private UserType userType;
 }
