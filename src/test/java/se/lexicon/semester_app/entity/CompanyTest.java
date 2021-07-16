@@ -6,23 +6,23 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.List;
-
 @SpringBootTest
 public class CompanyTest {
     Company company;
-    List<Employee> employeeList;
+
 
     @BeforeEach
     public void setUp() {
         company = new Company();
         company.setName("Test");
+
     }
 
     @Test
     @DisplayName("Test1")
     public void test1_create_Company() {
         Assertions.assertEquals("Test", company.getName());
+
     }
 
     @Test

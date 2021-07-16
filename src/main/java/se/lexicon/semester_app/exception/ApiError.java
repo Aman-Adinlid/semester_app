@@ -1,4 +1,5 @@
 package se.lexicon.semester_app.exception;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.http.HttpStatus;
@@ -15,5 +16,4 @@ public class ApiError {
     private String message;
     private String debugMessage;
     private List<ApiValidationError> subErrors;
-
 }

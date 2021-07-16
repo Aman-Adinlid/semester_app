@@ -11,7 +11,7 @@ import se.lexicon.semester_app.service.VacationDayService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/vacationDay")
+@RequestMapping("api/v1/vacationDay")
 public class VacationDayController {
 
     VacationDayService vacationDayService;

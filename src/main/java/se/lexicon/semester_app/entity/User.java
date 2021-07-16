@@ -9,7 +9,10 @@ import java.util.Collection;
 @Data
 @Entity
 
+
 public class User implements UserDetails {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")

@@ -12,6 +12,7 @@ import se.lexicon.semester_app.entity.Employee;
 import se.lexicon.semester_app.exception.ArgumentException;
 import se.lexicon.semester_app.exception.RecordNotFoundException;
 import se.lexicon.semester_app.repository.EmployeeRepository;
+import se.lexicon.semester_app.repository.VacationDayRepository;
 
 
 import java.util.ArrayList;
@@ -19,23 +20,15 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
     EmployeeRepository employeeRepository;
     ModelMapper modelMapper;
+    VacationDayRepository vacationDayRepository;
     CompanyService companyService;
     UserService userService;
-
-    @Autowired
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
-
-    @Autowired
-    public void setCompanyService(CompanyService companyService) {
-        this.companyService = companyService;
-    }
 
     @Autowired
     public void setEmployeeRepository(EmployeeRepository employeeRepository) {
@@ -45,6 +38,21 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     public void setModelMapper(ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
+    }
+
+    @Autowired
+    public void setVacationDayRepository(VacationDayRepository vacationDayRepository) {
+        this.vacationDayRepository = vacationDayRepository;
+    }
+
+    @Autowired
+    public void setCompanyService(CompanyService companyService) {
+        this.companyService = companyService;
+    }
+
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
     }
 
 
@@ -59,6 +67,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new RecordNotFoundException("EmployeeDto not found");
         }
     }
+
     @Transactional
     @Override
     public EmployeeDto create(EmployeeDto employeeDto) throws RecordNotFoundException {
@@ -74,9 +83,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         convertedEntityToDto.setUser(userDto);
         convertedEntityToDto.setCompany(companyDto);
         return convertedEntityToDto;
+
     }
-
-
 
     @Override
     public List<EmployeeDto> findAll() {
@@ -85,7 +93,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         List<EmployeeDto> employeeDtoList = employeeList.stream().map(employee -> modelMapper.map(employee, EmployeeDto.class)).collect(Collectors.toList());
         return employeeDtoList;
     }
-
 
     @Transactional
     @Override
@@ -106,7 +113,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
     @Override
-    public List<EmployeeDto> findByCompany(CompanyDto companyDto) {
+    public List<EmployeeDto> findByCompany(CompanyDto companyDto) throws RecordNotFoundException {
         if (companyDto.getId() == 0) throw new ArgumentException("Id should not be null");
         List<Employee> employees = employeeRepository.findByCompany(modelMapper.map(companyDto, Company.class));
         List<EmployeeDto> employeeDtoList = employees.stream().map(employee -> modelMapper.map(employee, EmployeeDto.class)).collect(Collectors.toList());
@@ -123,6 +130,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     }
 }
+
 
 
 

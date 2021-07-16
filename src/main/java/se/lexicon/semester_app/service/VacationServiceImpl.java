@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import se.lexicon.semester_app.dto.EmployeeDto;
 import se.lexicon.semester_app.dto.VacationDayDto;
 import se.lexicon.semester_app.entity.VacationDay;
 import se.lexicon.semester_app.exception.ArgumentException;
@@ -81,6 +82,11 @@ public class VacationServiceImpl implements VacationDayService {
     @Override
     public boolean isApproved(VacationDayDto vacationDayDto) {
         return false;//tried to fix it but it didn't work, fix it if u can!!!!
+    }
+
+    @Override
+    public List<VacationDayDto> findByEmployee(EmployeeDto employeeDto) {
+        return null;
     }
 
     @Override
