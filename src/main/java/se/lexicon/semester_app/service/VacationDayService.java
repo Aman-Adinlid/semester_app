@@ -25,5 +25,7 @@ public interface VacationDayService {
 
     List<VacationDayDto> findByEmployee(EmployeeDto employeeDto);
 
+    List<VacationDayDto> findVacationDaysByEmployee_CompanyId(int id);
+
     void delete(int id) throws RecordNotFoundException;
 }

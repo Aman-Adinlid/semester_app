@@ -11,4 +11,5 @@ public class CompanyDto {
     @NotNull
     @Size(min = 2, max = 30)
     private String name;
+    private String workspace;
 }
