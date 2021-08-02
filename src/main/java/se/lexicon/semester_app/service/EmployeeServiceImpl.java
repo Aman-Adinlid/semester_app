@@ -14,6 +14,7 @@ import se.lexicon.semester_app.exception.RecordNotFoundException;
 import se.lexicon.semester_app.repository.EmployeeRepository;
 import se.lexicon.semester_app.repository.VacationDayRepository;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
