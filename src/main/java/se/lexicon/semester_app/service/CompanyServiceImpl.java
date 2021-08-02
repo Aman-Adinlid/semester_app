@@ -98,6 +98,17 @@ public class CompanyServiceImpl implements CompanyService {
     public void delete(int id) throws RecordNotFoundException {
         if (id == 0) throw new ArgumentException("Id is not valid");
         companyRepository.delete(modelMapper.map(companyRepository.findById(id)
-                .orElseThrow(() -> new RecordNotFoundException("Id ")), Company.class));
+                .orElseThrow(() -> new RecordNotFoundException("Id not found")), Company.class));
+    }
+
+    @Override
+    public CompanyDto findCompanyByWorkspace(String workspace) throws RecordNotFoundException {
+        Optional<Company> companyOptional = companyRepository.findCompanyByWorkspace(workspace);
+        if (companyOptional.isPresent()) {
+            return modelMapper.map(companyOptional.get(), CompanyDto.class);
+        } else {
+            throw new RecordNotFoundException("CompanyDto not found");
+        }
+
     }
 }

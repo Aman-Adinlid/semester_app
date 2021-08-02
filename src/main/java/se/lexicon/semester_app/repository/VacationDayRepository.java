@@ -12,4 +12,5 @@ public interface VacationDayRepository extends CrudRepository<VacationDay, Integ
 
     List<VacationDay> findByApproved(boolean approved);
 
+    List<VacationDay> findVacationDaysByEmployee_CompanyId(int id);
 }

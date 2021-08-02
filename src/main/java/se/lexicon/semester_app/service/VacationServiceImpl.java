@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.DataBinder;
 import se.lexicon.semester_app.dto.EmployeeDto;
 import se.lexicon.semester_app.dto.VacationDayDto;
 import se.lexicon.semester_app.entity.VacationDay;
@@ -35,8 +36,7 @@ public class VacationServiceImpl implements VacationDayService {
 
     @Override
     public VacationDayDto findById(int id) throws RecordNotFoundException {
-        return modelMapper.map(vacationDayRepository.findById(id).orElseThrow(() ->
-                new RecordNotFoundException("VacationDayDto not found")), VacationDayDto.class);
+        return modelMapper.map(vacationDayRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("VacationDayDto not found")), VacationDayDto.class);
     }
 
     @Override
@@ -48,8 +48,7 @@ public class VacationServiceImpl implements VacationDayService {
     public List<VacationDayDto> findAll() {
         List<VacationDay> vacationDayList = new ArrayList<>();
         vacationDayRepository.findAll().iterator().forEachRemaining(vacationDayList::add);
-        List<VacationDayDto> vacationDayDtoList = vacationDayList.stream().map(vacationDay ->
-                modelMapper.map(vacationDay, VacationDayDto.class)).collect(Collectors.toList());
+        List<VacationDayDto> vacationDayDtoList = vacationDayList.stream().map(vacationDay -> modelMapper.map(vacationDay, VacationDayDto.class)).collect(Collectors.toList());
         return vacationDayDtoList;
     }
 
@@ -63,8 +62,12 @@ public class VacationServiceImpl implements VacationDayService {
     @Transactional
     @Override
     public VacationDayDto update(VacationDayDto vacationDayDto) throws RecordNotFoundException {
-        if (vacationDayDto == null) throw new ArgumentException("VacationDayDto object should not be null");
-        if (vacationDayDto.getId() < 1) throw new IllegalArgumentException("VacationDayId should not be null");
+        if (vacationDayDto == null) {
+            throw new ArgumentException("VacationDayDto object should not be null");
+        }
+        if (vacationDayDto.getId() < 1) {
+            throw new IllegalArgumentException("VacationDayId should not be null");
+        }
         Optional<VacationDay> vacationDayOptional = vacationDayRepository.findById(vacationDayDto.getId());
         if (vacationDayOptional.isPresent()) {
             return modelMapper.map(vacationDayRepository.save(modelMapper.map(vacationDayDto, VacationDay.class)), VacationDayDto.class);
@@ -91,9 +94,23 @@ public class VacationServiceImpl implements VacationDayService {
     }
 
     @Override
+    public List<VacationDayDto> findVacationDaysByEmployee_CompanyId(int id) {
+        if (id == 0) {
+            throw new ArgumentException("Id is not valid");
+        }
+        List<VacationDay> vacationDays = vacationDayRepository.findVacationDaysByEmployee_CompanyId(id);
+        List<VacationDayDto> vacationDayDtoList = vacationDays.stream()
+                .map(vacationDay -> modelMapper.map(vacationDay, VacationDayDto.class))
+                .collect(Collectors.toList());
+
+        return vacationDayDtoList;
+    }
+
+    @Override
     public void delete(int id) throws RecordNotFoundException {
-        if (id == 0) throw new ArgumentException("Id is not valid");
-        vacationDayRepository.delete(modelMapper.map(vacationDayRepository.findById(id)
-                .orElseThrow(() -> new RecordNotFoundException("Id ")), VacationDay.class));
+        if (id == 0) {
+            throw new ArgumentException("Id is not valid");
+        }
+        vacationDayRepository.delete(modelMapper.map(vacationDayRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("Id ")), VacationDay.class));
     }
 }

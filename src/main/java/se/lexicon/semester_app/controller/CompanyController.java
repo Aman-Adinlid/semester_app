@@ -60,4 +60,11 @@ public class CompanyController {
         companyService.delete(id);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/workspace")
+    public ResponseEntity<CompanyDto> findCompanyByWorkspace(
+            @RequestParam(value = "workspace") String workspace
+    ) throws RecordNotFoundException  {
+        return ResponseEntity.status(HttpStatus.OK).body(companyService.findCompanyByWorkspace(workspace));
+    }
 }

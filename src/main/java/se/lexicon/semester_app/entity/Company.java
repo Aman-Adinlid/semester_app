@@ -12,5 +12,6 @@ public class Company {
     @Column(name = "company_id")
     private int id;
     private String name;
+    private String workspace;
 
 }
