@@ -1,9 +1,11 @@
-package se.lexicon.semester_app.registration;
+package se.lexicon.semester_app.controller;
 
 
 import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import se.lexicon.semester_app.service.RegistrationRequest;
+import se.lexicon.semester_app.service.RegistrationService;
 
 import javax.validation.Valid;
 
@@ -19,7 +21,6 @@ public class RegistrationController {
 
     @PostMapping("/register")
     public String register (@Valid @RequestBody RegistrationRequest request) {
-        request.setPassword("1234567a");
         return registrationService.register(request);
     }
 }

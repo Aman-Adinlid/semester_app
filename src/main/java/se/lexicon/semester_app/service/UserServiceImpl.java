@@ -3,8 +3,7 @@ package se.lexicon.semester_app.service;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,8 +37,7 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    public User loadUserByUsername(String email)  {
         Optional<User> user = userRepository.findByEmail(email);
         if(user.isPresent()){
             return user.get();
@@ -94,7 +92,9 @@ public class UserServiceImpl implements UserService {
         if(email.isPresent()){
             throw new IllegalStateException("Email already exist");
         }
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        if(user.getPassword() != null){
+           user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        }
         userRepository.save(user);
         userRepository.enableAppUser(user.getEmail());
         return "User has been registered";

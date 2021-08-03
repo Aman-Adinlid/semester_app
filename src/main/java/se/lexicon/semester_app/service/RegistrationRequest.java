@@ -1,4 +1,4 @@
-package se.lexicon.semester_app.registration;
+package se.lexicon.semester_app.service;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,7 +10,7 @@ public class RegistrationRequest {
     private  String firstName;
     private  String lastName;
     private  String email;
-    private  String password ="1234567a";
+    private  String password;
     private  String mobile;
 
 

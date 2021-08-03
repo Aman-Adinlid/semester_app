@@ -1,13 +1,12 @@
 package se.lexicon.semester_app.service;
 
-import org.springframework.security.core.userdetails.UserDetailsService;
 import se.lexicon.semester_app.dto.UserDto;
 import se.lexicon.semester_app.entity.User;
 import se.lexicon.semester_app.exception.RecordNotFoundException;
 
 import java.util.List;
 
-public interface UserService extends UserDetailsService {
+public interface UserService  {
 
     UserDto findById(int id) throws RecordNotFoundException;
 

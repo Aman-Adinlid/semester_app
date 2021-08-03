@@ -4,12 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import se.lexicon.semester_app.dto.UserDto;
 import se.lexicon.semester_app.dto.VacationDayDto;
 import se.lexicon.semester_app.exception.RecordNotFoundException;
 import se.lexicon.semester_app.service.UserService;
 import se.lexicon.semester_app.service.VacationDayService;
-
 import java.util.List;
 
 @RestController

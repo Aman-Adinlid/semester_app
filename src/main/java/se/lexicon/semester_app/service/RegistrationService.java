@@ -1,16 +1,12 @@
-package se.lexicon.semester_app.registration;
+package se.lexicon.semester_app.service;
 
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import se.lexicon.semester_app.entity.User;
 import se.lexicon.semester_app.entity.UserType;
-import se.lexicon.semester_app.service.UserService;
 import se.lexicon.semester_app.validation.EmailValidator;
 import se.lexicon.semester_app.validation.PassWordValidator;
-
-import java.time.LocalDateTime;
-
 
 
 @Service
@@ -28,9 +24,9 @@ public class RegistrationService {
             throw  new IllegalStateException("Invalid email");
         }
 
-
-         else if (emailValidator.test(request.getEmail()) == true && passWordValidator.isValidPassword(request.getPassword())==true)
-          {
+//         else if (emailValidator.test(request.getEmail()) == true && passWordValidator.isValidPassword(request.getPassword())==true)
+                  else if (emailValidator.test(request.getEmail()) )
+        {
 
             String token =   userService.signUp(new User(
                     request.getFirstName(),
