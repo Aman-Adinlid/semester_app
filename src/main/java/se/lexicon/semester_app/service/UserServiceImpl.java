@@ -4,7 +4,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import se.lexicon.semester_app.dto.CompanyDto;
 import se.lexicon.semester_app.dto.UserDto;
+import se.lexicon.semester_app.entity.Company;
 import se.lexicon.semester_app.entity.User;
 import se.lexicon.semester_app.exception.ArgumentException;
 import se.lexicon.semester_app.exception.RecordNotFoundException;
@@ -38,8 +40,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto findByEmail(String email) {
-        return modelMapper.map(userRepository.findByEmail(email), UserDto.class);
+    public UserDto findByEmail(String email) throws RecordNotFoundException {
+        Optional<User> userOptional = userRepository.findByEmail(email);
+        if (userOptional.isPresent()) {
+            return modelMapper.map(userOptional.get(), UserDto.class);
+        } else {
+            throw new RecordNotFoundException("UserDto not found");
+        }
     }
 
     @Override
