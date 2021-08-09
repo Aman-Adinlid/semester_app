@@ -107,7 +107,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<EmployeeDto> findByCompany(CompanyDto companyDto) {
-        if (companyDto.getId() == 0) throw new ArgumentException("Id should not be null");
+        if (companyDto.getId() == null) throw new ArgumentException("Id should not be null");
         List<Employee> employees = employeeRepository.findByCompany(modelMapper.map(companyDto, Company.class));
         List<EmployeeDto> employeeDtoList = employees.stream().map(employee -> modelMapper.map(employee, EmployeeDto.class)).collect(Collectors.toList());
         return employeeDtoList;

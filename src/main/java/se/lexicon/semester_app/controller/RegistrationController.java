@@ -14,6 +14,7 @@ import javax.validation.Valid;
 @RequestMapping("/api/v1")
 @AllArgsConstructor
 @Validated
+@CrossOrigin("*")
 public class RegistrationController {
 
     private final RegistrationService registrationService;

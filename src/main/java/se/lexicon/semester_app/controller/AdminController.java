@@ -2,21 +2,37 @@ package se.lexicon.semester_app.controller;
 
 
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import se.lexicon.semester_app.entity.User;
 import se.lexicon.semester_app.entity.UserType;
 import se.lexicon.semester_app.repository.UserRepository;
-
 import java.util.List;
 import java.util.Optional;
+
+import static se.lexicon.semester_app.controller.SignIn_Out.SignedInUser;
 
 @RestController
 @RequestMapping("/admin/api/v1")
 @AllArgsConstructor
+@CrossOrigin("*")
 public class AdminController {
-    UserRepository appUserRepository;
+
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private UserRepository appUserRepository;
+    public static User user;
+
+    @Autowired
+    public void setAppUserRepository(UserRepository appUserRepository) {
+        this.appUserRepository = appUserRepository;
+    }
+    @Autowired
+    public void setbCryptPasswordEncoder(BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    }
 
     @GetMapping()
     public ResponseEntity<List<User>> findAllNormalUSERS () {
@@ -44,12 +60,42 @@ public class AdminController {
         }
         return ResponseEntity.status(HttpStatus.OK).body(user);
     }
+    @PostMapping("/signin")
+    public ResponseEntity<String> signInAdmin(@RequestBody User user){
+        Optional<User> user2 = appUserRepository.findByEmail(user.getEmail());
+        if(!user2.isPresent()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User Not Found");
+        }
+        user.setId(user2.get().getId());
+        user.setUserType(user2.get().getUserType());
 
+        if(user.getUserType().equals(UserType.USER)){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("You dont have access");
+            
+        }
+
+        if(user.getUserType().equals(UserType.ADMIN) || user.getUserType().equals(UserType.SUPERVISOR)){
+
+            if(user.getPassword()== null){
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Password cannot be null");
+            }
+        }
+        if( !bCryptPasswordEncoder.matches(user.getPassword(), user2.get().getPassword()) ){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Wrong password");
+        }
+        if(user.getPassword() == null){
+            SignedInUser(user2.get());
+            return ResponseEntity.status(HttpStatus.OK).body("Login Successful");
+        }
+        else
+            SignedInUser(user2.get());
+        return ResponseEntity.status(HttpStatus.OK).body("Login Successful");
+    }
     public void adminValidation(){
-        if(SignIn_Out.SignedInUser(SignIn_Out.user).getUserType().equals(UserType.USER)  ){
+        if(SignedInUser(SignIn_Out.user).getUserType().equals(UserType.USER)  ){
              throw new IllegalStateException("You dont have an ADMIN access");
         }
-        if(SignIn_Out.SignedInUser(SignIn_Out.user).equals(null)){
+        if(SignedInUser(SignIn_Out.user).equals(null)){
             ResponseEntity.status(HttpStatus.NOT_FOUND).body("No user Signed in");
         }
     }

@@ -40,7 +40,7 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public CompanyDto findById(int id) throws RecordNotFoundException {
+    public CompanyDto findById(String id) throws RecordNotFoundException {
         return modelMapper.map(companyRepository.findById(id).orElseThrow(() ->
                 new RecordNotFoundException("CompanyDto not found")), CompanyDto.class);
     }
@@ -85,7 +85,6 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public CompanyDto update(CompanyDto companyDto) throws RecordNotFoundException {
         if (companyDto == null) throw new ArgumentException("CompanyDto object should not be null");
-        if (companyDto.getId() < 1) throw new IllegalArgumentException("CompanyId should not be null");
         Optional<Company> companyOptional = companyRepository.findById(companyDto.getId());
         if (companyOptional.isPresent()) {
             return modelMapper.map(companyRepository.save(modelMapper.map(companyDto, Company.class)), CompanyDto.class);
@@ -95,8 +94,8 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public void delete(int id) throws RecordNotFoundException {
-        if (id == 0) throw new ArgumentException("Id is not valid");
+    public void delete(String id) throws RecordNotFoundException {
+        if (id == null) throw new ArgumentException("Id is not valid");
         companyRepository.delete(modelMapper.map(companyRepository.findById(id)
                 .orElseThrow(() -> new RecordNotFoundException("Id ")), Company.class));
     }

@@ -13,6 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/signin")
+@CrossOrigin("*")
 public class SignIn_Out {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     private UserRepository appUserRepository;
@@ -54,6 +55,7 @@ public class SignIn_Out {
             SignedInUser(user2.get());
         return ResponseEntity.status(HttpStatus.OK).body("Login Successful");
     }
+
     @GetMapping("/signin")
     public  ResponseEntity<User> myUser(){
         return ResponseEntity.status(HttpStatus.OK).body(user);

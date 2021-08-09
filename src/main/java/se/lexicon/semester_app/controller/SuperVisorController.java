@@ -14,6 +14,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/supervisor/api/v1")
 @AllArgsConstructor
+@CrossOrigin("*")
 public class SuperVisorController {
     UserRepository appUserRepository;
 

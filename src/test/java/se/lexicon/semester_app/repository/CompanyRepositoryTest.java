@@ -46,7 +46,7 @@ public class CompanyRepositoryTest {
     public void test2_findById() {
         List<Company> companyList = new ArrayList<>();
         companyRepository.findAll().iterator().forEachRemaining(companyList::add);
-        Integer expected = companyList.get(0).getId();
+        String expected = companyList.get(0).getId();
         Optional<Company> actual = companyRepository.findById(expected);
         assertEquals("Test", actual.get().getName());
     }

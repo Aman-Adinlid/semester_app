@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface CompanyService {
 
-    CompanyDto findById(int id) throws RecordNotFoundException;
+    CompanyDto findById(String id) throws RecordNotFoundException;
 
     List<CompanyDto> findCompanyByName(String name);
 
@@ -24,5 +24,5 @@ public interface CompanyService {
 
     CompanyDto update(CompanyDto companyDto) throws RecordNotFoundException;
 
-    void delete(int id) throws RecordNotFoundException;
+    void delete(String id) throws RecordNotFoundException;
 }
