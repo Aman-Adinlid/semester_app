@@ -75,12 +75,13 @@ public class SignIn_Out {
         return  ResponseEntity.status(HttpStatus.OK).body(SignedInUser(user).toString());
     }
     @PostMapping("/password")
-    public ResponseEntity<String> forgotPassword(@RequestParam String email, @RequestParam String password){
-        Optional<User> user2 = appUserRepository.findByEmail(email);
+    public ResponseEntity<String> forgotPassword(@RequestBody User user){
+        Optional<User> user2 = appUserRepository.findByEmail(user.getEmail());
+
         if(!user2.isPresent()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User Not Found");
         }
-        user2.get().setPassword(bCryptPasswordEncoder.encode(password));
+        user2.get().setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         appUserRepository.save(user2.get());
         return ResponseEntity.status(HttpStatus.OK).body("Password has been changed");
     }
