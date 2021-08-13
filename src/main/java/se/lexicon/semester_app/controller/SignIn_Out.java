@@ -72,7 +72,7 @@ public class SignIn_Out {
         if(SignedInUser(user)==null){
             return ResponseEntity.status(HttpStatus.OK).body("No account signed in");
         }
-        return  ResponseEntity.status(HttpStatus.OK).body(SignedInUser(user).toString());
+        return  ResponseEntity.status(HttpStatus.OK).body(SignedInUser(user).getUserType().toString());
     }
     @PostMapping("/password")
     public ResponseEntity<String> forgotPassword(@RequestBody User user){
