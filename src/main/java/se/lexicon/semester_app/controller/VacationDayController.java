@@ -29,16 +29,10 @@ public class VacationDayController {
 
     @GetMapping("/{id}")
     public ResponseEntity<VacationDayDto> findById(@PathVariable("id") Integer id) throws RecordNotFoundException {
-        if (id == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        return ResponseEntity.status(HttpStatus.OK).body(vacationDayService.findById(id));
-    }
-
-    @GetMapping("/company/{company_id}")
-    public ResponseEntity<List<VacationDayDto>> findVacationDaysByEmployee_CompanyId(@PathVariable("company_id") Integer id) throws RecordNotFoundException {
         if (id == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
-        return ResponseEntity.status(HttpStatus.OK).body(vacationDayService.findVacationDaysByEmployee_CompanyId(id));
+        return ResponseEntity.status(HttpStatus.OK).body(vacationDayService.findById(id));
     }
 
 

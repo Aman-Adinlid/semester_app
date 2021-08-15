@@ -2,9 +2,11 @@ package se.lexicon.semester_app.service;
 
 import se.lexicon.semester_app.dto.CompanyDto;
 import se.lexicon.semester_app.dto.EmployeeDto;
+import se.lexicon.semester_app.entity.Company;
 import se.lexicon.semester_app.exception.RecordNotFoundException;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CompanyService {
 
