@@ -25,4 +25,6 @@ public interface CompanyService {
     CompanyDto update(CompanyDto companyDto) throws RecordNotFoundException;
 
     void delete(int id) throws RecordNotFoundException;
+
+    CompanyDto findCompanyByWorkspace(String workspace) throws RecordNotFoundException;
 }

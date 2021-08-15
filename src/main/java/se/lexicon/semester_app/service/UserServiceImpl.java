@@ -1,5 +1,6 @@
 package se.lexicon.semester_app.service;
 
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,16 +11,20 @@ import se.lexicon.semester_app.exception.ArgumentException;
 import se.lexicon.semester_app.exception.RecordNotFoundException;
 import se.lexicon.semester_app.repository.UserRepository;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
     UserRepository userRepository;
     ModelMapper modelMapper;
+
 
     @Autowired
     public void setUserRepository(UserRepository userRepository) {
@@ -31,17 +36,16 @@ public class UserServiceImpl implements UserService {
         this.modelMapper = modelMapper;
     }
 
+
     @Override
     public UserDto findById(int id) throws RecordNotFoundException {
         return modelMapper.map(userRepository.findById(id).orElseThrow(() ->
-                new RecordNotFoundException("UserDto not found")), UserDto.class);
+                                                                               new RecordNotFoundException("UserDto not found")), UserDto.class);
     }
-
     @Override
     public UserDto findByEmail(String email) {
         return modelMapper.map(userRepository.findByEmail(email), UserDto.class);
     }
-
     @Override
     public List<UserDto> findAll() {
         List<User> userList = new ArrayList<>();
@@ -50,14 +54,11 @@ public class UserServiceImpl implements UserService {
                 collect(Collectors.toList());
         return userDtoList;
     }
-
     @Transactional
     @Override
     public UserDto create(UserDto userDto) {
         return modelMapper.map(userRepository.save(modelMapper.map(userDto, User.class)), UserDto.class);
-
     }
-
     @Transactional
     @Override
     public UserDto update(UserDto userDto) throws RecordNotFoundException {
@@ -70,12 +71,11 @@ public class UserServiceImpl implements UserService {
             throw new RecordNotFoundException("UserDto not found");
         }
     }
-
     @Override
     public void delete(int id) throws RecordNotFoundException {
         if (id == 0) throw new ArgumentException("Id is not valid");
         userRepository.delete(modelMapper.map(userRepository.findById(id)
-                .orElseThrow(() -> new RecordNotFoundException("Id ")), User.class));
+                                                      .orElseThrow(() -> new RecordNotFoundException("Id ")), User.class));
     }
 }
 

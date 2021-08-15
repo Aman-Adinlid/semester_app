@@ -38,6 +38,13 @@ public class EmployeeController {
         }
     }
 
+    @GetMapping("/company/{company_id}")
+    public ResponseEntity<List<EmployeeDto>> findByCompanyId(@PathVariable("company_id") Integer company_id) throws RecordNotFoundException {
+        if (company_id == 0) return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+
+        return ResponseEntity.status(HttpStatus.OK).body(employeeService.findEmployeesByCompanyId(company_id));
+    }
+
     @PostMapping
     public ResponseEntity<EmployeeDto> create(@RequestBody EmployeeDto employeeDto) throws RecordNotFoundException {
         if (employeeDto == null) {

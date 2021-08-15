@@ -91,6 +91,19 @@ public class VacationServiceImpl implements VacationDayService {
     }
 
     @Override
+    public List<VacationDayDto> findVacationDaysByEmployee_CompanyId(int id) {
+        if (id == 0) {
+            throw new ArgumentException("Id is not valid");
+        }
+        List<VacationDay> vacationDays = vacationDayRepository.findVacationDaysByEmployee_CompanyId(id);
+        List<VacationDayDto> vacationDayDtoList = vacationDays.stream()
+                .map(vacationDay -> modelMapper.map(vacationDay, VacationDayDto.class))
+                .collect(Collectors.toList());
+
+        return vacationDayDtoList;
+    }
+
+    @Override
     public void delete(int id) throws RecordNotFoundException {
         if (id == 0) throw new ArgumentException("Id is not valid");
         vacationDayRepository.delete(modelMapper.map(vacationDayRepository.findById(id)
