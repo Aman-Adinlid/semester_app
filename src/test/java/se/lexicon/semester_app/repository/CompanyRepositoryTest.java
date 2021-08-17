@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import se.lexicon.semester_app.entity.Company;
-import se.lexicon.semester_app.entity.Employee;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +17,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class CompanyRepositoryTest {
     CompanyRepository companyRepository;
     Company company;
-    List<Employee> employeeList;
 
     @Autowired
     public void setCompanyRepository(CompanyRepository companyRepository) {

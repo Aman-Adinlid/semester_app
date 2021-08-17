@@ -4,8 +4,6 @@ import lombok.Data;
 import se.lexicon.semester_app.entity.User;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.UUID;
 
 @Data
 public class EmployeeDto {

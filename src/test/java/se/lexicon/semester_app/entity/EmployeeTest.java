@@ -7,26 +7,19 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @SpringBootTest
 public class EmployeeTest {
     Employee employee;
-    List<VacationDay> vacationDayList;
-    List<Employee> employeeList;
-    Company company;
     User user;
 
     @BeforeEach
     public void setUp() {
         employee = new Employee();
-
-        employee.setSavedVacation(12);
-        employee.setYearlyVacationDays(2021);
+        employee.setCompany(employee.getCompany());
+        employee.setUser(user);
+        employee.setSavedVacation(22);
         employee.setDateOfEmployment(LocalDate.of(2021, 01, 12));
-
-        company = new Company();
-        company.setName("Test");
 
         user = new User();
         user.setEmail("Test");
@@ -37,7 +30,6 @@ public class EmployeeTest {
     @DisplayName("Test1")
     public void test1_create_Employee() {
         Assertions.assertEquals(12, employee.getSavedVacation());
-        Assertions.assertEquals(2021, employee.getYearlyVacationDays());
         Assertions.assertEquals(LocalDate.of(2021, 01, 12), employee.getDateOfEmployment());
     }
 
@@ -45,11 +37,8 @@ public class EmployeeTest {
     @DisplayName("Test2")
     public void test2_equal() {
         employee = new Employee();
-
         employee.setSavedVacation(12);
-        employee.setYearlyVacationDays(2021);
         employee.setDateOfEmployment(LocalDate.of(2021, 01, 12));
-        employee.setCompany(company);
         employee.setUser(user);
         Assertions.assertTrue(employee.equals(employee));
     }
@@ -58,14 +47,11 @@ public class EmployeeTest {
     @DisplayName("Test3")
     public void test3_hashCode() {
         employee = new Employee();
-
-        employee.setSavedVacation(12);
-        employee.setYearlyVacationDays(2021);
         employee.setDateOfEmployment(LocalDate.of(2021, 01, 12));
-        employee.setCompany(company);
         employee.setUser(user);
         Assertions.assertEquals(employee.hashCode(), employee.hashCode());
 
     }
 
 }
+

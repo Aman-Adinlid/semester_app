@@ -8,14 +8,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import se.lexicon.semester_app.entity.UserType;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import static se.lexicon.semester_app.controller.SignIn_Out.user;
 
 @SpringBootTest
 public class EmployeeDtoTest {
     EmployeeDto employeeDto;
-    List<VacationDayDto> vacationDayDtoList;
     UserDto userDto;
 
     @BeforeEach
@@ -36,7 +34,6 @@ public class EmployeeDtoTest {
         Assertions.assertEquals(12, employeeDto.getSavedVacation());
         Assertions.assertEquals(2021, employeeDto.getYearlyVacationDays());
         Assertions.assertEquals(LocalDate.of(2021, 01, 12), employeeDto.getDateOfEmployment());
-
     }
 
     @Test

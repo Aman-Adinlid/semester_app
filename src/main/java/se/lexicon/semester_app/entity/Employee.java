@@ -2,10 +2,10 @@ package se.lexicon.semester_app.entity;
 
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.UUID;
+
 @Entity
 @Data
 public class Employee {
@@ -23,6 +23,5 @@ public class Employee {
     private LocalDate dateOfEmployment;
     @OneToOne
     private User user;
-
-
+  
 }
