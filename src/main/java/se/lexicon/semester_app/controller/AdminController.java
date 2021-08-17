@@ -8,13 +8,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import se.lexicon.semester_app.dto.EmployeeDto;
-import se.lexicon.semester_app.entity.Employee;
 import se.lexicon.semester_app.entity.User;
 import se.lexicon.semester_app.entity.UserType;
 import se.lexicon.semester_app.exception.RecordNotFoundException;
 import se.lexicon.semester_app.repository.UserRepository;
 import se.lexicon.semester_app.service.EmployeeServiceImpl;
-
 import java.util.List;
 import java.util.Optional;
 
