@@ -8,8 +8,6 @@ import se.lexicon.semester_app.dto.CompanyDto;
 import se.lexicon.semester_app.entity.UserType;
 import se.lexicon.semester_app.exception.RecordNotFoundException;
 import se.lexicon.semester_app.service.CompanyService;
-
-import java.nio.file.AccessDeniedException;
 import java.util.List;
 
 @RestController
