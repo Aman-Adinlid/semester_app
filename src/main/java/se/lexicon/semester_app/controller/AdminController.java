@@ -50,6 +50,7 @@ public class AdminController {
     @GetMapping("/request")
     public ResponseEntity<List<EmployeeDto>> getVacationRequest(){
        List<EmployeeDto> employeeDtoList =  employeeService.findByRequest("Pending");
+        System.out.println();
        return ResponseEntity.status(HttpStatus.OK).body(employeeDtoList);
     }
     @PostMapping("/request/accept/{id}")
