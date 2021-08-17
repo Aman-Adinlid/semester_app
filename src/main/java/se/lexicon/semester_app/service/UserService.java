@@ -1,11 +1,13 @@
 package se.lexicon.semester_app.service;
 
+import org.springframework.security.core.userdetails.UserDetailsService;
 import se.lexicon.semester_app.dto.UserDto;
+import se.lexicon.semester_app.entity.User;
 import se.lexicon.semester_app.exception.RecordNotFoundException;
 
 import java.util.List;
 
-public interface UserService {
+public interface UserService extends UserDetailsService {
 
     UserDto findById(int id) throws RecordNotFoundException;
 
@@ -19,4 +21,7 @@ public interface UserService {
 
     void delete(int id) throws RecordNotFoundException;
 
+    String signUp(User user);
+
+    int enableUser(String email);
 }
