@@ -31,7 +31,7 @@ public class VacationDayController {
 
     @GetMapping()
     public ResponseEntity<List<VacationDayDto>> findAll() {
-
+        System.out.println();
         return ResponseEntity.status(HttpStatus.OK).body(vacationDayService.findAll());
     }
 
