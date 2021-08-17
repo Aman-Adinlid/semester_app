@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface UserService  {
 
-    UserDto findById(int id) throws RecordNotFoundException;
+    User findById(int id) throws RecordNotFoundException;
 
     UserDto findByEmail(String email);
 

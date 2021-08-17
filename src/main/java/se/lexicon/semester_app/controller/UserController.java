@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import se.lexicon.semester_app.dto.UserDto;
+import se.lexicon.semester_app.entity.User;
 import se.lexicon.semester_app.exception.RecordNotFoundException;
 import se.lexicon.semester_app.service.UserService;
 
@@ -29,10 +30,11 @@ public class UserController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserDto> findById(@PathVariable("id") Integer id) throws RecordNotFoundException {
+    public ResponseEntity<User> findById(@PathVariable("id") Integer id) throws RecordNotFoundException {
         if (id == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         return ResponseEntity.status(HttpStatus.OK).body(userService.findById(id));
     }
+
 
 
     @PostMapping

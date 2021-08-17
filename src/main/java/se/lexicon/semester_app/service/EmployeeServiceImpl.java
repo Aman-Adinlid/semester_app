@@ -4,20 +4,22 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import se.lexicon.semester_app.controller.SignIn_Out;
 import se.lexicon.semester_app.dto.CompanyDto;
 import se.lexicon.semester_app.dto.EmployeeDto;
-import se.lexicon.semester_app.dto.UserDto;
 import se.lexicon.semester_app.entity.Company;
 import se.lexicon.semester_app.entity.Employee;
+import se.lexicon.semester_app.entity.User;
 import se.lexicon.semester_app.exception.ArgumentException;
 import se.lexicon.semester_app.exception.RecordNotFoundException;
 import se.lexicon.semester_app.repository.EmployeeRepository;
-
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static se.lexicon.semester_app.controller.SignIn_Out.SignedInUser;
+import static se.lexicon.semester_app.controller.SignIn_Out.user;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -54,6 +56,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         Optional<Employee> optionalEmployee = employeeRepository.findById(id);
         if (optionalEmployee.isPresent()) {
             EmployeeDto convertedData = modelMapper.map(optionalEmployee.get(), EmployeeDto.class);
+
             return convertedData;
         } else {
             throw new RecordNotFoundException("EmployeeDto not found");
@@ -69,10 +72,16 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee savedEmployeeEntity = employeeRepository.save(employeeEntity);
         EmployeeDto convertedEntityToDto = modelMapper.map(savedEmployeeEntity, EmployeeDto.class);
 
-        UserDto userDto = userService.findById(convertedEntityToDto.getUser().getId());
-        CompanyDto companyDto = companyService.findById(convertedEntityToDto.getCompany().getId());
-        convertedEntityToDto.setUser(userDto);
-        convertedEntityToDto.setCompany(companyDto);
+         if(SignIn_Out.SignedInUser(user) == null){
+             throw new IllegalStateException("You have to sign in");
+         }
+         CompanyDto companyDto = companyService.findById(convertedEntityToDto.getCompany().getId());
+         convertedEntityToDto.setCompany(companyDto);
+
+         User user = userService.findById(convertedEntityToDto.getUser().getId());
+          convertedEntityToDto.setUser(user);
+
+
         return convertedEntityToDto;
     }
 
@@ -121,6 +130,13 @@ public class EmployeeServiceImpl implements EmployeeService {
             employeeRepository.deleteById(id);
         }
 
+    }
+
+    @Override
+    public List<EmployeeDto> findByRequest(String request) {
+        List<Employee> employeeList=  employeeRepository.findEmployeesByRequest(request);
+        List<EmployeeDto> employeeDtoList = employeeList.stream().map(employee -> modelMapper.map(employee,EmployeeDto.class)).collect(Collectors.toList());
+        return employeeDtoList;
     }
 }
 

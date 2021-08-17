@@ -19,6 +19,7 @@ public class Employee {
     private Company company;
     private int savedVacation;
     private int yearlyVacationDays;
+    private String request;
     private LocalDate dateOfEmployment;
     @OneToOne
     private User user;

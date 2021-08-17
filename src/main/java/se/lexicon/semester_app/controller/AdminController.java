@@ -7,9 +7,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import se.lexicon.semester_app.dto.EmployeeDto;
+import se.lexicon.semester_app.entity.Employee;
 import se.lexicon.semester_app.entity.User;
 import se.lexicon.semester_app.entity.UserType;
+import se.lexicon.semester_app.exception.RecordNotFoundException;
 import se.lexicon.semester_app.repository.UserRepository;
+import se.lexicon.semester_app.service.EmployeeServiceImpl;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +29,7 @@ public class AdminController {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     private UserRepository appUserRepository;
     public static User user;
+    private EmployeeServiceImpl employeeService;
 
     @Autowired
     public void setAppUserRepository(UserRepository appUserRepository) {
@@ -39,6 +45,24 @@ public class AdminController {
         adminValidation();
         List<User> users = appUserRepository.findUserByUserType(UserType.USER);
         return ResponseEntity.status(HttpStatus.OK).body(users);
+    }
+
+    @GetMapping("/request")
+    public ResponseEntity<List<EmployeeDto>> getVacationRequest(){
+       List<EmployeeDto> employeeDtoList =  employeeService.findByRequest("Pending");
+       return ResponseEntity.status(HttpStatus.OK).body(employeeDtoList);
+    }
+    @PostMapping("/request/accept/{id}")
+    public ResponseEntity<EmployeeDto> acceptVacationRequest(@PathVariable String id) throws RecordNotFoundException {
+        EmployeeDto employeeDto1 = employeeService.findById(id);
+        employeeDto1.setRequest("ACCEPT");
+        return ResponseEntity.status(HttpStatus.OK).body( employeeService.update(employeeDto1));
+    }
+    @PostMapping ("/request/decline/{id}")
+    public ResponseEntity<EmployeeDto> declineVacationRequest(@PathVariable String id) throws RecordNotFoundException {
+        EmployeeDto employeeDto1 = employeeService.findById(id);
+        employeeDto1.setRequest("DECLINE");
+        return ResponseEntity.status(HttpStatus.OK).body(employeeService.update(employeeDto1));
     }
 
     @DeleteMapping("/{id}")

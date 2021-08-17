@@ -46,9 +46,11 @@ public class UserServiceImpl implements UserService {
 
     }
     @Override
-    public UserDto findById(int id) throws RecordNotFoundException {
-        return modelMapper.map(userRepository.findById(id).orElseThrow(() ->
-                new RecordNotFoundException("UserDto not found")), UserDto.class);
+    public User findById(int id) throws RecordNotFoundException {
+        if(userRepository.findById(id).isPresent()){
+            return  userRepository.findById(id).get();
+        }
+       throw new RecordNotFoundException("Id not found");
     }
     @Override
     public UserDto findByEmail(String email) {

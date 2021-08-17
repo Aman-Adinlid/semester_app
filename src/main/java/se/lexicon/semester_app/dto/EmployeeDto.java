@@ -1,6 +1,7 @@
 package se.lexicon.semester_app.dto;
 
 import lombok.Data;
+import se.lexicon.semester_app.entity.User;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -13,5 +14,6 @@ public class EmployeeDto {
     private int savedVacation;
     private int yearlyVacationDays;
     private LocalDate dateOfEmployment;
-    private UserDto user;
+    private String request;
+    private User user;
 }

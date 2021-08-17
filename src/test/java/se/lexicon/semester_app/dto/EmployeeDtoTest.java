@@ -10,6 +10,8 @@ import se.lexicon.semester_app.entity.UserType;
 import java.time.LocalDate;
 import java.util.List;
 
+import static se.lexicon.semester_app.controller.SignIn_Out.user;
+
 @SpringBootTest
 public class EmployeeDtoTest {
     EmployeeDto employeeDto;
@@ -44,7 +46,7 @@ public class EmployeeDtoTest {
         employeeDto.setSavedVacation(12);
         employeeDto.setYearlyVacationDays(2021);
         employeeDto.setDateOfEmployment(LocalDate.of(2021, 01, 12));
-        employeeDto.setUser(userDto);
+        employeeDto.setUser(user);
         Assertions.assertTrue(employeeDto.equals(employeeDto));
 
     }
@@ -57,7 +59,7 @@ public class EmployeeDtoTest {
         employeeDto.setSavedVacation(12);
         employeeDto.setYearlyVacationDays(2021);
         employeeDto.setDateOfEmployment(LocalDate.of(2021, 01, 12));
-        employeeDto.setUser(userDto);
+        employeeDto.setUser(user);
         Assertions.assertEquals(employeeDto.hashCode(), employeeDto.hashCode());
     }
 }

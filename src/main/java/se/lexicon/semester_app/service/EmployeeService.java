@@ -22,4 +22,5 @@ public interface EmployeeService {
 
     void delete(String id);
 
+    List<EmployeeDto> findByRequest(String request);
 }

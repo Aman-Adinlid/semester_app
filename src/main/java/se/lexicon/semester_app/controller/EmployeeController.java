@@ -5,6 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import se.lexicon.semester_app.dto.EmployeeDto;
+import se.lexicon.semester_app.dto.UserDto;
+import se.lexicon.semester_app.entity.User;
 import se.lexicon.semester_app.exception.RecordNotFoundException;
 import se.lexicon.semester_app.service.EmployeeService;
 
@@ -39,18 +41,40 @@ public class EmployeeController {
         }
     }
 
+    @PostMapping("/request/{id}")
+    public ResponseEntity<EmployeeDto> sendingRequest(@PathVariable String id) throws RecordNotFoundException {
+        EmployeeDto employeeDto = employeeService.findById(id);
+
+        if (employeeDto == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        System.out.println(employeeDto.getUser());
+//        User user = employeeDto.getUser();
+//
+//        if(user == null){
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+//        }
+//        if(SignIn_Out.SignedInUser(user) != user){
+//            throw new IllegalStateException("You need to sign in to make a request");
+//        }
+       employeeDto.setRequest("Pending");
+
+      return  ResponseEntity.status(HttpStatus.OK).body(employeeService.update(employeeDto));
+    }
+
     @PostMapping
     public ResponseEntity<EmployeeDto> create(@RequestBody EmployeeDto employeeDto) throws RecordNotFoundException {
         if (employeeDto == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
+        employeeDto.setRequest("No Request");
         return ResponseEntity.status(HttpStatus.CREATED).body(employeeService.create(employeeDto));
     }
 
     @PutMapping
     public ResponseEntity<EmployeeDto> update(@RequestBody EmployeeDto employeeDto) throws RecordNotFoundException {
         if (employeeDto == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         return ResponseEntity.status(HttpStatus.OK).body(employeeService.update(employeeDto));
     }
