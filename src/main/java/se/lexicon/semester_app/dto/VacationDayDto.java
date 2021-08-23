@@ -12,5 +12,5 @@ public class VacationDayDto {
     private LocalDate vacationDate;
     private boolean approved;
     private VacationType vacationType;
-    private EmployeeDto employee;
+    private String employeeId;
 }

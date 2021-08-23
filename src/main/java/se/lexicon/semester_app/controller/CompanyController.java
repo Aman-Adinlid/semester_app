@@ -61,10 +61,9 @@ public class CompanyController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/workspace")
+    @GetMapping("/public")
     public ResponseEntity<CompanyDto> findCompanyByWorkspace(
-            @RequestParam(value = "workspace") String workspace
-    ) throws RecordNotFoundException  {
+            @RequestParam(value = "workspace") String workspace) throws RecordNotFoundException  {
         return ResponseEntity.status(HttpStatus.OK).body(companyService.findCompanyByWorkspace(workspace));
     }
 }

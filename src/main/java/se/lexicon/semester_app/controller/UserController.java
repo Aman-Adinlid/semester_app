@@ -36,7 +36,7 @@ public class UserController {
     }
 
 
-    @PostMapping
+    @PostMapping("/public")
     public ResponseEntity<UserDto> create(@RequestBody @Valid UserDto userDto) throws RecordNotFoundException {
         if (userDto == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
@@ -54,8 +54,9 @@ public class UserController {
     }
 
 
-    @GetMapping("/email")
-    public ResponseEntity<UserDto> findByEmail(@RequestParam(value = "email") String email) {
+    @GetMapping("/public")
+    public ResponseEntity<UserDto> findByEmail(
+            @RequestParam(value = "email") String email) throws RecordNotFoundException {
         return ResponseEntity.status(HttpStatus.OK).body(userService.findByEmail(email));
     }
 
@@ -65,6 +66,5 @@ public class UserController {
         userService.delete(id);
         return ResponseEntity.ok().build();
     }
-
 }
 

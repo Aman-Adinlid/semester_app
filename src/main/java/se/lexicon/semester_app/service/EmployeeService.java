@@ -21,5 +21,7 @@ public interface EmployeeService {
 
     List<EmployeeDto> findByCompany(CompanyDto companyDto) throws RecordNotFoundException;
 
+    List<EmployeeDto> findEmployeesByCompanyId(int id) throws RecordNotFoundException;;
+
     void delete(String id);
 }

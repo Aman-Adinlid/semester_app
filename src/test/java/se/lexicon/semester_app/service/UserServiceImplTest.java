@@ -40,7 +40,7 @@ public class UserServiceImplTest {
 
     @Test
     @DisplayName("Test2")
-    public void test2_findByEmail() {
+    public void test2_findByEmail() throws RecordNotFoundException {
         assertEquals("Test", userService.findByEmail("Test").getEmail());
     }
 
