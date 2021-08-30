@@ -65,7 +65,6 @@ public class VacationServiceImpl implements VacationDayService {
     public VacationDayDto findByVacationDate(LocalDate vacationDate) {
         return modelMapper.map(vacationDayRepository.findByVacationDate(vacationDate), VacationDayDto.class);
     }
-
     @Override
     public List<VacationDayDto> findAll() {
 
