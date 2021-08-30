@@ -75,7 +75,6 @@ public class VacationServiceImpl implements VacationDayService {
                     modelMapper.map(vacationDay, VacationDayDto.class)).collect(Collectors.toList());
             return vacationDayDtoList;
         }
-
     @Transactional
     @Override
     public VacationDayDto create(VacationDayDto vacationDayDto) throws RecordNotFoundException {
