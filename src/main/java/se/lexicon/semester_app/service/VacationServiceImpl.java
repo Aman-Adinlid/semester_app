@@ -1,12 +1,11 @@
 package se.lexicon.semester_app.service;
 
-import org.checkerframework.checker.units.qual.A;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import se.lexicon.semester_app.dto.EmployeeDto;
-import se.lexicon.semester_app.dto.UserDto;
 import se.lexicon.semester_app.dto.VacationDayDto;
 import se.lexicon.semester_app.entity.VacationDay;
 import se.lexicon.semester_app.exception.ArgumentException;
@@ -59,7 +58,6 @@ public class VacationServiceImpl implements VacationDayService {
         return modelMapper.map(vacationDayRepository.findById(id).orElseThrow(() ->
                 new RecordNotFoundException("VacationDayDto not found")), VacationDayDto.class);
     }
-
 
     @Override
     public VacationDayDto findByVacationDate(LocalDate vacationDate) {
