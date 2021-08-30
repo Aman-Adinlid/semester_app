@@ -38,6 +38,22 @@ public class EmployeeController {
         }
     }
 
+
+    @GetMapping("/company/public")
+    public ResponseEntity<List<EmployeeDto>> findEmployeesByCompanyId (
+            @RequestParam(value = "id") Integer id) throws RecordNotFoundException {
+        if (id == 0) return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        try {
+            List<EmployeeDto> employees = employeeService.findEmployeesByCompanyId(id);
+            return ResponseEntity.ok(employees);
+        } catch (RecordNotFoundException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+    }
+
+    @PostMapping("/public")
+
     @GetMapping("/company/{company_id}")
     public ResponseEntity<List<EmployeeDto>> findByCompanyId(@PathVariable("company_id") Integer company_id) throws RecordNotFoundException {
         if (company_id == 0) return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
@@ -46,6 +62,7 @@ public class EmployeeController {
     }
 
     @PostMapping
+
     public ResponseEntity<EmployeeDto> create(@RequestBody EmployeeDto employeeDto) throws RecordNotFoundException {
         if (employeeDto == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();

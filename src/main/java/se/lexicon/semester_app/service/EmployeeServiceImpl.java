@@ -90,7 +90,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     public List<EmployeeDto> findAll() {
         List<Employee> employeeList = new ArrayList<>();
         employeeRepository.findAll().iterator().forEachRemaining(employeeList::add);
-        List<EmployeeDto> employeeDtoList = employeeList.stream().map(employee -> modelMapper.map(employee, EmployeeDto.class)).collect(Collectors.toList());
+        List<EmployeeDto> employeeDtoList = employeeList.stream()
+                .map(employee -> modelMapper.map(employee, EmployeeDto.class))
+                .collect(Collectors.toList());
         return employeeDtoList;
     }
 
@@ -116,7 +118,20 @@ public class EmployeeServiceImpl implements EmployeeService {
     public List<EmployeeDto> findByCompany(CompanyDto companyDto) throws RecordNotFoundException {
         if (companyDto.getId() == 0) throw new ArgumentException("Id should not be null");
         List<Employee> employees = employeeRepository.findByCompany(modelMapper.map(companyDto, Company.class));
-        List<EmployeeDto> employeeDtoList = employees.stream().map(employee -> modelMapper.map(employee, EmployeeDto.class)).collect(Collectors.toList());
+        List<EmployeeDto> employeeDtoList = employees.stream()
+                .map(employee -> modelMapper.map(employee, EmployeeDto.class))
+                .collect(Collectors.toList());
+        return employeeDtoList;
+
+    }
+
+    @Override
+    public List<EmployeeDto> findEmployeesByCompanyId(int id) throws RecordNotFoundException {
+        if (id == 0) throw new ArgumentException("Id is not valid");
+        List<Employee> employees = employeeRepository.findEmployeesByCompanyId(id);
+        List<EmployeeDto> employeeDtoList = employees.stream()
+                .map(employee -> modelMapper.map(employee, EmployeeDto.class))
+                .collect(Collectors.toList());
         return employeeDtoList;
     }
 

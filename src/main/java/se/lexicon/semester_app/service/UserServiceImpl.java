@@ -3,6 +3,13 @@ package se.lexicon.semester_app.service;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import se.lexicon.semester_app.dto.CompanyDto;
@@ -46,13 +53,16 @@ public class UserServiceImpl implements UserService {
     }
     @Override
     public UserDto findByEmail(String email) throws RecordNotFoundException {
-        Optional<User> userOptional = userRepository.findByEmail(email);
-        if (userOptional.isPresent()) {
-            return modelMapper.map(userOptional.get(), UserDto.class);
+
+        Optional<User> user = userRepository.findByEmail(email);
+        if (user.isPresent()) {
+            return modelMapper.map(user.get(), UserDto.class);
         } else {
-            throw new RecordNotFoundException("UserDto not found");
+            throw new RecordNotFoundException("Email not Found");
+
         }
     }
+
     @Override
     public List<UserDto> findAll() {
         List<User> userList = new ArrayList<>();
@@ -84,6 +94,34 @@ public class UserServiceImpl implements UserService {
         userRepository.delete(modelMapper.map(userRepository.findById(id)
                                                       .orElseThrow(() -> new RecordNotFoundException("Id ")), User.class));
     }
+
+
+    @Override
+    public String signUp(User user){
+        Optional<User> email =  userRepository.findByEmail(user.getEmail());
+        if(email.isPresent()){
+            throw new IllegalStateException("Email already exist");
+        }
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
+        // Autoenable user until company admin layer is implemented
+        userRepository.enableAppUser(user.getEmail());
+        String token =  UUID.randomUUID().toString();
+        ConfirmationToken confirmationToken = new ConfirmationToken(
+                token,
+                LocalDateTime.now(),
+                LocalDateTime.now().plusMinutes(15),
+                user
+        );
+        confirmationTokenService.saveConfirmationToken(confirmationToken);
+        return token;
+    }
+    @Override
+    public int enableUser(String email) {
+        return userRepository.enableAppUser(email);
+    }
+
+
 }
 
 
