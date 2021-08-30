@@ -30,7 +30,7 @@ public class CompanyServiceTest {
     @BeforeEach
     public void setup() throws RecordNotFoundException {
         VacationDayDto vacationDayDto = new VacationDayDto();
-        vacationDayDto.setVacationDate(LocalDate.now());
+//        vacationDayDto.setVacationDate(LocalDate.now());
         vacationDayDto.setApproved(vacationDayDto.isApproved());
 
         List<VacationDayDto> vacationDayDtoList = new ArrayList<>();

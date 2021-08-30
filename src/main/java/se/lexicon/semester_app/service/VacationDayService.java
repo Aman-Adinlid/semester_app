@@ -2,6 +2,7 @@ package se.lexicon.semester_app.service;
 
 import se.lexicon.semester_app.dto.EmployeeDto;
 import se.lexicon.semester_app.dto.VacationDayDto;
+import se.lexicon.semester_app.entity.VacationDay;
 import se.lexicon.semester_app.exception.RecordNotFoundException;
 
 import java.time.LocalDate;
@@ -15,7 +16,7 @@ public interface VacationDayService {
 
     List<VacationDayDto> findAll() ;
 
-    VacationDayDto create(VacationDayDto vacationDayDto);
+    VacationDayDto create(VacationDayDto vacationDayDto) throws RecordNotFoundException;
 
     VacationDayDto update(VacationDayDto vacationDayDto) throws RecordNotFoundException;
 

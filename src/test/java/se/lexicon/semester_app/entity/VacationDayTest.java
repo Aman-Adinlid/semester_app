@@ -15,7 +15,7 @@ public class VacationDayTest {
     @BeforeEach
     public void setUp() {
         vacationDay = new VacationDay();
-        vacationDay.setVacationDate(LocalDate.now());
+//        vacationDay.setVacationDate(LocalDate.now());
         vacationDay.setApproved(vacationDay.isApproved());
         vacationDay.setVacationType(VacationType.VACATION);
     }
@@ -31,7 +31,7 @@ public class VacationDayTest {
     @DisplayName("Test2")
     public void test2_equal() {
         VacationDay vacationDay = new VacationDay();
-        vacationDay.setVacationDate(LocalDate.now());
+//        vacationDay.setVacationDate(LocalDate.now());
         vacationDay.setApproved(vacationDay.isApproved());
         vacationDay.setVacationType(VacationType.VACATION);
         Assertions.assertTrue(vacationDay.equals(vacationDay));
@@ -41,7 +41,7 @@ public class VacationDayTest {
     @DisplayName("Test3")
     public void test3_hashCode() {
         VacationDay vacationDay = new VacationDay();
-        vacationDay.setVacationDate(LocalDate.now());
+//        vacationDay.setVacationDate(LocalDate.now());
         vacationDay.setApproved(vacationDay.isApproved());
         vacationDay.setVacationType(VacationType.VACATION);
         Assertions.assertEquals(vacationDay.hashCode(), vacationDay.hashCode());

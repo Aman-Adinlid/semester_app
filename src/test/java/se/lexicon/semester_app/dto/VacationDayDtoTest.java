@@ -15,7 +15,7 @@ public class VacationDayDtoTest {
     @BeforeEach
     public void setUp() {
         vacationDayDto = new VacationDayDto();
-        vacationDayDto.setVacationDate(LocalDate.now());
+//        vacationDayDto.setVacationDate(LocalDate.now());
         vacationDayDto.setApproved(vacationDayDto.isApproved());
 
     }
@@ -31,7 +31,7 @@ public class VacationDayDtoTest {
     @DisplayName("Test2")
     public void test2_equal() {
         VacationDayDto vacationDayDto = new VacationDayDto();
-        vacationDayDto.setVacationDate(LocalDate.now());
+//        vacationDayDto.setVacationDate(LocalDate.now());
         vacationDayDto.setApproved(vacationDayDto.isApproved());
         Assertions.assertTrue(vacationDayDto.equals(vacationDayDto));
     }
@@ -40,7 +40,7 @@ public class VacationDayDtoTest {
     @DisplayName("Test3")
     public void test3_hashCode() {
         VacationDayDto vacationDayDto = new VacationDayDto();
-        vacationDayDto.setVacationDate(LocalDate.now());
+//        vacationDayDto.setVacationDate(LocalDate.now());
         vacationDayDto.setApproved(vacationDayDto.isApproved());
         Assertions.assertEquals(vacationDayDto.hashCode(), vacationDayDto.hashCode());
     }

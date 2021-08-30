@@ -51,7 +51,7 @@ public class CompanyServiceImplTest {
     public void test1_findById() throws RecordNotFoundException {
         CompanyDto createdCompanyDto = companyService.create(companyDto);
         companyService.findById(createdCompanyDto.getId());
-        assertEquals(2, companyService.findById(2).getId());
+        assertEquals(2, companyService.findById("2").getId());
 
     }
 

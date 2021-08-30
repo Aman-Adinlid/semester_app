@@ -49,14 +49,7 @@ public class EmployeeController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         System.out.println(employeeDto.getUser());
-//        User user = employeeDto.getUser();
-//
-//        if(user == null){
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-//        }
-//        if(SignIn_Out.SignedInUser(user) != user){
-//            throw new IllegalStateException("You need to sign in to make a request");
-//        }
+
        employeeDto.setRequest("Pending");
 
       return  ResponseEntity.status(HttpStatus.OK).body(employeeService.update(employeeDto));

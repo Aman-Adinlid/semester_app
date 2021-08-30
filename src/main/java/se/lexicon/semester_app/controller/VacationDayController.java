@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import se.lexicon.semester_app.dto.VacationDayDto;
 import se.lexicon.semester_app.exception.RecordNotFoundException;
+import se.lexicon.semester_app.service.EmployeeService;
 import se.lexicon.semester_app.service.UserService;
 import se.lexicon.semester_app.service.VacationDayService;
 import java.util.List;
@@ -17,11 +18,16 @@ public class VacationDayController {
 
     VacationDayService vacationDayService;
     UserService userService;
+    EmployeeService employeeService;
 
 
     @Autowired
     public void setVacationDayService(VacationDayService vacationDayService) {
         this.vacationDayService = vacationDayService;
+    }
+    @Autowired
+    public void setEmployeeService(EmployeeService employeeService) {
+        this.employeeService = employeeService;
     }
 
     @Autowired
@@ -31,7 +37,6 @@ public class VacationDayController {
 
     @GetMapping()
     public ResponseEntity<List<VacationDayDto>> findAll() {
-        System.out.println();
         return ResponseEntity.status(HttpStatus.OK).body(vacationDayService.findAll());
     }
 
@@ -48,7 +53,9 @@ public class VacationDayController {
         if (vacationDayDto == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
-        return ResponseEntity.status(HttpStatus.CREATED).body(vacationDayService.create(vacationDayDto));
+        VacationDayDto vacationDayDto1 = vacationDayService.create(vacationDayDto);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(vacationDayDto1);
     }
 
 
@@ -66,4 +73,5 @@ public class VacationDayController {
         vacationDayService.delete(id);
         return ResponseEntity.ok().build();
     }
+
 }

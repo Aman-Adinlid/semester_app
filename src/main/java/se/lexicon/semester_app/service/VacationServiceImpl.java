@@ -1,14 +1,17 @@
 package se.lexicon.semester_app.service;
 
+import org.checkerframework.checker.units.qual.A;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import se.lexicon.semester_app.dto.EmployeeDto;
 import se.lexicon.semester_app.dto.UserDto;
 import se.lexicon.semester_app.dto.VacationDayDto;
 import se.lexicon.semester_app.entity.VacationDay;
 import se.lexicon.semester_app.exception.ArgumentException;
 import se.lexicon.semester_app.exception.RecordNotFoundException;
+import se.lexicon.semester_app.repository.EmployeeRepository;
 import se.lexicon.semester_app.repository.VacationDayRepository;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -22,10 +25,18 @@ public class VacationServiceImpl implements VacationDayService {
     VacationDayRepository vacationDayRepository;
     ModelMapper modelMapper;
     UserService userService;
+    EmployeeService employeeService;
+    EmployeeRepository employeeRepository;
 
     @Autowired
     public void setVacationDayRepository(VacationDayRepository vacationDayRepository) {
         this.vacationDayRepository = vacationDayRepository;
+    }
+
+
+    @Autowired
+    public void setEmployeeRepository(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
     }
 
     @Autowired
@@ -38,6 +49,10 @@ public class VacationServiceImpl implements VacationDayService {
         this.userService = userService;
     }
 
+    @Autowired
+    public void setEmployeeService(EmployeeService employeeService) {
+        this.employeeService = employeeService;
+    }
 
     @Override
     public VacationDayDto findById(int id) throws RecordNotFoundException {
@@ -61,10 +76,11 @@ public class VacationServiceImpl implements VacationDayService {
             return vacationDayDtoList;
         }
 
-
     @Transactional
     @Override
-    public VacationDayDto create(VacationDayDto vacationDayDto) {
+    public VacationDayDto create(VacationDayDto vacationDayDto) throws RecordNotFoundException {
+        EmployeeDto employeeDto = employeeService.findById(vacationDayDto.getEmployee().getId());
+        vacationDayDto.setEmployee(employeeDto);
         return modelMapper.map(vacationDayRepository.save(modelMapper.map(vacationDayDto, VacationDay.class)), VacationDayDto.class);
 
     }
@@ -92,6 +108,11 @@ public class VacationServiceImpl implements VacationDayService {
     @Override
     public boolean isApproved(VacationDayDto vacationDayDto) {
         return false;//tried to fix it but it didn't work, fix it if u can!!!!
+    }
+
+    @Override
+    public List<VacationDayDto> findByEmployee(EmployeeDto employeeDto) {
+        return null;
     }
 
     @Override

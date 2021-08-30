@@ -4,6 +4,8 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
+
 @Entity
 @Data
 public class VacationDay {
@@ -11,7 +13,8 @@ public class VacationDay {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private LocalDate vacationDate;
+    @ElementCollection
+    private List<LocalDate> vacationDate;
     private boolean approved;
     private VacationType vacationType;
     @ManyToOne
