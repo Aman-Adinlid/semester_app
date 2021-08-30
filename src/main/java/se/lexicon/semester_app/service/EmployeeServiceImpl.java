@@ -136,6 +136,25 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    public List<EmployeeDto> findEmployeesByCompanyId(int id) throws RecordNotFoundException {
+        if (id == 0) throw new ArgumentException("Id should not be null");
+        List<Employee> employees = employeeRepository.findByCompanyId(id);
+        return employees.stream().map(employee -> modelMapper.map(employee, EmployeeDto.class)).collect(Collectors.toList());
+    }
+
+    // Not in use at the moment.
+    @Override
+    public EmployeeDto findEmployeeByUserId(int id) throws RecordNotFoundException {
+        if (id == 0) throw new ArgumentException("Id should not be null");
+        Optional<Employee> optionalEmployee = employeeRepository.findEmployeeByUserId(id);
+        if (optionalEmployee.isPresent()) {
+            return modelMapper.map(optionalEmployee.get(), EmployeeDto.class);
+        } else {
+            throw new RecordNotFoundException("EmployeeDto not found");
+        }
+    }
+
+        @Override
     public void delete(String id) {
         if (id == null) throw new ArgumentException("Id is not valid");
         Optional<Employee> optional = employeeRepository.findById(id);

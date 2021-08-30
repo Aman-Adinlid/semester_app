@@ -35,6 +35,7 @@ public class VacationDayController {
         return ResponseEntity.status(HttpStatus.OK).body(vacationDayService.findById(id));
     }
 
+
     @GetMapping("/company/public")
     public ResponseEntity<List<VacationDayDto>> findVacationDaysByEmployee_CompanyId(
             @RequestParam("id") Integer id) throws RecordNotFoundException {
@@ -43,6 +44,7 @@ public class VacationDayController {
         }
         return ResponseEntity.status(HttpStatus.OK).body(vacationDayService.findVacationDaysByEmployee_CompanyId(id));
     }
+
 
     @PostMapping
     public ResponseEntity<VacationDayDto> create(@RequestBody VacationDayDto vacationDayDto) throws RecordNotFoundException {

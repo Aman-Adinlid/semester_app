@@ -3,20 +3,21 @@ package se.lexicon.semester_app.service;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import se.lexicon.semester_app.dto.CompanyDto;
 import se.lexicon.semester_app.dto.UserDto;
+import se.lexicon.semester_app.entity.Company;
 import se.lexicon.semester_app.entity.User;
 import se.lexicon.semester_app.exception.ArgumentException;
 import se.lexicon.semester_app.exception.RecordNotFoundException;
-import se.lexicon.semester_app.registration.token.ConfirmationToken;
-import se.lexicon.semester_app.registration.token.ConfirmationTokenRepository;
-import se.lexicon.semester_app.registration.token.ConfirmationTokenService;
 import se.lexicon.semester_app.repository.UserRepository;
 
 import java.time.LocalDateTime;
@@ -32,9 +33,6 @@ public class UserServiceImpl implements UserService {
 
     UserRepository userRepository;
     ModelMapper modelMapper;
-    ConfirmationTokenRepository confirmationTokenRepository;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    private ConfirmationTokenService confirmationTokenService;
 
 
     @Autowired
@@ -47,33 +45,21 @@ public class UserServiceImpl implements UserService {
         this.modelMapper = modelMapper;
     }
 
-    @Autowired
-    public void setConfirmationTokenRepository(ConfirmationTokenRepository confirmationTokenRepository) {
-        this.confirmationTokenRepository = confirmationTokenRepository;
-    }
 
-
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Optional<User> user = userRepository.findByEmail(email);
-        if(user.isPresent()){
-            return user.get();
-        }
-      else throw new IllegalStateException("User Not Found, Invalid Email");
-
-    }
     @Override
     public UserDto findById(int id) throws RecordNotFoundException {
         return modelMapper.map(userRepository.findById(id).orElseThrow(() ->
-                new RecordNotFoundException("UserDto not found")), UserDto.class);
+                                                                               new RecordNotFoundException("UserDto not found")), UserDto.class);
     }
     @Override
     public UserDto findByEmail(String email) throws RecordNotFoundException {
+
         Optional<User> user = userRepository.findByEmail(email);
         if (user.isPresent()) {
             return modelMapper.map(user.get(), UserDto.class);
         } else {
             throw new RecordNotFoundException("Email not Found");
+
         }
     }
 
@@ -106,8 +92,9 @@ public class UserServiceImpl implements UserService {
     public void delete(int id) throws RecordNotFoundException {
         if (id == 0) throw new ArgumentException("Id is not valid");
         userRepository.delete(modelMapper.map(userRepository.findById(id)
-                .orElseThrow(() -> new RecordNotFoundException("Id ")), User.class));
+                                                      .orElseThrow(() -> new RecordNotFoundException("Id ")), User.class));
     }
+
 
     @Override
     public String signUp(User user){
@@ -133,6 +120,7 @@ public class UserServiceImpl implements UserService {
     public int enableUser(String email) {
         return userRepository.enableAppUser(email);
     }
+
 
 }
 

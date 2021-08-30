@@ -111,4 +111,14 @@ public class CompanyServiceImpl implements CompanyService {
         }
 
     }
+
+    @Override
+    public CompanyDto findCompanyByWorkspace(String workspace) throws RecordNotFoundException {
+        Optional<Company> companyOptional = companyRepository.findCompanyByWorkspace(workspace);
+        if (companyOptional.isPresent()) {
+            return modelMapper.map(companyOptional.get(), CompanyDto.class);
+        } else {
+            throw new RecordNotFoundException("CompanyDto not found");
+        }
+    }
 }
