@@ -16,5 +16,7 @@ public class UserDto {
     @Size(min = 2, max = 30)
     private String lastName;
     private String email;
+    private String mobile;
     private UserType userType;
+    private boolean enabled;
 }

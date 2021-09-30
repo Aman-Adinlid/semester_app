@@ -23,5 +23,7 @@ public interface UserService extends UserDetailsService {
 
     String signUp(User user);
 
+    String[] mobileSignUp(User user);
+
     int enableUser(String email);
 }

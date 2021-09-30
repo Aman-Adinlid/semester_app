@@ -16,12 +16,6 @@ public interface CompanyService {
 
     List<CompanyDto> findAll();
 
-    // employee method can not be in here at all
-    List<EmployeeDto> getEmployees(EmployeeDto employeeDto);
-
-    // employee method can not be in here at all
-    EmployeeDto getEmployee(EmployeeDto employeeDto);
-
     CompanyDto create(CompanyDto companyDto) throws RecordNotFoundException;
 
     CompanyDto update(CompanyDto companyDto) throws RecordNotFoundException;

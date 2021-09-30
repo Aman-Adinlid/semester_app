@@ -63,16 +63,6 @@ public class CompanyServiceImpl implements CompanyService {
         return companyDtoList;
     }
 
-    @Override
-    public List<EmployeeDto> getEmployees(EmployeeDto employeeDto) {
-        return null;
-    }
-
-    @Override
-    public EmployeeDto getEmployee(EmployeeDto employeeDto) {
-        return null;
-    }
-
     @Transactional
     @Override
     public CompanyDto create(CompanyDto companyDto) {

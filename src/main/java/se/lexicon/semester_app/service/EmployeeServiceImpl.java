@@ -122,11 +122,22 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .map(employee -> modelMapper.map(employee, EmployeeDto.class))
                 .collect(Collectors.toList());
         return employeeDtoList;
-
     }
 
     @Override
-    public List<EmployeeDto> findEmployeesByCompanyId(int id) throws RecordNotFoundException {
+    public EmployeeDto findEmployeeByUserId(int id) throws RecordNotFoundException {
+        if (id == 0) throw new ArgumentException("Id should not be null");
+
+        Optional<Employee> employee = employeeRepository.findByUserId(id);
+        if (employee.isPresent()) {
+            return modelMapper.map(employee.get(), EmployeeDto.class);
+        } else {
+            throw new RecordNotFoundException("EmployeeDto not found");
+        }
+    }
+
+    @Override
+    public List<EmployeeDto> findEmployeesByCompanyId(int id) {
         if (id == 0) throw new ArgumentException("Id is not valid");
         List<Employee> employees = employeeRepository.findEmployeesByCompanyId(id);
         List<EmployeeDto> employeeDtoList = employees.stream()

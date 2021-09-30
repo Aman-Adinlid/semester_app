@@ -22,7 +22,7 @@ public class CompanyController {
         this.companyService = companyService;
     }
 
-    @GetMapping
+    @GetMapping("")
     public ResponseEntity<List<CompanyDto>> findAll() {
         return ResponseEntity.status(HttpStatus.OK).body(companyService.findAll());
     }
@@ -33,13 +33,17 @@ public class CompanyController {
         return ResponseEntity.status(HttpStatus.OK).body(companyService.findById(id));
     }
 
+    @GetMapping("/name")
+    public ResponseEntity<List<CompanyDto>> findCompanyByName(@RequestParam(value = "name") String name) {
+        return ResponseEntity.status(HttpStatus.OK).body(companyService.findCompanyByName(name));
+    }
+
     @PostMapping
     public ResponseEntity<CompanyDto> create(@RequestBody @Valid CompanyDto companyDto) throws RecordNotFoundException {
         if (companyDto == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(companyService.create(companyDto));
-
     }
 
     @PutMapping
@@ -50,20 +54,9 @@ public class CompanyController {
         return ResponseEntity.status(HttpStatus.OK).body(companyService.update(companyDto));
     }
 
-    @GetMapping("/name")
-    public ResponseEntity<List<CompanyDto>> findCompanyByName(@RequestParam(value = "name") String name) {
-        return ResponseEntity.status(HttpStatus.OK).body(companyService.findCompanyByName(name));
-    }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable("id") Integer id) throws RecordNotFoundException {
         companyService.delete(id);
         return ResponseEntity.ok().build();
-    }
-
-    @GetMapping("/public")
-    public ResponseEntity<CompanyDto> findCompanyByWorkspace(
-            @RequestParam(value = "workspace") String workspace) throws RecordNotFoundException  {
-        return ResponseEntity.status(HttpStatus.OK).body(companyService.findCompanyByWorkspace(workspace));
     }
 }

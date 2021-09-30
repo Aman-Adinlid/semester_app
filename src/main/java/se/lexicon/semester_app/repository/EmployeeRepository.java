@@ -13,12 +13,7 @@ public interface EmployeeRepository extends CrudRepository<Employee, String> {
 
      List<Employee> findByCompany(Company company); // think about it
 
+     Optional<Employee> findByUserId(int id) throws RecordNotFoundException;
 
-     List<Employee> findEmployeesByCompanyId(int id) throws RecordNotFoundException;;
-
-     List<Employee> findByCompanyId(int id);
-
-     Optional<Employee> findEmployeeByUserId(int id);
-
+     List<Employee> findEmployeesByCompanyId(int id);
 }
-
