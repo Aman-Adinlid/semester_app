@@ -54,11 +54,6 @@ public class UserController {
     }
 
 
-
-    @GetMapping("/public")
-    public ResponseEntity<UserDto> findByEmail(
-            @RequestParam(value = "email") String email) throws RecordNotFoundException {
-
     @GetMapping("/email")
     public ResponseEntity<UserDto> findByEmail(@RequestParam(value = "email") String email) throws RecordNotFoundException {
 
