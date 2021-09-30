@@ -6,12 +6,14 @@ import se.lexicon.semester_app.entity.Employee;
 import se.lexicon.semester_app.exception.RecordNotFoundException;
 
 import java.util.List;
+import java.util.Optional;
 
 
 public interface EmployeeRepository extends CrudRepository<Employee, String> {
 
      List<Employee> findByCompany(Company company); // think about it
 
-     List<Employee> findEmployeesByCompanyId(int id) throws RecordNotFoundException;;
-}
+     Optional<Employee> findByUserId(int id) throws RecordNotFoundException;
 
+     List<Employee> findEmployeesByCompanyId(int id);
+}

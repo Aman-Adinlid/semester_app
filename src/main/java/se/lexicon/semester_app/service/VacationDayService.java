@@ -17,15 +17,14 @@ public interface VacationDayService {
 
     VacationDayDto create(VacationDayDto vacationDayDto);
 
+    List<VacationDayDto> createMultiple(List<VacationDayDto> vacationDayDtoList);
+
     VacationDayDto update(VacationDayDto vacationDayDto) throws RecordNotFoundException;
 
     List<VacationDayDto> findByApproved(boolean approved);
 
-    boolean isApproved(VacationDayDto vacationDayDto);
-
-    List<VacationDayDto> findByEmployee(EmployeeDto employeeDto);
-
-    List<VacationDayDto> findVacationDaysByEmployee_CompanyId(int id);
+    List<VacationDayDto> findByEmployeeId(String id);
 
     void delete(int id) throws RecordNotFoundException;
+
 }

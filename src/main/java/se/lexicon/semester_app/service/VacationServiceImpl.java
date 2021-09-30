@@ -4,13 +4,13 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.DataBinder;
 import se.lexicon.semester_app.dto.EmployeeDto;
 import se.lexicon.semester_app.dto.VacationDayDto;
 import se.lexicon.semester_app.entity.VacationDay;
 import se.lexicon.semester_app.exception.ArgumentException;
 import se.lexicon.semester_app.exception.RecordNotFoundException;
 import se.lexicon.semester_app.repository.VacationDayRepository;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +55,20 @@ public class VacationServiceImpl implements VacationDayService {
     @Override
     public VacationDayDto create(VacationDayDto vacationDayDto) {
         return modelMapper.map(vacationDayRepository.save(modelMapper.map(vacationDayDto, VacationDay.class)), VacationDayDto.class);
+    }
 
+    @Transactional
+    @Override
+    public List<VacationDayDto> createMultiple(List<VacationDayDto> vacationDayDtoList) {
+        List<VacationDayDto> responseList = new ArrayList<>();
+
+        for (VacationDayDto dto : vacationDayDtoList) {
+            // Automatically set to approved until approval system is implemented
+            dto.setApproved(true);
+            VacationDayDto createdVacationDay = create(dto);
+            responseList.add(createdVacationDay);
+        }
+        return responseList;
     }
 
     @Transactional
@@ -83,24 +96,15 @@ public class VacationServiceImpl implements VacationDayService {
     }
 
     @Override
-    public boolean isApproved(VacationDayDto vacationDayDto) {
-        return false;//tried to fix it but it didn't work, fix it if u can!!!!
-    }
-
-    @Override
-    public List<VacationDayDto> findByEmployee(EmployeeDto employeeDto) {
-        return null;
-    }
-
-    @Override
-    public List<VacationDayDto> findVacationDaysByEmployee_CompanyId(int id) {
-        if (id == 0) {
+    public List<VacationDayDto> findByEmployeeId(String id) {
+        if (id == null) {
             throw new ArgumentException("Id is not valid");
         }
-        List<VacationDay> vacationDays = vacationDayRepository.findVacationDaysByEmployee_CompanyId(id);
+
+        List<VacationDay> vacationDays = vacationDayRepository.findByEmployeeId(id);
         List<VacationDayDto> vacationDayDtoList = vacationDays.stream()
-                .map(vacationDay -> modelMapper.map(vacationDay, VacationDayDto.class))
-                .collect(Collectors.toList());
+            .map(vacationDay -> modelMapper.map(vacationDay, VacationDayDto.class))
+            .collect(Collectors.toList());
 
         return vacationDayDtoList;
     }

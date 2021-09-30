@@ -17,6 +17,7 @@ public class Employee {
     @ManyToOne
     @JoinColumn(name = "company_id")
     private Company company;
+    private String jobTitle;
     private int savedVacation;
     private int yearlyVacationDays;
     private LocalDate dateOfEmployment;

@@ -3,8 +3,6 @@ package se.lexicon.semester_app.service;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,6 +16,7 @@ import se.lexicon.semester_app.registration.token.ConfirmationToken;
 import se.lexicon.semester_app.registration.token.ConfirmationTokenRepository;
 import se.lexicon.semester_app.registration.token.ConfirmationTokenService;
 import se.lexicon.semester_app.repository.UserRepository;
+import se.lexicon.semester_app.security.PasswordGenerator;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -33,9 +32,8 @@ public class UserServiceImpl implements UserService {
     UserRepository userRepository;
     ModelMapper modelMapper;
     ConfirmationTokenRepository confirmationTokenRepository;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
     private ConfirmationTokenService confirmationTokenService;
-
 
     @Autowired
     public void setUserRepository(UserRepository userRepository) {
@@ -52,21 +50,22 @@ public class UserServiceImpl implements UserService {
         this.confirmationTokenRepository = confirmationTokenRepository;
     }
 
-
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Optional<User> user = userRepository.findByEmail(email);
-        if(user.isPresent()){
+        if (user.isPresent()) {
             return user.get();
+        } else {
+            throw new UsernameNotFoundException("User Not Found, Invalid Email");
         }
-      else throw new IllegalStateException("User Not Found, Invalid Email");
-
     }
+
     @Override
     public UserDto findById(int id) throws RecordNotFoundException {
-        return modelMapper.map(userRepository.findById(id).orElseThrow(() ->
-                new RecordNotFoundException("UserDto not found")), UserDto.class);
+        return modelMapper.map(userRepository.findById(id)
+                .orElseThrow(() -> new RecordNotFoundException("UserDto not found")), UserDto.class);
     }
+
     @Override
     public UserDto findByEmail(String email) throws RecordNotFoundException {
         Optional<User> user = userRepository.findByEmail(email);
@@ -85,16 +84,23 @@ public class UserServiceImpl implements UserService {
                 collect(Collectors.toList());
         return userDtoList;
     }
+
     @Transactional
     @Override
     public UserDto create(UserDto userDto) {
         return modelMapper.map(userRepository.save(modelMapper.map(userDto, User.class)), UserDto.class);
     }
+
     @Transactional
     @Override
     public UserDto update(UserDto userDto) throws RecordNotFoundException {
-        if (userDto == null) throw new ArgumentException("UserDto object should not be null");
-        if (userDto.getId() == 0) throw new IllegalArgumentException("UserId should not be null");
+        if (userDto == null) {
+            throw new ArgumentException("UserDto object should not be null");
+        }
+        if (userDto.getId() == 0) {
+            throw new IllegalArgumentException("UserId should not be null");
+        }
+
         Optional<User> userOptional = userRepository.findById(userDto.getId());
         if (userOptional.isPresent()) {
             return modelMapper.map(userRepository.save(modelMapper.map(userDto, User.class)), UserDto.class);
@@ -102,9 +108,12 @@ public class UserServiceImpl implements UserService {
             throw new RecordNotFoundException("UserDto not found");
         }
     }
+
     @Override
     public void delete(int id) throws RecordNotFoundException {
-        if (id == 0) throw new ArgumentException("Id is not valid");
+        if (id == 0) {
+            throw new ArgumentException("Id is not valid");
+        }
         userRepository.delete(modelMapper.map(userRepository.findById(id)
                 .orElseThrow(() -> new RecordNotFoundException("Id ")), User.class));
     }
@@ -121,14 +130,42 @@ public class UserServiceImpl implements UserService {
         userRepository.enableAppUser(user.getEmail());
         String token =  UUID.randomUUID().toString();
         ConfirmationToken confirmationToken = new ConfirmationToken(
+            token,
+            LocalDateTime.now(),
+            LocalDateTime.now().plusMinutes(15),
+            user
+        );
+        confirmationTokenService.saveConfirmationToken(confirmationToken);
+        return token;
+    }
+
+    @Override
+    public String[] mobileSignUp(User user) {
+        Optional<User> email = userRepository.findByEmail(user.getEmail());
+        if (email.isPresent()) {
+            throw new IllegalStateException("Email already exists");
+        }
+
+        // Autogenerate initial password
+        String generatedPassword = PasswordGenerator.generateStrongPassword();
+        user.setPassword(bCryptPasswordEncoder.encode(generatedPassword));
+
+        User savedUser = userRepository.save(user);
+        // Auto enable user until company admin layer is implemented
+        userRepository.enableAppUser(user.getEmail());
+
+        String token = UUID.randomUUID().toString();
+        ConfirmationToken confirmationToken = new ConfirmationToken(
                 token,
                 LocalDateTime.now(),
                 LocalDateTime.now().plusMinutes(15),
                 user
         );
         confirmationTokenService.saveConfirmationToken(confirmationToken);
-        return token;
+
+        return new String[]{generatedPassword, token, String.valueOf(savedUser.getId())};
     }
+
     @Override
     public int enableUser(String email) {
         return userRepository.enableAppUser(email);
